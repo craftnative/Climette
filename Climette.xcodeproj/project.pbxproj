@@ -6,32 +6,8 @@
 	objectVersion = 110;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		3CF1F8C6306373BB0037803A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3C33D00F305C37AF0071425B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C33CFF5305C37AE0071425B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C33CFFC305C37AE0071425B;
-			remoteInfo = Climette;
-		};
-		3C33D019305C37AF0071425B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C33CFF5305C37AE0071425B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C33CFFC305C37AE0071425B;
-			remoteInfo = Climette;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		3C33CFFD305C37AE0071425B /* Climette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Climette.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C33D00E305C37AF0071425B /* ClimetteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimetteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C33D018305C37AF0071425B /* ClimetteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimetteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,30 +29,10 @@
 			path = Climette;
 			sourceTree = "<group>";
 		};
-		3C33D011305C37AF0071425B /* ClimetteTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ClimetteTests;
-			sourceTree = "<group>";
-		};
-		3C33D01B305C37AF0071425B /* ClimetteUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ClimetteUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3C33CFFA305C37AE0071425B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
-		3C33D00B305C37AF0071425B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			files = (
-			);
-		};
-		3C33D015305C37AF0071425B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
 			);
@@ -87,10 +43,7 @@
 		3C33CFF4305C37AE0071425B = {
 			isa = PBXGroup;
 			children = (
-				3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */,
 				3C33CFFF305C37AE0071425B /* Climette */,
-				3C33D011305C37AF0071425B /* ClimetteTests */,
-				3C33D01B305C37AF0071425B /* ClimetteUITests */,
 				3C33CFFE305C37AE0071425B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,8 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				3C33CFFD305C37AE0071425B /* Climette.app */,
-				3C33D00E305C37AF0071425B /* ClimetteTests.xctest */,
-				3C33D018305C37AF0071425B /* ClimetteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,48 +77,6 @@
 			productReference = 3C33CFFD305C37AE0071425B /* Climette.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3C33D00D305C37AF0071425B /* ClimetteTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C33D024305C37AF0071425B /* Build configuration list for PBXNativeTarget "ClimetteTests" */;
-			buildPhases = (
-				3C33D00A305C37AF0071425B /* Sources */,
-				3C33D00B305C37AF0071425B /* Frameworks */,
-				3C33D00C305C37AF0071425B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C33D010305C37AF0071425B /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3C33D011305C37AF0071425B /* ClimetteTests */,
-			);
-			name = ClimetteTests;
-			productName = ClimetteTests;
-			productReference = 3C33D00E305C37AF0071425B /* ClimetteTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		3C33D017305C37AF0071425B /* ClimetteUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C33D027305C37AF0071425B /* Build configuration list for PBXNativeTarget "ClimetteUITests" */;
-			buildPhases = (
-				3C33D014305C37AF0071425B /* Sources */,
-				3C33D015305C37AF0071425B /* Frameworks */,
-				3C33D016305C37AF0071425B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C33D01A305C37AF0071425B /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				3C33D01B305C37AF0071425B /* ClimetteUITests */,
-			);
-			name = ClimetteUITests;
-			productName = ClimetteUITests;
-			productReference = 3C33D018305C37AF0071425B /* ClimetteUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,22 +90,13 @@
 					3C33CFFC305C37AE0071425B = {
 						CreatedOnToolsVersion = 27.0;
 					};
-					3C33D00D305C37AF0071425B = {
-						CreatedOnToolsVersion = 27.0;
-						LastSwiftMigration = 2700;
-						TestTargetID = 3C33CFFC305C37AE0071425B;
-					};
-					3C33D017305C37AF0071425B = {
-						CreatedOnToolsVersion = 27.0;
-						LastSwiftMigration = 2700;
-						TestTargetID = 3C33CFFC305C37AE0071425B;
-					};
 				};
 			};
 			buildConfigurationList = 3C33CFF8305C37AE0071425B /* Build configuration list for PBXProject "Climette" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				Base,
 				es,
 			);
@@ -208,25 +108,12 @@
 			projectRoot = "";
 			targets = (
 				3C33CFFC305C37AE0071425B /* Climette */,
-				3C33D00D305C37AF0071425B /* ClimetteTests */,
-				3C33D017305C37AF0071425B /* ClimetteUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3C33CFFB305C37AE0071425B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-				3CF1F8C6306373BB0037803A /* LaunchScreen.storyboard in Resources */,
-			);
-		};
-		3C33D00C305C37AF0071425B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			files = (
-			);
-		};
-		3C33D016305C37AF0071425B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
 			);
@@ -239,30 +126,7 @@
 			files = (
 			);
 		};
-		3C33D00A305C37AF0071425B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-			);
-		};
-		3C33D014305C37AF0071425B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			files = (
-			);
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3C33D010305C37AF0071425B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C33CFFC305C37AE0071425B /* Climette */;
-			targetProxy = 3C33D00F305C37AF0071425B /* PBXContainerItemProxy */;
-		};
-		3C33D01A305C37AF0071425B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C33CFFC305C37AE0071425B /* Climette */;
-			targetProxy = 3C33D019305C37AF0071425B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		3C33D020305C37AF0071425B /* Debug configuration for PBXNativeTarget "Climette" */ = {
@@ -280,10 +144,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,10 +183,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -468,114 +330,6 @@
 			};
 			name = Release;
 		};
-		3C33D025305C37AF0071425B /* Debug configuration for PBXNativeTarget "ClimetteTests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PTD4DV322;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = craftnative.studio.ClimetteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Climette.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Climette";
-			};
-			name = Debug;
-		};
-		3C33D026305C37AF0071425B /* Release configuration for PBXNativeTarget "ClimetteTests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PTD4DV322;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = craftnative.studio.ClimetteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Climette.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Climette";
-			};
-			name = Release;
-		};
-		3C33D028305C37AF0071425B /* Debug configuration for PBXNativeTarget "ClimetteUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PTD4DV322;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = craftnative.studio.ClimetteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Climette;
-			};
-			name = Debug;
-		};
-		3C33D029305C37AF0071425B /* Release configuration for PBXNativeTarget "ClimetteUITests" */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5PTD4DV322;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = craftnative.studio.ClimetteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Climette;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -592,22 +346,6 @@
 			buildConfigurations = (
 				3C33D020305C37AF0071425B /* Debug configuration for PBXNativeTarget "Climette" */,
 				3C33D021305C37AF0071425B /* Release configuration for PBXNativeTarget "Climette" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		3C33D024305C37AF0071425B /* Build configuration list for PBXNativeTarget "ClimetteTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C33D025305C37AF0071425B /* Debug configuration for PBXNativeTarget "ClimetteTests" */,
-				3C33D026305C37AF0071425B /* Release configuration for PBXNativeTarget "ClimetteTests" */,
-			);
-			defaultConfigurationName = Release;
-		};
-		3C33D027305C37AF0071425B /* Build configuration list for PBXNativeTarget "ClimetteUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C33D028305C37AF0071425B /* Debug configuration for PBXNativeTarget "ClimetteUITests" */,
-				3C33D029305C37AF0071425B /* Release configuration for PBXNativeTarget "ClimetteUITests" */,
 			);
 			defaultConfigurationName = Release;
 		};

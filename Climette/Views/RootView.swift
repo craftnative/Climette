@@ -4,14 +4,6 @@ import SwiftData
 struct RootView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
     
-    init() {
-        #if DEBUG
-        if CommandLine.arguments.contains("-resetOnboarding") {
-            UserDefaults.standard.removeObject(forKey: "hasCompletedOnboarding")
-        }
-        #endif
-    }
-    
     var body: some View {
         Group {
             if hasCompletedOnboarding {
@@ -23,12 +15,5 @@ struct RootView: View {
                 OnboardingView()
             }
         }
-        #if DEBUG
-        .onAppear {
-            if CommandLine.arguments.contains("-resetOnboarding") {
-                hasCompletedOnboarding = false
-            }
-        }
-        #endif
     }
 }
