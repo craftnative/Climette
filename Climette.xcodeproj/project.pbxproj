@@ -6,6 +6,10 @@
 	objectVersion = 110;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3CF1F8C6306373BB0037803A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3C33D00F305C37AF0071425B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		3C33CFFD305C37AE0071425B /* Climette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Climette.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C33D00E305C37AF0071425B /* ClimetteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimetteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C33D018305C37AF0071425B /* ClimetteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClimetteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -82,6 +87,7 @@
 		3C33CFF4305C37AE0071425B = {
 			isa = PBXGroup;
 			children = (
+				3CF1F8C5306373BB0037803A /* LaunchScreen.storyboard */,
 				3C33CFFF305C37AE0071425B /* Climette */,
 				3C33D011305C37AF0071425B /* ClimetteTests */,
 				3C33D01B305C37AF0071425B /* ClimetteUITests */,
@@ -210,6 +216,7 @@
 		3C33CFFB305C37AE0071425B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				3CF1F8C6306373BB0037803A /* LaunchScreen.storyboard in Resources */,
 			);
 		};
 		3C33D00C305C37AF0071425B /* Resources */ = {
@@ -261,7 +268,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Climette/Climette.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5PTD4DV322;
@@ -301,7 +307,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Climette/Climette.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5PTD4DV322;
