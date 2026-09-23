@@ -1,0 +1,1014 @@
+{
+  "sourceLanguage" : "es",
+  "strings" : {
+    "Aguanté con lo puesto" : {
+      "comment" : "Modelos: FeedbackRecord - Reacción física del usuario sin ajustar ropa",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I stuck with what I was wearing"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aguanté con lo puesto"
+          }
+        }
+      }
+    },
+    "Ajusta las recomendaciones según el clima de tu zona." : {
+      "comment" : "Onboarding: Descripción de la pantalla de condiciones locales",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fine-tune recommendations based on your local weather."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajusta las recomendaciones según el clima de tu zona."
+          }
+        }
+      }
+    },
+    "Ajustar según horario de sueño" : {
+      "comment" : "Onboarding: Botón para sincronizar horarios con la app de Salud (HealthKit)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync with sleep schedule"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustar según horario de sueño"
+          }
+        }
+      }
+    },
+    "Al acostarse" : {
+      "comment" : "Onboarding: Subtítulo para la valoración del día",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "At bedtime"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al acostarse"
+          }
+        }
+      }
+    },
+    "Al despertar" : {
+      "comment" : "Onboarding: Subtítulo para la recomendación matutina",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upon waking"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Al despertar"
+          }
+        }
+      }
+    },
+    "Área del mapa interactivo" : {
+      "comment" : "Onboarding: Etiqueta de accesibilidad para el mapa temporal",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interactive map area"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Área del mapa interactivo"
+          }
+        }
+      }
+    },
+    "Buscar ubicación" : {
+      "comment" : "Onboarding: Placeholder y accesibilidad para el campo de texto de ciudad",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar ubicación"
+          }
+        }
+      }
+    },
+    "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado." : {
+      "comment" : "Onboarding: Descripción principal del perfil térmico",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibrate how you perceive temperature changes to tune your Personal Thermal Index."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado."
+          }
+        }
+      }
+    },
+    "Caluroso" : {
+      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (tolera el frío, sufre el calor)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warm-natured"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caluroso"
+          }
+        }
+      }
+    },
+    "Capa Base" : {
+      "comment" : "Modelos: ClothingItem - Primera capa de ropa (pegada al cuerpo)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Base Layer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capa Base"
+          }
+        }
+      }
+    },
+    "Capa Exterior" : {
+      "comment" : "Modelos: ClothingItem - Tercera capa de ropa (abrigos, cortavientos)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Outer Layer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capa Exterior"
+          }
+        }
+      }
+    },
+    "Capa Intermedia" : {
+      "comment" : "Modelos: ClothingItem - Segunda capa de ropa (jerséis, sudaderas)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mid Layer"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capa Intermedia"
+          }
+        }
+      }
+    },
+    "Clavada / Perfecto" : {
+      "comment" : "Modelos: FeedbackRecord - Percepción térmica ideal reportada por el usuario",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spot on / Perfect"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clavada / Perfecto"
+          }
+        }
+      }
+    },
+    "Comenzar" : {
+      "comment" : "Onboarding: Botón final para finalizar la configuración",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        }
+      }
+    },
+    "Condiciones Locales" : {
+      "comment" : "Onboarding: Título de la pantalla de configuración de ubicación",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local Conditions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones Locales"
+          }
+        }
+      }
+    },
+    "Cubierto" : {
+      "comment" : "Modelos: Weather - Estado del cielo (nublado)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overcast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cubierto"
+          }
+        }
+      }
+    },
+    "Debes completar la información requerida para continuar." : {
+      "comment" : "Onboarding: Hint de accesibilidad cuando el botón siguiente está desactivado",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You must fill in the required information to continue."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Debes completar la información requerida para continuar."
+          }
+        }
+      }
+    },
+    "Desactivar en fin de semana" : {
+      "comment" : "Onboarding: Etiqueta del interruptor para silenciar notificaciones en fines de semana",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mute on weekends"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivar en fin de semana"
+          }
+        }
+      }
+    },
+    "Despejado" : {
+      "comment" : "Modelos: Weather - Estado del cielo (sin nubes)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Despejado"
+          }
+        }
+      }
+    },
+    "Equilibrio estándar respecto a las condiciones registradas." : {
+      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Normal'",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standard balance relative to recorded conditions."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Equilibrio estándar respecto a las condiciones registradas."
+          }
+        }
+      }
+    },
+    "Estuve perfecto" : {
+      "comment" : "Modelos: FeedbackRecord - Estado posterior tras haberse ajustado la ropa",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felt comfortable"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estuve perfecto"
+          }
+        }
+      }
+    },
+    "Evita recibir notificaciones durante los fines de semana." : {
+      "comment" : "Onboarding: Hint de accesibilidad para el toggle de fin de semana",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avoid receiving notifications over the weekend."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Evita recibir notificaciones durante los fines de semana."
+          }
+        }
+      }
+    },
+    "Friolero" : {
+      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (sufre el frío)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cold-sensitive"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friolero"
+          }
+        }
+      }
+    },
+    "GPS" : {
+      "comment" : "Onboarding: Opción de selector para usar ubicación automática",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GPS"
+          }
+        }
+      }
+    },
+    "Húmedo" : {
+      "comment" : "Modelos: Weather - Estado de precipitación",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Húmedo"
+          }
+        }
+      }
+    },
+    "Mantiene calibrada la recomendación climática local sin intervención manual." : {
+      "comment" : "Onboarding: Descripción explicativa de la opción GPS",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keeps local weather recommendations calibrated without manual adjustments."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene calibrada la recomendación climática local sin intervención manual."
+          }
+        }
+      }
+    },
+    "Manual" : {
+      "comment" : "Onboarding: Opción de selector para ingresar ubicación escrita",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manual"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manual"
+          }
+        }
+      }
+    },
+    "MAPA" : {
+      "comment" : "Onboarding: Placeholder de UI para el componente del mapa interactivo",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MAP"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MAPA"
+          }
+        }
+      }
+    },
+    "Me añadí/quité ropa" : {
+      "comment" : "Modelos: FeedbackRecord - Reacción física del usuario (modificó sus capas)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I added or removed layers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Me añadí/quité ropa"
+          }
+        }
+      }
+    },
+    "Mediodía - Tarde" : {
+      "comment" : "Modelos: Weather - Periodo de evaluación del día",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afternoon - Evening"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mediodía - Tarde"
+          }
+        }
+      }
+    },
+    "Mismo clima, distintas sensaciones" : {
+      "comment" : "General/LaunchScreen: Lema principal de la marca y proyecto",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Same weather, different sensations"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mismo clima, distintas sensaciones"
+          }
+        }
+      }
+    },
+    "Navegación respeta los límites" : {
+      "comment" : "Tests: Descripción del test unitario de OnboardingState (límites tabulares)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigation respects bounds"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navegación respeta los límites"
+          }
+        }
+      }
+    },
+    "Normal" : {
+      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (estándar)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Normal"
+          }
+        }
+      }
+    },
+    "Origen de datos" : {
+      "comment" : "Onboarding: Título para el selector de origen de ubicación (GPS/Manual)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data source"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Origen de datos"
+          }
+        }
+      }
+    },
+    "Pantalla Principal de Climette" : {
+      "comment" : "RootView: Texto provisional de la pantalla principal / validación de tests",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Climette Main Screen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pantalla Principal de Climette"
+          }
+        }
+      }
+    },
+    "Pasé calor" : {
+      "comment" : "Modelos: FeedbackRecord - Percepción térmica (exceso de abrigo)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felt hot"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasé calor"
+          }
+        }
+      }
+    },
+    "Pasé frío" : {
+      "comment" : "Modelos: FeedbackRecord - Percepción térmica (falta de abrigo)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Felt cold"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pasé frío"
+          }
+        }
+      }
+    },
+    "Paso %lld de %lld" : {
+      "comment" : "OnboardingBottomBar: Accesibilidad para indicar el indicador de progreso tabular",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Step %1$lld of %2$lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paso %1$lld de %2$lld"
+          }
+        }
+      }
+    },
+    "Persistencia de datos en ModelContext" : {
+      "comment" : "Tests: Descripción del test de guardado SwiftData",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ModelContext data persistence"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persistencia de datos en ModelContext"
+          }
+        }
+      }
+    },
+    "Por la mañana" : {
+      "comment" : "Modelos: Weather - Periodo de evaluación del día",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morning"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Por la mañana"
+          }
+        }
+      }
+    },
+    "Prefieres prendas más ligeras o toleras menor abrigo." : {
+      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Caluroso'",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You prefer lighter clothes or tolerate less warmth."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prefieres prendas más ligeras o toleras menor abrigo."
+          }
+        }
+      }
+    },
+    "Recomendación de ropa" : {
+      "comment" : "Onboarding: Título del selector horario de mañanas",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clothing recommendation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recomendación de ropa"
+          }
+        }
+      }
+    },
+    "Rutina" : {
+      "comment" : "Onboarding: Título de la pantalla de configuración de alertas (paso 3)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Routine"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rutina"
+          }
+        }
+      }
+    },
+    "Seco" : {
+      "comment" : "Modelos: Weather - Estado de precipitación nula o mínima",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dry"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seco"
+          }
+        }
+      }
+    },
+    "Seguí destemplado" : {
+      "comment" : "Modelos: FeedbackRecord - Estado posterior (el ajuste no solucionó el malestar)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Still uncomfortable"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seguí destemplado"
+          }
+        }
+      }
+    },
+    "Selecciona tu perfil de sensibilidad térmica." : {
+      "comment" : "Onboarding: Hint de accesibilidad para la botonera de perfiles térmicos",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select your thermal sensitivity profile."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona tu perfil de sensibilidad térmica."
+          }
+        }
+      }
+    },
+    "Sensibilidad Térmica" : {
+      "comment" : "Onboarding: Título de la pantalla de selección térmica (paso 1)",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thermal Sensitivity"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sensibilidad Térmica"
+          }
+        }
+      }
+    },
+    "Siguiente" : {
+      "comment" : "Onboarding: Botón genérico para avanzar en las pestañas del wizard",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siguiente"
+          }
+        }
+      }
+    },
+    "Sincroniza la recomendación matutina y el registro nocturno según tus horarios." : {
+      "comment" : "Onboarding: Descripción de la pantalla de rutinas",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync morning recommendations and evening check-ins with your schedule."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincroniza la recomendación matutina y el registro nocturno según tus horarios."
+          }
+        }
+      }
+    },
+    "Sueles necesitar una capa adicional frente a la media." : {
+      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Friolero'",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You often need an extra layer compared to the average."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sueles necesitar una capa adicional frente a la media."
+          }
+        }
+      }
+    },
+    "Todo el día" : {
+      "comment" : "Modelos: Weather - Periodo de evaluación del día",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All day"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Todo el día"
+          }
+        }
+      }
+    },
+    "Ubicación específica" : {
+      "comment" : "Onboarding: Etiqueta sobre el campo de texto manual",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Specific location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación específica"
+          }
+        }
+      }
+    },
+    "Utiliza los datos de descanso para sincronizar automáticamente las horas de aviso." : {
+      "comment" : "Onboarding: Pie explicativo del botón de HealthKit para sueño",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uses rest data to automatically sync notification times."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliza los datos de descanso para sincronizar automáticamente las horas de aviso."
+          }
+        }
+      }
+    },
+    "Validación de ingreso manual de ubicación" : {
+      "comment" : "Tests: Descripción del test unitario de campos de texto",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manual location entry validation"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Validación de ingreso manual de ubicación"
+          }
+        }
+      }
+    },
+    "Valoración del día" : {
+      "comment" : "Onboarding: Título del selector horario de noches",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily check-in"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valoración del día"
+          }
+        }
+      }
+    },
+    "Valores por defecto iniciales" : {
+      "comment" : "Tests: Descripción del test unitario de estado inicial",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Initial default values"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valores por defecto iniciales"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -59,7 +59,7 @@ struct LocationStepView: View {
                                     .onSubmit {
                                         isFocused = false
                                     }
-                                    .accessibilityLabel("Buscar ubicación")
+                                    .accessibilityLabel(String(localized: "Buscar ubicación"))
                             }
                             .padding(10)
                             .background(Color(uiColor: .tertiarySystemGroupedBackground))
@@ -75,7 +75,7 @@ struct LocationStepView: View {
                                     .foregroundStyle(.secondary)
                             }
                             .accessibilityElement(children: .ignore)
-                            .accessibilityLabel("Área del mapa interactivo")
+                            .accessibilityLabel(String(localized: "Área del mapa interactivo"))
                         }
                         .padding()
                         .background(Color(uiColor: .secondarySystemGroupedBackground))

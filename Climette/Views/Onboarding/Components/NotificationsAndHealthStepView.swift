@@ -52,7 +52,7 @@ struct NotificationsAndHealthStepView: View {
                             isOn: $muteWeekends
                         )
                         .font(.headline)
-                        .accessibilityHint("Evita recibir notificaciones durante los fines de semana.")
+                        .accessibilityHint(String(localized: "Evita recibir notificaciones durante los fines de semana."))
                     }
                     .padding()
                     .background(Color(uiColor: .secondarySystemGroupedBackground))

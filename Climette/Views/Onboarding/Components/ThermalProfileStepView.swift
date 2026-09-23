@@ -18,7 +18,7 @@ struct ThermalProfileStepView: View {
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    Text(sensitivity.rawValue)
+                                    Text(LocalizedStringKey(sensitivity.rawValue))
                                         .font(.headline)
                                         .foregroundStyle(.primary)
 
@@ -43,7 +43,7 @@ struct ThermalProfileStepView: View {
                         .tint(.primary)
                         .accessibilityElement(children: .combine)
                         .accessibilityAddTraits(selectedSensitivity == sensitivity ? [.isButton, .isSelected] : .isButton)
-                        .accessibilityHint("Selecciona tu perfil de sensibilidad térmica.")
+                        .accessibilityHint(String(localized: "Selecciona tu perfil de sensibilidad térmica."))
                     }
                 }
                 .padding(.horizontal)
@@ -52,7 +52,7 @@ struct ThermalProfileStepView: View {
         }
     }
 
-    private func description(for sensitivity: ThermalSensitivity) -> String {
+    private func description(for sensitivity: ThermalSensitivity) -> LocalizedStringKey {
         switch sensitivity {
         case .friolero: return "Sueles necesitar una capa adicional frente a la media."
         case .normal: return "Equilibrio estándar respecto a las condiciones registradas."

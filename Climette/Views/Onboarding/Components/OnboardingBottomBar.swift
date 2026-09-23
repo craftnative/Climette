@@ -7,8 +7,12 @@ struct OnboardingBottomBar: View {
     let onNext: () -> Void
     let onComplete: () -> Void
 
-    private var buttonTitle: String {
+    private var buttonTitleKey: LocalizedStringKey {
         currentTab == totalTabs - 1 ? "Comenzar" : "Siguiente"
+    }
+    
+    private var buttonTitleRaw: String {
+        currentTab == totalTabs - 1 ? String(localized: "Comenzar") : String(localized: "Siguiente")
     }
 
     var body: some View {
@@ -28,7 +32,7 @@ struct OnboardingBottomBar: View {
                         onComplete()
                     }
                 } label: {
-                    Text(buttonTitle)
+                    Text(buttonTitleKey)
                         .font(.headline)
                         .foregroundStyle(.white)
                         .padding(.horizontal, 32)
@@ -38,9 +42,8 @@ struct OnboardingBottomBar: View {
                         .contentShape(Capsule())
                 }
                 .disabled(!isValid)
-                // Usar exactamente el mismo texto visible como accessibilityLabel
-                .accessibilityLabel(buttonTitle)
-                .accessibilityHint(isValid ? "" : "Debes completar la información requerida para continuar.")
+                .accessibilityLabel(buttonTitleRaw)
+                .accessibilityHint(isValid ? "" : String(localized: "Debes completar la información requerida para continuar."))
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
@@ -62,6 +65,6 @@ private struct PageControlIndicator: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Paso \(currentPage + 1) de \(numberOfPages)")
+        .accessibilityLabel(String(localized: "Paso \(currentPage + 1) de \(numberOfPages)"))
     }
 }

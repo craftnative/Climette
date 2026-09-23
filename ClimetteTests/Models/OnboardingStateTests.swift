@@ -12,7 +12,7 @@ struct OnboardingStateTests {
         #expect(state.currentTab == 0)
         #expect(state.selectedSensitivity == .normal)
         #expect(state.selectedLocationMode == .manual)
-        #expect(state.isCurrentStepValid == true) // Paso 0 (Sensibilidad Térmica) es válido
+        #expect(state.isCurrentStepValid == true)
     }
 
     @Test("Navegación respeta los límites")
@@ -20,7 +20,7 @@ struct OnboardingStateTests {
         let state = OnboardingState()
         
         state.goBack(reduceMotion: true)
-        #expect(state.currentTab == 0) // No baja de 0
+        #expect(state.currentTab == 0)
 
         state.advance(reduceMotion: true)
         #expect(state.currentTab == 1)
@@ -29,7 +29,7 @@ struct OnboardingStateTests {
         #expect(state.currentTab == 2)
 
         state.advance(reduceMotion: true)
-        #expect(state.currentTab == 2) // No supera totalTabs - 1
+        #expect(state.currentTab == 2)
     }
 
     @Test("Validación de ingreso manual de ubicación")
@@ -37,7 +37,6 @@ struct OnboardingStateTests {
         let state = OnboardingState()
         state.currentTab = 1
         
-        // Al iniciar por defecto en .manual con cadena vacía debe ser inválido
         #expect(state.selectedLocationMode == .manual)
         state.manualCityName = ""
         #expect(state.isCurrentStepValid == false)
