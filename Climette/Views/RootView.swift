@@ -7,13 +7,14 @@ struct RootView: View {
     var body: some View {
         Group {
             if hasCompletedOnboarding {
-                NavigationStack {
-                    Text("Pantalla Principal de Climette")
-                        .font(.title2)
-                }
+                MainTabView()
             } else {
                 OnboardingView()
             }
         }
     }
+}
+
+#Preview {
+    RootView()
 }

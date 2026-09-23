@@ -6,9 +6,7 @@ struct ClimetteApp: App {
 
     #if DEBUG
     init() {
-        if ProcessInfo.processInfo.arguments.contains("-resetOnboarding") {
-            UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
-        }
+        UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
     }
     #endif
 
