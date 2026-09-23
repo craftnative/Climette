@@ -1,7 +1,7 @@
 import Foundation
 
 extension ClothingItemEntity {
-    public func toDomain() -> Garment {
+    @MainActor public func toDomain() -> Garment {
         return Garment(
             id: id,
             layer: ClothingLayer(rawValue: layerRaw) ?? .base,

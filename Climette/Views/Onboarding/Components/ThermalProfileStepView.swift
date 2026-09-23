@@ -4,14 +4,14 @@ struct ThermalProfileStepView: View {
     @Binding var selectedSensitivity: ThermalSensitivity
 
     var body: some View {
-        VStack(spacing: 0) {
-            OnboardingHeaderView(
-                title: "Sensibilidad Térmica",
-                description: "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado."
-            )
+        ScrollView {
+            VStack(spacing: 0) {
+                OnboardingHeaderView(
+                    title: "Sensibilidad Térmica",
+                    description: "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado."
+                )
 
-            Form {
-                Section {
+                VStack(spacing: 16) {
                     ForEach(ThermalSensitivity.allCases, id: \.self) { sensitivity in
                         Button {
                             selectedSensitivity = sensitivity
@@ -25,20 +25,29 @@ struct ThermalProfileStepView: View {
                                     Text(description(for: sensitivity))
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
+                                        .multilineTextAlignment(.leading)
                                 }
                                 Spacer()
                                 if selectedSensitivity == sensitivity {
                                     Image(systemName: "checkmark")
                                         .fontWeight(.bold)
                                         .foregroundStyle(Color.accentColor)
+                                        .accessibilityHidden(true)
                                 }
                             }
+                            .padding()
+                            .background(Color(uiColor: .secondarySystemGroupedBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .tint(.primary)
+                        .accessibilityElement(children: .combine)
+                        .accessibilityAddTraits(selectedSensitivity == sensitivity ? [.isButton, .isSelected] : .isButton)
+                        .accessibilityHint("Selecciona tu perfil de sensibilidad térmica.")
                     }
                 }
+                .padding(.horizontal)
             }
-            .scrollDisabled(true)
+            .padding(.bottom, 24)
         }
     }
 

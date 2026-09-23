@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct OnboardingBottomBar: View {
-    @Binding var currentTab: Int
+    let currentTab: Int
     let totalTabs: Int
     let isValid: Bool
+    let onNext: () -> Void
     let onComplete: () -> Void
 
     var body: some View {
@@ -18,9 +19,7 @@ struct OnboardingBottomBar: View {
                 
                 Button {
                     if currentTab < totalTabs - 1 {
-                        withAnimation(.easeInOut) {
-                            currentTab += 1
-                        }
+                        onNext()
                     } else {
                         onComplete()
                     }
@@ -31,9 +30,12 @@ struct OnboardingBottomBar: View {
                         .padding(.horizontal, 32)
                         .padding(.vertical, 14)
                         .background(isValid ? Color.accentColor : Color.secondary)
-                        .clipShape(.capsule)
+                        .clipShape(Capsule())
+                        .contentShape(Capsule())
                 }
                 .disabled(!isValid)
+                .accessibilityLabel(currentTab == totalTabs - 1 ? "Comenzar la aplicación" : "Ir al siguiente paso")
+                .accessibilityHint(isValid ? "" : "Debes completar la información requerida para continuar.")
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 16)
@@ -42,7 +44,6 @@ struct OnboardingBottomBar: View {
     }
 }
 
-// Representación nativa del indicador de páginas HIG
 private struct PageControlIndicator: View {
     let currentPage: Int
     let numberOfPages: Int
@@ -53,8 +54,10 @@ private struct PageControlIndicator: View {
                 Circle()
                     .fill(index == currentPage ? Color.primary : Color.secondary.opacity(0.3))
                     .frame(width: 8, height: 8)
-                    .animation(.snappy, value: currentPage)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Paso \(currentPage + 1) de \(numberOfPages)")
+        .accessibilityAddTraits(.isStaticText)
     }
 }

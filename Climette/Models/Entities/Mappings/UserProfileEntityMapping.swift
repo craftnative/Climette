@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 extension UserProfileEntity {
     public func toDomain() -> UserProfile {
         let alertTimes = NotificationAlertTimes(

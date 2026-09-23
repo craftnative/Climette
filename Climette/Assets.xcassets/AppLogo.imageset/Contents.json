@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "compression-type" : "automatic",
       "filename" : "DC69ECE2-8398-44E0-BDC2-824AC68366A5.png",
       "idiom" : "universal"
     },
@@ -11,6 +12,7 @@
           "value" : "light"
         }
       ],
+      "compression-type" : "automatic",
       "filename" : "DC69ECE2-8398-44E0-BDC2-824AC68366A5 1.png",
       "idiom" : "universal"
     },
@@ -21,6 +23,7 @@
           "value" : "dark"
         }
       ],
+      "compression-type" : "automatic",
       "filename" : "3377D6E1-F611-4BA7-BC65-BDFC77D556D7.png",
       "idiom" : "universal"
     }
@@ -28,5 +31,8 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "lossless"
   }
 }

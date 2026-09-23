@@ -1,7 +1,7 @@
 import Foundation
 
 extension WeatherSnapshotEntity {
-    public func toDomain() -> Weather {
+    @MainActor public func toDomain() -> Weather {
         return Weather(
             id: id,
             temperature: temperature,

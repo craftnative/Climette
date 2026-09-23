@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 extension LocationStateEntity {
     public func toDomain() -> LocationState {
         let mode: LocationMode

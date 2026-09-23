@@ -1,6 +1,6 @@
 import Foundation
 
-enum LocationSelectionMode: Int, Sendable, Equatable {
+public enum LocationSelectionMode: Int, Sendable, Equatable {
     case gps
     case manual
 }

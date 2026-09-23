@@ -1,7 +1,7 @@
 import Foundation
 
 extension FeedbackRecordEntity {
-    public func toDomain() -> FeedbackRecord? {
+    @MainActor public func toDomain() -> FeedbackRecord? {
         guard let weatherSnapshot = weatherSnapshot?.toDomain(),
               let baseLayer = baseLayer?.toDomain() else { return nil }
         
