@@ -26,6 +26,7 @@ struct ThermalProfileStepView: View {
                                         .font(.subheadline)
                                         .foregroundStyle(.secondary)
                                         .multilineTextAlignment(.leading)
+                                        .fixedSize(horizontal: false, vertical: true)
                                 }
                                 Spacer()
                                 if selectedSensitivity == sensitivity {

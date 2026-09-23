@@ -10,17 +10,18 @@ struct OnboardingHeaderView: View {
                 .font(.largeTitle.weight(.bold))
                 .foregroundStyle(.primary)
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
 
             Text(description)
                 .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.leading)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal)
         .padding(.top, 32)
         .padding(.bottom, 24)
-        .accessibilityElement(children: .combine)
     }
 }

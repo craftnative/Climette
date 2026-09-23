@@ -7,6 +7,10 @@ struct OnboardingBottomBar: View {
     let onNext: () -> Void
     let onComplete: () -> Void
 
+    private var buttonTitle: String {
+        currentTab == totalTabs - 1 ? "Comenzar" : "Siguiente"
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             Divider()
@@ -24,7 +28,7 @@ struct OnboardingBottomBar: View {
                         onComplete()
                     }
                 } label: {
-                    Text(currentTab == totalTabs - 1 ? "Comenzar" : "Siguiente")
+                    Text(buttonTitle)
                         .font(.headline)
                         .foregroundStyle(.white)
                         .padding(.horizontal, 32)
@@ -34,7 +38,8 @@ struct OnboardingBottomBar: View {
                         .contentShape(Capsule())
                 }
                 .disabled(!isValid)
-                .accessibilityLabel(currentTab == totalTabs - 1 ? "Comenzar la aplicación" : "Ir al siguiente paso")
+                // Usar exactamente el mismo texto visible como accessibilityLabel
+                .accessibilityLabel(buttonTitle)
                 .accessibilityHint(isValid ? "" : "Debes completar la información requerida para continuar.")
             }
             .padding(.horizontal, 24)
@@ -58,6 +63,5 @@ private struct PageControlIndicator: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("Paso \(currentPage + 1) de \(numberOfPages)")
-        .accessibilityAddTraits(.isStaticText)
     }
 }

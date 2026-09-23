@@ -9,7 +9,7 @@ public final class OnboardingState {
     public let totalTabs: Int = 3
 
     public var selectedSensitivity: ThermalSensitivity = .normal
-    public var selectedLocationMode: LocationSelectionMode = .gps
+    public var selectedLocationMode: LocationSelectionMode = .manual
     public var manualCityName: String = ""
 
     public var weekdayWakeUp: Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 45)) ?? .now

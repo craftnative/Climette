@@ -3,51 +3,79 @@ import SwiftUI
 struct LocationStepView: View {
     @Binding var selectedLocationMode: LocationSelectionMode
     @Binding var manualCityName: String
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
                 OnboardingHeaderView(
                     title: "Condiciones Locales",
-                    description: "Climette necesita contrastar las condiciones microclimáticas de tu entorno real con tus capas de abrigo."
+                    description: "Ajusta las recomendaciones según el clima de tu zona."
                 )
 
                 VStack(spacing: 24) {
-                    VStack(alignment: .leading, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 12) {
                         Text("Origen de datos")
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
-                            .accessibilityHidden(true)
+                            .fixedSize(horizontal: false, vertical: true)
 
-                        Picker("Modo de Ubicación", selection: $selectedLocationMode) {
-                            Text("GPS Automático").tag(LocationSelectionMode.gps)
-                            Text("Ingreso Manual").tag(LocationSelectionMode.manual)
+                        Picker("Origen de datos", selection: $selectedLocationMode) {
+                            Text("Manual").tag(LocationSelectionMode.manual)
+                            Text("GPS").tag(LocationSelectionMode.gps)
                         }
                         .pickerStyle(.segmented)
-                        .accessibilityLabel("Selección del origen de datos de ubicación")
-
-                        Text(selectedLocationMode == .gps ? "Mantiene calibrada la recomendación climática local sin intervención manual." : "Establece una ubicación fija predeterminada para consultar el reporte.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .accessibilityHidden(true)
                     }
                     .padding()
                     .background(Color(uiColor: .secondarySystemGroupedBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
+                    
+                    switch selectedLocationMode {
+                    case .gps:
+                        Text("Mantiene calibrada la recomendación climática local sin intervención manual.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 4)
+                            .fixedSize(horizontal: false, vertical: true)
 
-                    if selectedLocationMode == .manual {
-                        VStack(alignment: .leading, spacing: 8) {
+                    case .manual:
+                        VStack(alignment: .leading, spacing: 16) {
                             Text("Ubicación específica")
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
-                                .accessibilityHidden(true)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            HStack(spacing: 8) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundStyle(.secondary)
+                                    .accessibilityHidden(true)
 
-                            TextField("Ciudad (ej. Madrid)", text: $manualCityName)
-                                .textFieldStyle(.roundedBorder)
-                                .textInputAutocapitalization(.words)
-                                .autocorrectionDisabled()
-                                .accessibilityLabel("Nombre de la ciudad")
-                                .accessibilityHint("Introduce la ciudad para las previsiones climáticas.")
+                                TextField("Buscar ubicación", text: $manualCityName, axis: .vertical)
+                                    .textInputAutocapitalization(.words)
+                                    .autocorrectionDisabled()
+                                    .focused($isFocused)
+                                    .submitLabel(.done)
+                                    .onSubmit {
+                                        isFocused = false
+                                    }
+                                    .accessibilityLabel("Buscar ubicación")
+                            }
+                            .padding(10)
+                            .background(Color(uiColor: .tertiarySystemGroupedBackground))
+                            .clipShape(RoundedRectangle(cornerRadius: 8))
+                            
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color(uiColor: .tertiarySystemGroupedBackground))
+                                    .frame(height: 200)
+
+                                Text("MAPA")
+                                    .font(.headline)
+                                    .foregroundStyle(.secondary)
+                            }
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel("Área del mapa interactivo")
                         }
                         .padding()
                         .background(Color(uiColor: .secondarySystemGroupedBackground))

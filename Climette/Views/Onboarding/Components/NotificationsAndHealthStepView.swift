@@ -26,9 +26,8 @@ struct NotificationsAndHealthStepView: View {
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
+                            .accessibilityElement(children: .combine)
                         }
-                        .accessibilityElement(children: .combine)
-                        .accessibilityLabel("Hora de recomendación de ropa al despertar")
 
                         Divider()
 
@@ -43,9 +42,8 @@ struct NotificationsAndHealthStepView: View {
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
+                            .accessibilityElement(children: .combine)
                         }
-                        .accessibilityElement(children: .combine)
-                        .accessibilityLabel("Hora de valoración del día al acostarse")
 
                         Divider()
 
@@ -62,7 +60,6 @@ struct NotificationsAndHealthStepView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Button {
-                            // Acción de sincronización con HealthKit
                         } label: {
                             HStack {
                                 Text("Ajustar según horario de sueño")
@@ -72,16 +69,14 @@ struct NotificationsAndHealthStepView: View {
                                     .foregroundStyle(Color.accentColor)
                                     .accessibilityHidden(true)
                             }
+                            .frame(minHeight: 44)
                         }
                         .tint(.primary)
-                        .accessibilityElement(children: .combine)
-                        .accessibilityAddTraits(.isButton)
-                        .accessibilityHint("Sincroniza automáticamente las horas de aviso utilizando tus datos de descanso de Apple Health.")
 
                         Text("Utiliza los datos de descanso para sincronizar automáticamente las horas de aviso.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                            .accessibilityHidden(true)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding()
                     .background(Color(uiColor: .secondarySystemGroupedBackground))

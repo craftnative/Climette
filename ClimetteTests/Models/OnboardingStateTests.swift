@@ -11,8 +11,8 @@ struct OnboardingStateTests {
         let state = OnboardingState()
         #expect(state.currentTab == 0)
         #expect(state.selectedSensitivity == .normal)
-        #expect(state.selectedLocationMode == .gps)
-        #expect(state.isCurrentStepValid == true)
+        #expect(state.selectedLocationMode == .manual)
+        #expect(state.isCurrentStepValid == true) // Paso 0 (Sensibilidad Térmica) es válido
     }
 
     @Test("Navegación respeta los límites")
@@ -37,10 +37,8 @@ struct OnboardingStateTests {
         let state = OnboardingState()
         state.currentTab = 1
         
-        state.selectedLocationMode = .gps
-        #expect(state.isCurrentStepValid == true)
-        
-        state.selectedLocationMode = .manual
+        // Al iniciar por defecto en .manual con cadena vacía debe ser inválido
+        #expect(state.selectedLocationMode == .manual)
         state.manualCityName = ""
         #expect(state.isCurrentStepValid == false)
         
@@ -48,6 +46,9 @@ struct OnboardingStateTests {
         #expect(state.isCurrentStepValid == false)
         
         state.manualCityName = "Madrid"
+        #expect(state.isCurrentStepValid == true)
+
+        state.selectedLocationMode = .gps
         #expect(state.isCurrentStepValid == true)
     }
 
