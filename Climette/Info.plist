@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Climette analiza tus horarios de sueño para sincronizar automáticamente la entrega matutina y nocturna de recomendaciones.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Climette requiere acceso al entorno de salud para gestionar la sincronización de horarios de descanso.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Climette utiliza tu ubicación actual para consultar las condiciones climáticas hiperlocales y calcular tu Índice Térmico Personalizado.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

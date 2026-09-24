@@ -5,6 +5,11 @@ struct NotificationsAndHealthStepView: View {
     @Binding var nightReview: Date
     @Binding var muteWeekends: Bool
 
+    var healthKitService: HealthKitServiceProtocol = HealthKitService()
+
+    @State private var isSyncingHealth: Bool = false
+    @State private var healthErrorMessage: String?
+
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
@@ -60,23 +65,39 @@ struct NotificationsAndHealthStepView: View {
 
                     VStack(alignment: .leading, spacing: 8) {
                         Button {
+                            Task { @MainActor in
+                                await syncWithSleepSchedule()
+                            }
                         } label: {
                             HStack {
                                 Text("Ajustar según horario de sueño")
                                     .font(.headline)
                                 Spacer()
-                                Image(systemName: "bed.double.fill")
-                                    .foregroundStyle(Color.accentColor)
-                                    .accessibilityHidden(true)
+                                if isSyncingHealth {
+                                    ProgressView()
+                                        .controlSize(.small)
+                                } else {
+                                    Image(systemName: "bed.double.fill")
+                                        .foregroundStyle(Color.accentColor)
+                                        .accessibilityHidden(true)
+                                }
                             }
                             .frame(minHeight: 44)
                         }
+                        .disabled(isSyncingHealth)
                         .tint(.primary)
 
                         Text("Utiliza los datos de descanso para sincronizar automáticamente las horas de aviso.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
+
+                        if let healthErrorMessage {
+                            Text(healthErrorMessage)
+                                .font(.caption)
+                                .foregroundStyle(.red)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
                     }
                     .padding()
                     .background(Color(uiColor: .secondarySystemGroupedBackground))
@@ -86,5 +107,38 @@ struct NotificationsAndHealthStepView: View {
             }
             .padding(.bottom, 24)
         }
+    }
+
+    private func syncWithSleepSchedule() async {
+        isSyncingHealth = true
+        healthErrorMessage = nil
+
+        do {
+            _ = try await healthKitService.requestSleepAuthorization()
+            if let schedule = try await healthKitService.fetchRecentSleepSchedule() {
+                let calendar = Calendar.current
+                let now = Date.now
+
+                if let wakeHour = schedule.wakeUp.hour,
+                   let wakeMinute = schedule.wakeUp.minute,
+                   let calculatedWakeUp = calendar.date(bySettingHour: wakeHour, minute: wakeMinute, second: 0, of: now) {
+                    weekdayWakeUp = calculatedWakeUp
+                }
+
+                if let bedHour = schedule.bedtime.hour,
+                   let bedMinute = schedule.bedtime.minute,
+                   let calculatedBedtime = calendar.date(bySettingHour: bedHour, minute: bedMinute, second: 0, of: now) {
+                    nightReview = calculatedBedtime
+                }
+            } else {
+                healthErrorMessage = HealthKitServiceError.noDataFound.localizedDescription
+            }
+        } catch let error as LocalizedError {
+            healthErrorMessage = error.errorDescription ?? error.localizedDescription
+        } catch {
+            healthErrorMessage = error.localizedDescription
+        }
+
+        isSyncingHealth = false
     }
 }

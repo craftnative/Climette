@@ -38,18 +38,22 @@ public final class OnboardingState {
         }
     }
 
-    public func saveAndComplete(context: ModelContext) {
+    public func createNotificationAlertTimes() -> NotificationAlertTimes {
         let calendar = Calendar.current
         let weekdayComponents = calendar.dateComponents([.hour, .minute], from: weekdayWakeUp)
         let weekendComponents = calendar.dateComponents([.hour, .minute], from: weekendWakeUp)
         let nightComponents = calendar.dateComponents([.hour, .minute], from: nightReview)
 
-        let alertTimes = NotificationAlertTimes(
+        return NotificationAlertTimes(
             weekdayMorning: DateComponents(hour: weekdayComponents.hour ?? 7, minute: weekdayComponents.minute ?? 45),
             weekendMorning: DateComponents(hour: weekendComponents.hour ?? 10, minute: weekendComponents.minute ?? 30),
             nightFeedback: DateComponents(hour: nightComponents.hour ?? 20, minute: nightComponents.minute ?? 30),
             isWeekendMuted: muteWeekends
         )
+    }
+
+    public func saveAndComplete(context: ModelContext) {
+        let alertTimes = createNotificationAlertTimes()
 
         let userProfile = UserProfile(
             sensitivity: selectedSensitivity,
