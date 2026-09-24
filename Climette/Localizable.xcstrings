@@ -1,24 +1,24 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
-    "!" : {
-      "comment" : "An exclamation mark.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "!"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "!"
-          }
-        }
-      }
-    },
+      "exclamation_mark" : {
+            "comment" : "An exclamation mark.",
+            "extractionState" : "manual",
+            "localizations" : {
+              "en" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "!"
+                }
+              },
+              "es" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "!"
+                }
+              }
+            }
+          },
     "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema." : {
       "comment" : "Text displayed in a notification that asks the user to rate their clothing choices for the day.",
       "extractionState" : "manual",

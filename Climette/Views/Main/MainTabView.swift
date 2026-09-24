@@ -55,7 +55,7 @@ struct MainTabView: View {
             }
             .accessibilityLabel(Text("Ajustes"))
             .accessibilityHint(Text("tab_settings_accessibility_hint"))
-            .badge(hasMissingPermissions ? "!" : nil)
+            .badge(hasMissingPermissions ? Text(verbatim: "!") : nil)
             .tag(MainTab.settings)
         }
         .tint(Color("AccentColor"))

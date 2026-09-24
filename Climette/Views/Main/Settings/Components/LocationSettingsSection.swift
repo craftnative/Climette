@@ -8,6 +8,7 @@ struct LocationSettingsSection: View {
     @State private var modeSelection: LocationSelectionMode = .gps
     @State private var cityName: String = ""
     @State private var showMapSheet: Bool = false
+    @State private var isSyncingFromModel: Bool = false
 
     var body: some View {
         Section {
@@ -17,6 +18,7 @@ struct LocationSettingsSection: View {
             }
             .pickerStyle(.segmented)
             .onChange(of: modeSelection) { _, newMode in
+                guard !isSyncingFromModel else { return }
                 applyModeChange(newMode)
             }
 
@@ -76,14 +78,24 @@ struct LocationSettingsSection: View {
                 }
             }
         }
-        .task {
-            if locationState.modeRaw == "manualCity" {
-                modeSelection = .manual
-                cityName = locationState.cityName ?? ""
-            } else {
-                modeSelection = .gps
-            }
+        .task(id: locationState.modeRaw) {
+            syncStateFromModel()
         }
+        .task(id: locationState.cityName) {
+            syncStateFromModel()
+        }
+    }
+
+    private func syncStateFromModel() {
+        isSyncingFromModel = true
+        if locationState.modeRaw == "manualCity" {
+            modeSelection = .manual
+            cityName = locationState.cityName ?? ""
+        } else {
+            modeSelection = .gps
+            cityName = locationState.cityName ?? ""
+        }
+        isSyncingFromModel = false
     }
 
     private func applyModeChange(_ mode: LocationSelectionMode) {

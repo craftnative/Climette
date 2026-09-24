@@ -18,7 +18,6 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            
             if let dbErrorMessage {
                 Section {
                     VStack(alignment: .leading, spacing: 4) {
@@ -124,22 +123,31 @@ struct SettingsView: View {
     }
 
     private func ensureInitialEntitiesExist() {
-        var needsSave = false
-        if userProfiles.isEmpty {
-            modelContext.insert(UserProfileEntity(from: UserProfile()))
-            needsSave = true
-        }
-        if locationStates.isEmpty {
-            modelContext.insert(LocationStateEntity(from: LocationState()))
-            needsSave = true
-        }
-        if needsSave {
-            do {
-                try modelContext.save()
-            } catch {
-                dbErrorMessage = error.localizedDescription
-                print("⚠️ Error SwiftData (SettingsView): \(error)")
+        do {
+            var needsSave = false
+
+            var profileDescriptor = FetchDescriptor<UserProfileEntity>()
+            profileDescriptor.fetchLimit = 1
+            let existingProfiles = try modelContext.fetch(profileDescriptor)
+            if existingProfiles.isEmpty {
+                modelContext.insert(UserProfileEntity(from: UserProfile()))
+                needsSave = true
             }
+
+            var locationDescriptor = FetchDescriptor<LocationStateEntity>()
+            locationDescriptor.fetchLimit = 1
+            let existingLocations = try modelContext.fetch(locationDescriptor)
+            if existingLocations.isEmpty {
+                modelContext.insert(LocationStateEntity(from: LocationState()))
+                needsSave = true
+            }
+
+            if needsSave {
+                try modelContext.save()
+            }
+        } catch {
+            dbErrorMessage = error.localizedDescription
+            print("⚠️ Error SwiftData (SettingsView): \(error)")
         }
     }
 }
