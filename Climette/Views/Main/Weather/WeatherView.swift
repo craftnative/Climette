@@ -29,9 +29,3 @@ struct WeatherView: View {
         .navigationTitle(Text("Tiempo"))
     }
 }
-
-#Preview {
-    NavigationStack {
-        WeatherView()
-    }
-}

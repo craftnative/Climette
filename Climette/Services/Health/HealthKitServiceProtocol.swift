@@ -11,7 +11,7 @@ public enum HealthKitServiceError: Error, Sendable, LocalizedError {
     case healthDataUnavailable
     case sampleTypeUnavailable
     case authorizationFailed
-    case noDataFound
+    case noDataOrPermissionDenied
 
     public var errorDescription: String? {
         switch self {
@@ -21,8 +21,8 @@ public enum HealthKitServiceError: Error, Sendable, LocalizedError {
             return "El tipo de dato de análisis de sueño no se encuentra disponible."
         case .authorizationFailed:
             return "No se concedió acceso a los datos de descanso."
-        case .noDataFound:
-            return "No se encontraron muestras recientes de sueño."
+        case .noDataOrPermissionDenied:
+            return "No se encontraron datos o el acceso de lectura fue denegado."
         }
     }
 }

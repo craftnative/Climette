@@ -29,9 +29,3 @@ struct WardrobeView: View {
         .navigationTitle(Text("Armario"))
     }
 }
-
-#Preview {
-    NavigationStack {
-        WardrobeView()
-    }
-}

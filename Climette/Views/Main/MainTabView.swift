@@ -55,7 +55,3 @@ struct MainTabView: View {
         .tint(Color("AccentColor"))
     }
 }
-
-#Preview {
-    MainTabView()
-}

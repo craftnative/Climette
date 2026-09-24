@@ -34,9 +34,3 @@ struct SettingsView: View {
         .navigationTitle(Text("Ajustes"))
     }
 }
-
-#Preview {
-    NavigationStack {
-        SettingsView()
-    }
-}

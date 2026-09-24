@@ -20,7 +20,11 @@ public final class HealthKitService: HealthKitServiceProtocol {
         let sleepType = HKCategoryType(.sleepAnalysis)
         let typesToRead: Set<HKObjectType> = [sleepType]
 
-        try await healthStore.requestAuthorization(toShare: [], read: typesToRead)
+        let status = try await healthStore.statusForAuthorizationRequest(toShare: [], read: typesToRead)
+        if status == .shouldRequest {
+            try await healthStore.requestAuthorization(toShare: [], read: typesToRead)
+        }
+
         return true
     }
 
@@ -32,9 +36,9 @@ public final class HealthKitService: HealthKitServiceProtocol {
         let sleepType = HKCategoryType(.sleepAnalysis)
         let calendar = Calendar.current
         let endDate = Date.now
-        
+
         guard let startDate = calendar.date(byAdding: .day, value: -7, to: endDate) else {
-            return nil
+            throw HealthKitServiceError.noDataOrPermissionDenied
         }
 
         let predicate = HKQuery.predicateForSamples(
@@ -42,7 +46,7 @@ public final class HealthKitService: HealthKitServiceProtocol {
             end: endDate,
             options: .strictStartDate
         )
-        
+
         let descriptor = HKSampleQueryDescriptor(
             predicates: [.categorySample(type: sleepType, predicate: predicate)],
             sortDescriptors: [SortDescriptor(\.endDate, order: .reverse)],
@@ -51,12 +55,16 @@ public final class HealthKitService: HealthKitServiceProtocol {
 
         let samples = try await descriptor.result(for: healthStore)
 
+        guard !samples.isEmpty else {
+            throw HealthKitServiceError.noDataOrPermissionDenied
+        }
+
         let validSleepSamples = samples.filter { sample in
             sample.value != HKCategoryValueSleepAnalysis.inBed.rawValue
         }
 
         guard let latestSample = validSleepSamples.first ?? samples.first else {
-            return nil
+            throw HealthKitServiceError.noDataOrPermissionDenied
         }
 
         let bedtimeComponents = calendar.dateComponents([.hour, .minute], from: latestSample.startDate)

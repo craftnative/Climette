@@ -74,7 +74,3 @@ struct OnboardingView: View {
         isProcessingCompletion = false
     }
 }
-
-#Preview {
-    OnboardingView()
-}

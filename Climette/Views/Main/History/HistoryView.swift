@@ -29,9 +29,3 @@ struct HistoryView: View {
         .navigationTitle(Text("Historial"))
     }
 }
-
-#Preview {
-    NavigationStack {
-        HistoryView()
-    }
-}
