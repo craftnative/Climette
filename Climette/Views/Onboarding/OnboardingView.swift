@@ -8,7 +8,6 @@ struct OnboardingView: View {
     
     var notificationService: NotificationServiceProtocol = NotificationService()
     var locationService: LocationServiceProtocol = LocationService()
-    var healthKitService: HealthKitServiceProtocol = HealthKitService()
     
     @State private var state = OnboardingState()
     @State private var isProcessingCompletion: Bool = false
@@ -25,11 +24,10 @@ struct OnboardingView: View {
             )
             .tag(1)
 
-            NotificationsAndHealthStepView(
-                weekdayWakeUp: $state.weekdayWakeUp,
+            RoutineStepView(
+                weekdayMorningAlert: $state.weekdayMorningAlert,
                 nightReview: $state.nightReview,
-                muteWeekends: $state.muteWeekends,
-                healthKitService: healthKitService
+                muteWeekends: $state.muteWeekends
             )
             .tag(2)
         }

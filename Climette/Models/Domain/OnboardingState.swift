@@ -12,8 +12,8 @@ public final class OnboardingState {
     public var selectedLocationMode: LocationSelectionMode = .manual
     public var manualCityName: String = ""
 
-    public var weekdayWakeUp: Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 45)) ?? .now
-    public var weekendWakeUp: Date = Calendar.current.date(from: DateComponents(hour: 10, minute: 30)) ?? .now
+    public var weekdayMorningAlert: Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 45)) ?? .now
+    public var weekendMorningAlert: Date = Calendar.current.date(from: DateComponents(hour: 10, minute: 30)) ?? .now
     public var nightReview: Date = Calendar.current.date(from: DateComponents(hour: 20, minute: 30)) ?? .now
     public var muteWeekends: Bool = false
 
@@ -40,8 +40,8 @@ public final class OnboardingState {
 
     public func createNotificationAlertTimes() -> NotificationAlertTimes {
         let calendar = Calendar.current
-        let weekdayComponents = calendar.dateComponents([.hour, .minute], from: weekdayWakeUp)
-        let weekendComponents = calendar.dateComponents([.hour, .minute], from: weekendWakeUp)
+        let weekdayComponents = calendar.dateComponents([.hour, .minute], from: weekdayMorningAlert)
+        let weekendComponents = calendar.dateComponents([.hour, .minute], from: weekendMorningAlert)
         let nightComponents = calendar.dateComponents([.hour, .minute], from: nightReview)
 
         return NotificationAlertTimes(

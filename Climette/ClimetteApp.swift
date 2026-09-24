@@ -20,7 +20,6 @@ struct ClimetteApp: App {
             FeedbackRecordEntity.self,
             ClothingItemEntity.self,
             WeatherSnapshotEntity.self,
-            SleepScheduleEntity.self,
             WeatherEntity.self
         ])
     }
