@@ -3,19 +3,19 @@ import SwiftData
 
 @Model
 public final class UserProfileEntity {
-    @Attribute(.unique) public var id: UUID
-    public var sensitivityRaw: String
+    public var id: UUID = UUID()
+    public var sensitivityRaw: String = ""
     
-    public var weekdayMorningHour: Int
-    public var weekdayMorningMinute: Int
-    public var weekendMorningHour: Int
-    public var weekendMorningMinute: Int
-    public var nightFeedbackHour: Int
-    public var nightFeedbackMinute: Int
-    public var isWeekendMuted: Bool
+    public var weekdayMorningHour: Int = 0
+    public var weekdayMorningMinute: Int = 0
+    public var weekendMorningHour: Int = 0
+    public var weekendMorningMinute: Int = 0
+    public var nightFeedbackHour: Int = 0
+    public var nightFeedbackMinute: Int = 0
+    public var isWeekendMuted: Bool = false
     
-    public var lastActiveTimestamp: Date
-    public var updatedAt: Date
+    public var lastActiveTimestamp: Date = Date()
+    public var updatedAt: Date = Date()
 
     public init(
         id: UUID = UUID(),

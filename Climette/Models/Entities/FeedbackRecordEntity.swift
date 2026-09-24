@@ -3,19 +3,19 @@ import SwiftData
 
 @Model
 public final class FeedbackRecordEntity {
-    @Attribute(.unique) public var id: UUID
-    public var timestamp: Date
+    public var id: UUID = UUID()
+    public var timestamp: Date = Date()
     
     @Relationship public var weatherSnapshot: WeatherSnapshotEntity?
-    public var originPriorityRaw: Int
+    public var originPriorityRaw: Int = 0
     public var evaluatedPeriodRaw: String?
     
     @Relationship public var baseLayer: ClothingItemEntity?
     @Relationship public var midLayer: ClothingItemEntity?
     @Relationship public var outerLayer: ClothingItemEntity?
     
-    public var perceptionRaw: String
-    public var isIndoorDistortion: Bool
+    public var perceptionRaw: String = ""
+    public var isIndoorDistortion: Bool = false
     public var physicalReactionRaw: String?
     
     @Relationship public var adjustedGarment: ClothingItemEntity?

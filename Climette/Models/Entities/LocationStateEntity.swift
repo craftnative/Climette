@@ -3,7 +3,7 @@ import SwiftData
 
 @Model
 public final class LocationStateEntity {
-    public var modeRaw: String
+    public var modeRaw: String = ""
     public var latitude: Double?
     public var longitude: Double?
     public var cityName: String?

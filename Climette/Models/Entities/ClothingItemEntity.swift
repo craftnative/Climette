@@ -3,11 +3,11 @@ import SwiftData
 
 @Model
 public final class ClothingItemEntity {
-    @Attribute(.unique) public var id: UUID
-    public var layerRaw: String
-    public var ontologyRaw: String
+    public var id: UUID = UUID()
+    public var layerRaw: String = ""
+    public var ontologyRaw: String = ""
     public var userNickname: String?
-    public var functionalDescriptor: String
+    public var functionalDescriptor: String = ""
 
     public init(
         id: UUID = UUID(),

@@ -3,15 +3,15 @@ import SwiftData
 
 @Model
 public final class WeatherSnapshotEntity {
-    @Attribute(.unique) public var id: UUID
-    public var temperature: Double
-    public var personalThermalIndex: Double
-    public var windSpeedKmh: Double
-    public var precipitationRaw: String
-    public var skyCoverRaw: String
-    public var minTemperature: Double
-    public var maxTemperature: Double
-    public var recordedAt: Date
+    public var id: UUID = UUID()
+    public var temperature: Double = 0.0
+    public var personalThermalIndex: Double = 0.0
+    public var windSpeedKmh: Double = 0.0
+    public var precipitationRaw: String = ""
+    public var skyCoverRaw: String = ""
+    public var minTemperature: Double = 0.0
+    public var maxTemperature: Double = 0.0
+    public var recordedAt: Date = Date()
 
     public init(
         id: UUID = UUID(),
