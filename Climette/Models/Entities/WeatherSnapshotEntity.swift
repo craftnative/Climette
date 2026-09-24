@@ -12,6 +12,9 @@ public final class WeatherSnapshotEntity {
     public var minTemperature: Double = 0.0
     public var maxTemperature: Double = 0.0
     public var recordedAt: Date = Date()
+    
+    // Relación inversa requerida por CloudKit
+    public var feedbackRecord: FeedbackRecordEntity?
 
     public init(
         id: UUID = UUID(),

@@ -1,15 +1,28 @@
 import SwiftUI
 import CloudKit
+import Network
 
 struct CloudKitSyncSection: View {
     @AppStorage("isCloudKitSyncEnabled") private var isCloudKitSyncEnabled: Bool = true
     @State private var accountStatus: CKAccountStatus = .couldNotDetermine
     @State private var isCheckingStatus: Bool = false
+    @State private var isNetworkAvailable: Bool = true
+
+    private let pathMonitor = NWPathMonitor()
+    private let monitorQueue = DispatchQueue(label: "NetworkMonitor")
 
     var body: some View {
         Section {
-            Toggle("Sincronizar con iCloud", isOn: $isCloudKitSyncEnabled)
-                .tint(Color("AccentColor"))
+            Toggle(isOn: $isCloudKitSyncEnabled) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Sincronizar con iCloud")
+                    
+                    Text("Los cambios en la sincronización se aplicarán al reiniciar la aplicación.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .tint(Color("AccentColor"))
 
             HStack {
                 Text("Estado de iCloud")
@@ -19,29 +32,36 @@ struct CloudKitSyncSection: View {
                     ProgressView()
                         .controlSize(.small)
                 } else {
-                    Text(accountStatusDescription)
+                    Text(syncStatusDescription)
                         .font(.subheadline)
-                        .foregroundStyle(accountStatusColor)
+                        .foregroundStyle(syncStatusColor)
                 }
             }
 
-            if accountStatus == .noAccount {
+            if accountStatus == .noAccount && isCloudKitSyncEnabled {
                 Text("Inicia sesión en Ajustes del sistema para respaldar datos.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
         } header: {
-            Text("Almacenamiento")
-        } footer: {
-            Text("CloudKit sincroniza perfiles y armarios privadamente.")
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Almacenamiento")
+                Text("Sincroniza historial y armario privadamente.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .listRowBackground(Color("SurfaceElevated"))
         .task {
+            startNetworkMonitoring()
             await checkAccountStatus()
         }
     }
 
-    private var accountStatusDescription: String {
+    private var syncStatusDescription: String {
+        guard isCloudKitSyncEnabled else { return "Desactivado" }
+        guard isNetworkAvailable else { return "Sin conexión" }
+
         switch accountStatus {
         case .available: return "Conectado"
         case .noAccount: return "Sin cuenta"
@@ -52,7 +72,10 @@ struct CloudKitSyncSection: View {
         }
     }
 
-    private var accountStatusColor: Color {
+    private var syncStatusColor: Color {
+        guard isCloudKitSyncEnabled else { return .secondary }
+        guard isNetworkAvailable else { return .orange }
+
         switch accountStatus {
         case .available: return .green
         case .noAccount, .restricted, .temporarilyUnavailable: return .orange
@@ -69,5 +92,14 @@ struct CloudKitSyncSection: View {
         } catch {
             accountStatus = .couldNotDetermine
         }
+    }
+
+    private func startNetworkMonitoring() {
+        pathMonitor.pathUpdateHandler = { path in
+            Task { @MainActor in
+                self.isNetworkAvailable = (path.status == .satisfied)
+            }
+        }
+        pathMonitor.start(queue: monitorQueue)
     }
 }

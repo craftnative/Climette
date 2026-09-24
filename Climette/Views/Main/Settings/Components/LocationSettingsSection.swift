@@ -47,9 +47,12 @@ struct LocationSettingsSection: View {
                 }
             }
         } header: {
-            Text("Ubicación y Clima")
-        } footer: {
-            Text("El Índice Térmico requiere condiciones hiperlocales.")
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Ubicación y Clima")
+                Text("El Índice Térmico requiere condiciones locales.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .listRowBackground(Color("SurfaceElevated"))
         .sheet(isPresented: $showMapSheet) {

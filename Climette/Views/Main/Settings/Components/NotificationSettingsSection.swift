@@ -53,9 +53,12 @@ struct NotificationSettingsSection: View {
                     updateSchedule()
                 }
         } header: {
-            Text("Notificaciones y Rutinas")
-        } footer: {
-            Text("Establece los momentos del día en que Climette evalúa el clima.")
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Notificaciones y Rutinas")
+                Text("Establece los momentos del día en que Climette evalúa el clima.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
         }
         .listRowBackground(Color("SurfaceElevated"))
         .task {

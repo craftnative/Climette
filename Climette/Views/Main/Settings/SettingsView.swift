@@ -13,10 +13,25 @@ struct SettingsView: View {
 
     @State private var locationStatus: LocationPermissionStatus = .notDetermined
     @State private var notificationStatus: NotificationPermissionStatus = .notDetermined
+    
+    @State private var dbErrorMessage: String?
 
     var body: some View {
         Form {
-            CloudKitSyncSection()
+            
+            if let dbErrorMessage {
+                Section {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Fallo en Base de Datos")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(.red)
+                        Text(dbErrorMessage)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .listRowBackground(Color("SurfaceElevated"))
+            }
             
             if hasMissingPermissions {
                 Section {
@@ -79,6 +94,8 @@ struct SettingsView: View {
                 }
                 .listRowBackground(Color("SurfaceElevated"))
             }
+            
+            CloudKitSyncSection()
         }
         .scrollContentBackground(.hidden)
         .background(Color("BackgroundBase").ignoresSafeArea())
@@ -117,7 +134,12 @@ struct SettingsView: View {
             needsSave = true
         }
         if needsSave {
-            try? modelContext.save()
+            do {
+                try modelContext.save()
+            } catch {
+                dbErrorMessage = error.localizedDescription
+                print("⚠️ Error SwiftData (SettingsView): \(error)")
+            }
         }
     }
 }

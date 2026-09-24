@@ -84,7 +84,8 @@ public final class OnboardingState {
         do {
             try context.save()
         } catch {
-            assertionFailure("Error al persistir Onboarding en ModelContext: \(error)")
+            print("⚠️ CRITICAL - Error al persistir Onboarding en ModelContext: \(error.localizedDescription)")
+            print("⚠️ Detalles técnicos: \(error)")
         }
     }
 }

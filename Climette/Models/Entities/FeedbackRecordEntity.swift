@@ -6,19 +6,28 @@ public final class FeedbackRecordEntity {
     public var id: UUID = UUID()
     public var timestamp: Date = Date()
     
-    @Relationship public var weatherSnapshot: WeatherSnapshotEntity?
+    @Relationship(inverse: \WeatherSnapshotEntity.feedbackRecord)
+    public var weatherSnapshot: WeatherSnapshotEntity?
+    
     public var originPriorityRaw: Int = 0
     public var evaluatedPeriodRaw: String?
     
-    @Relationship public var baseLayer: ClothingItemEntity?
-    @Relationship public var midLayer: ClothingItemEntity?
-    @Relationship public var outerLayer: ClothingItemEntity?
+    @Relationship(inverse: \ClothingItemEntity.baseLayerFeedbacks)
+    public var baseLayer: ClothingItemEntity?
+    
+    @Relationship(inverse: \ClothingItemEntity.midLayerFeedbacks)
+    public var midLayer: ClothingItemEntity?
+    
+    @Relationship(inverse: \ClothingItemEntity.outerLayerFeedbacks)
+    public var outerLayer: ClothingItemEntity?
     
     public var perceptionRaw: String = ""
     public var isIndoorDistortion: Bool = false
     public var physicalReactionRaw: String?
     
-    @Relationship public var adjustedGarment: ClothingItemEntity?
+    @Relationship(inverse: \ClothingItemEntity.adjustedGarmentFeedbacks)
+    public var adjustedGarment: ClothingItemEntity?
+    
     public var isGarmentAddition: Bool?
     public var postAdjustmentStateRaw: String?
 

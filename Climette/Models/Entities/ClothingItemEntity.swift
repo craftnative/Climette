@@ -8,6 +8,12 @@ public final class ClothingItemEntity {
     public var ontologyRaw: String = ""
     public var userNickname: String?
     public var functionalDescriptor: String = ""
+    
+    // Relaciones inversas requeridas por CloudKit
+    public var baseLayerFeedbacks: [FeedbackRecordEntity]?
+    public var midLayerFeedbacks: [FeedbackRecordEntity]?
+    public var outerLayerFeedbacks: [FeedbackRecordEntity]?
+    public var adjustedGarmentFeedbacks: [FeedbackRecordEntity]?
 
     public init(
         id: UUID = UUID(),

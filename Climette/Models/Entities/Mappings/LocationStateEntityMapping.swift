@@ -37,6 +37,7 @@ extension LocationStateEntity {
         }
         
         self.init(
+            id: UUID(),
             modeRaw: modeStr,
             latitude: lat,
             longitude: lon,
