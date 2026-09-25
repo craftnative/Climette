@@ -3,45 +3,36 @@ import Foundation
 @MainActor
 extension LocationStateEntity {
     public func toDomain() -> LocationState {
-        let mode: LocationMode
-        if modeRaw == "manualCity", let lat = latitude, let lon = longitude, let name = cityName {
-            mode = .manualCity(name: name, coordinate: GeographicCoordinate(latitude: lat, longitude: lon))
-        } else {
-            mode = .foregroundGPS
+        var manualCoord: GeographicCoordinate? = nil
+        if let lat = manualLatitude, let lon = manualLongitude {
+            manualCoord = GeographicCoordinate(latitude: lat, longitude: lon)
         }
         
-        var currentCoord: GeographicCoordinate? = nil
-        if let lat = latitude, let lon = longitude {
-            currentCoord = GeographicCoordinate(latitude: lat, longitude: lon)
+        var gpsCoord: GeographicCoordinate? = nil
+        if let lat = gpsLatitude, let lon = gpsLongitude {
+            gpsCoord = GeographicCoordinate(latitude: lat, longitude: lon)
         }
         
         return LocationState(
-            mode: mode,
-            currentCoordinate: currentCoord,
-            lastResolvedCityName: cityName,
+            mode: LocationMode(rawValue: modeRaw) ?? .gps,
+            manualCoordinate: manualCoord,
+            manualCityName: manualCityName,
+            gpsCoordinate: gpsCoord,
+            gpsCityName: gpsCityName,
             lastUpdated: lastUpdated
         )
     }
     
     public convenience init(from domain: LocationState) {
-        var modeStr = "foregroundGPS"
-        var lat = domain.currentCoordinate?.latitude
-        var lon = domain.currentCoordinate?.longitude
-        var city = domain.lastResolvedCityName
-        
-        if case .manualCity(let name, let coord) = domain.mode {
-            modeStr = "manualCity"
-            lat = coord.latitude
-            lon = coord.longitude
-            city = name
-        }
-        
         self.init(
             id: UUID(),
-            modeRaw: modeStr,
-            latitude: lat,
-            longitude: lon,
-            cityName: city,
+            modeRaw: domain.mode.rawValue,
+            manualLatitude: domain.manualCoordinate?.latitude,
+            manualLongitude: domain.manualCoordinate?.longitude,
+            manualCityName: domain.manualCityName,
+            gpsLatitude: domain.gpsCoordinate?.latitude,
+            gpsLongitude: domain.gpsCoordinate?.longitude,
+            gpsCityName: domain.gpsCityName,
             lastUpdated: domain.lastUpdated
         )
     }

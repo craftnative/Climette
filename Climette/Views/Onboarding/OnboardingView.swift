@@ -14,22 +14,24 @@ struct OnboardingView: View {
 
     var body: some View {
         TabView(selection: $state.currentTab) {
-            ThermalProfileStepView(selectedSensitivity: $state.selectedSensitivity)
-                .tag(0)
+            // El Group fuerza al compilador a usar @ViewBuilder y no @TabContentBuilder
+            Group {
+                ThermalProfileStepView(selectedSensitivity: $state.selectedSensitivity)
+                    .tag(0)
 
-            LocationStepView(
-                selectedLocationMode: $state.selectedLocationMode,
-                manualCityName: $state.manualCityName,
-                locationService: locationService
-            )
-            .tag(1)
+                LocationStepView(
+                    state: state,
+                    locationService: locationService
+                )
+                .tag(1)
 
-            RoutineStepView(
-                weekdayMorningAlert: $state.weekdayMorningAlert,
-                nightReview: $state.nightReview,
-                muteWeekends: $state.muteWeekends
-            )
-            .tag(2)
+                RoutineStepView(
+                    weekdayMorningAlert: $state.weekdayMorningAlert,
+                    nightReview: $state.nightReview,
+                    muteWeekends: $state.muteWeekends
+                )
+                .tag(2)
+            }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .background(Color(uiColor: .systemGroupedBackground))

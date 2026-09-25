@@ -5,9 +5,7 @@ struct LocationStepView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
     
-    @Binding var selectedLocationMode: LocationSelectionMode
-    @Binding var manualCityName: String
-    
+    @Bindable var state: OnboardingState
     var locationService: LocationServiceProtocol = LocationService()
     
     @FocusState private var isFocused: Bool
@@ -29,9 +27,9 @@ struct LocationStepView: View {
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
 
-                    Picker("Origen de datos", selection: $selectedLocationMode) {
-                        Text("Manual").tag(LocationSelectionMode.manual)
-                        Text("GPS").tag(LocationSelectionMode.gps)
+                    Picker("Origen de datos", selection: $state.selectedLocationMode) {
+                        Text("Manual").tag(LocationMode.manual)
+                        Text("GPS").tag(LocationMode.gps)
                     }
                     .pickerStyle(.segmented)
                 }
@@ -43,7 +41,7 @@ struct LocationStepView: View {
             .padding(.bottom, 24)
             
             VStack {
-                switch selectedLocationMode {
+                switch state.selectedLocationMode {
                 case .gps:
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 12) {
@@ -56,9 +54,9 @@ struct LocationStepView: View {
                                     .accessibilityHidden(true)
                             }
 
-                            Text("Mantiene calibrada la recomendación climática local sin intervención manual.")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                            Text(state.gpsCityName ?? "Mantiene calibrada la recomendación climática local sin intervención manual.")
+                                .font(state.gpsCityName != nil ? .body : .caption)
+                                .foregroundStyle(state.gpsCityName != nil ? Color("TextPrimary") : Color.secondary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
 
@@ -91,14 +89,18 @@ struct LocationStepView: View {
                     .padding(.horizontal, 20)
 
                 case .manual:
-                    InteractiveCityMapView(cityName: $manualCityName)
+                    InteractiveCityMapView(
+                        cityName: $state.manualCityName,
+                        coordinate: $state.manualCoordinate,
+                        locationService: locationService
+                    )
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .padding(.bottom, 24)
-        .task(id: selectedLocationMode) {
-            guard selectedLocationMode == .gps else {
+        .task(id: state.selectedLocationMode) {
+            guard state.selectedLocationMode == .gps else {
                 locationErrorMessage = nil
                 isLocating = false
                 isUnauthorized = false
@@ -107,7 +109,7 @@ struct LocationStepView: View {
             await resolveGPSLocation()
         }
         .onChange(of: scenePhase) { _, newPhase in
-            guard newPhase == .active, selectedLocationMode == .gps else { return }
+            guard newPhase == .active, state.selectedLocationMode == .gps else { return }
             Task { @MainActor in
                 await resolveGPSLocation()
             }
@@ -129,8 +131,9 @@ struct LocationStepView: View {
 
         do {
             let coordinate = try await locationService.getCurrentLocation()
+            state.gpsCoordinate = coordinate
             if let resolvedCity = try await locationService.reverseGeocode(coordinate: coordinate) {
-                manualCityName = resolvedCity
+                state.gpsCityName = resolvedCity
             }
         } catch let error as LocalizedError {
             locationErrorMessage = error.errorDescription ?? error.localizedDescription
@@ -140,11 +143,4 @@ struct LocationStepView: View {
 
         isLocating = false
     }
-}
-
-#Preview {
-    LocationStepView(
-        selectedLocationMode: .constant(.manual),
-        manualCityName: .constant("")
-    )
 }

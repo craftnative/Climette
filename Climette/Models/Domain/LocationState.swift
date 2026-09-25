@@ -10,26 +10,40 @@ public struct GeographicCoordinate: Codable, Sendable, Equatable {
     }
 }
 
-public enum LocationMode: Codable, Sendable, Equatable {
-    case foregroundGPS
-    case manualCity(name: String, coordinate: GeographicCoordinate)
+public enum LocationMode: String, Codable, Sendable, Equatable {
+    case gps = "gps"
+    case manual = "manual"
 }
 
 public struct LocationState: Codable, Sendable, Equatable {
     public var mode: LocationMode
-    public var currentCoordinate: GeographicCoordinate?
-    public var lastResolvedCityName: String?
+    public var manualCoordinate: GeographicCoordinate?
+    public var manualCityName: String?
+    public var gpsCoordinate: GeographicCoordinate?
+    public var gpsCityName: String?
     public var lastUpdated: Date?
 
+    public var activeCityName: String? {
+        mode == .manual ? manualCityName : gpsCityName
+    }
+    
+    public var activeCoordinate: GeographicCoordinate? {
+        mode == .manual ? manualCoordinate : gpsCoordinate
+    }
+
     public init(
-        mode: LocationMode = .foregroundGPS,
-        currentCoordinate: GeographicCoordinate? = nil,
-        lastResolvedCityName: String? = nil,
+        mode: LocationMode = .gps,
+        manualCoordinate: GeographicCoordinate? = nil,
+        manualCityName: String? = nil,
+        gpsCoordinate: GeographicCoordinate? = nil,
+        gpsCityName: String? = nil,
         lastUpdated: Date? = nil
     ) {
         self.mode = mode
-        self.currentCoordinate = currentCoordinate
-        self.lastResolvedCityName = lastResolvedCityName
+        self.manualCoordinate = manualCoordinate
+        self.manualCityName = manualCityName
+        self.gpsCoordinate = gpsCoordinate
+        self.gpsCityName = gpsCityName
         self.lastUpdated = lastUpdated
     }
 }

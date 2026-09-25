@@ -9,8 +9,12 @@ public final class OnboardingState {
     public let totalTabs: Int = 3
 
     public var selectedSensitivity: ThermalSensitivity = .normal
-    public var selectedLocationMode: LocationSelectionMode = .manual
+    
+    public var selectedLocationMode: LocationMode = .manual
     public var manualCityName: String = ""
+    public var manualCoordinate: GeographicCoordinate? = nil
+    public var gpsCityName: String? = nil
+    public var gpsCoordinate: GeographicCoordinate? = nil
 
     public var weekdayMorningAlert: Date = Calendar.current.date(from: DateComponents(hour: 7, minute: 45)) ?? .now
     public var weekendMorningAlert: Date = Calendar.current.date(from: DateComponents(hour: 10, minute: 30)) ?? .now
@@ -53,32 +57,69 @@ public final class OnboardingState {
     public func saveAndComplete(context: ModelContext) {
         let alertTimes = createNotificationAlertTimes()
 
-        let userProfile = UserProfile(
-            sensitivity: selectedSensitivity,
-            alertTimes: alertTimes,
-            lastActiveTimestamp: .now,
-            updatedAt: .now
-        )
-        let profileEntity = UserProfileEntity(from: userProfile)
-        context.insert(profileEntity)
+        // 1. Upsert UserProfileEntity
+        do {
+            var profileDescriptor = FetchDescriptor<UserProfileEntity>()
+            profileDescriptor.fetchLimit = 1
+            let existingProfiles = try context.fetch(profileDescriptor)
 
-        let trimmedCity = manualCityName.trimmingCharacters(in: .whitespacesAndNewlines)
-        let locationMode: LocationMode
-        if selectedLocationMode == .manual && !trimmedCity.isEmpty {
-            locationMode = .manualCity(name: trimmedCity, coordinate: GeographicCoordinate(latitude: 0.0, longitude: 0.0))
-        } else {
-            locationMode = .foregroundGPS
+            if let existingProfile = existingProfiles.first {
+                existingProfile.sensitivityRaw = selectedSensitivity.rawValue
+                existingProfile.weekdayMorningHour = alertTimes.weekdayMorning.hour ?? 7
+                existingProfile.weekdayMorningMinute = alertTimes.weekdayMorning.minute ?? 45
+                existingProfile.nightFeedbackHour = alertTimes.nightFeedback.hour ?? 20
+                existingProfile.nightFeedbackMinute = alertTimes.nightFeedback.minute ?? 30
+                existingProfile.isWeekendMuted = muteWeekends
+                existingProfile.lastActiveTimestamp = .now
+                existingProfile.updatedAt = .now
+            } else {
+                let userProfile = UserProfile(
+                    sensitivity: selectedSensitivity,
+                    alertTimes: alertTimes,
+                    lastActiveTimestamp: .now,
+                    updatedAt: .now
+                )
+                let profileEntity = UserProfileEntity(from: userProfile)
+                context.insert(profileEntity)
+            }
+        } catch {
+            print("⚠️ Error al consultar UserProfileEntity en Onboarding: \(error)")
         }
 
-        let locationState = LocationState(
-            mode: locationMode,
-            currentCoordinate: nil,
-            lastResolvedCityName: selectedLocationMode == .manual ? trimmedCity : nil,
-            lastUpdated: .now
-        )
-        let locationEntity = LocationStateEntity(from: locationState)
-        context.insert(locationEntity)
+        // 2. Upsert LocationStateEntity
+        let trimmedCity = manualCityName.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        do {
+            var locationDescriptor = FetchDescriptor<LocationStateEntity>()
+            locationDescriptor.fetchLimit = 1
+            let existingLocations = try context.fetch(locationDescriptor)
+
+            if let existingLocation = existingLocations.first {
+                existingLocation.modeRaw = selectedLocationMode.rawValue
+                existingLocation.manualCityName = trimmedCity.isEmpty ? nil : trimmedCity
+                existingLocation.manualLatitude = manualCoordinate?.latitude
+                existingLocation.manualLongitude = manualCoordinate?.longitude
+                existingLocation.gpsCityName = gpsCityName
+                existingLocation.gpsLatitude = gpsCoordinate?.latitude
+                existingLocation.gpsLongitude = gpsCoordinate?.longitude
+                existingLocation.lastUpdated = .now
+            } else {
+                let locationState = LocationState(
+                    mode: selectedLocationMode,
+                    manualCoordinate: manualCoordinate,
+                    manualCityName: trimmedCity.isEmpty ? nil : trimmedCity,
+                    gpsCoordinate: gpsCoordinate,
+                    gpsCityName: gpsCityName,
+                    lastUpdated: .now
+                )
+                let locationEntity = LocationStateEntity(from: locationState)
+                context.insert(locationEntity)
+            }
+        } catch {
+            print("⚠️ Error al consultar LocationStateEntity en Onboarding: \(error)")
+        }
+
+        // 3. Persistir cambios
         do {
             try context.save()
         } catch {

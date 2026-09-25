@@ -5,8 +5,11 @@ struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
     
-    @Query private var userProfiles: [UserProfileEntity]
-    @Query private var locationStates: [LocationStateEntity]
+    @Query(sort: \UserProfileEntity.updatedAt, order: .reverse)
+    private var userProfiles: [UserProfileEntity]
+
+    @Query(sort: \LocationStateEntity.lastUpdated, order: .reverse)
+    private var locationStates: [LocationStateEntity]
 
     var locationService: LocationServiceProtocol = LocationService()
     var notificationService: NotificationServiceProtocol = NotificationService()
@@ -38,7 +41,7 @@ struct SettingsView: View {
                         PermissionWarningRow(
                             icon: "location.slash.fill",
                             title: "Ubicación desactivada",
-                            description: "Necesario para precisión hiperlocal."
+                            description: "Necesario para precisión en cambios de localización."
                         )
                     }
                     if notificationStatus == .denied {
@@ -68,17 +71,19 @@ struct SettingsView: View {
                 .listRowBackground(Color("SurfaceElevated"))
             }
 
-            if let profile = userProfiles.first {
-                NotificationSettingsSection(userProfile: profile)
-            } else if !hasMissingPermissions {
-                Section {
-                    HStack {
-                        Spacer()
-                        ProgressView("Cargando perfil...")
-                        Spacer()
+            if notificationStatus == .authorized {
+                if let profile = userProfiles.first {
+                    NotificationSettingsSection(userProfile: profile)
+                } else if !hasMissingPermissions {
+                    Section {
+                        HStack {
+                            Spacer()
+                            ProgressView("Cargando perfil...")
+                            Spacer()
+                        }
                     }
+                    .listRowBackground(Color("SurfaceElevated"))
                 }
-                .listRowBackground(Color("SurfaceElevated"))
             }
 
             if let location = locationStates.first {

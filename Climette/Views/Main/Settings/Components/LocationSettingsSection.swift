@@ -2,19 +2,21 @@ import SwiftUI
 import SwiftData
 
 struct LocationSettingsSection: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var locationState: LocationStateEntity
     var locationService: LocationServiceProtocol = LocationService()
 
-    @State private var modeSelection: LocationSelectionMode = .gps
-    @State private var cityName: String = ""
+    @State private var modeSelection: LocationMode = .gps
+    @State private var tempCityName: String = ""
+    @State private var tempCoordinate: GeographicCoordinate? = nil
     @State private var showMapSheet: Bool = false
     @State private var isSyncingFromModel: Bool = false
 
     var body: some View {
         Section {
             Picker("Origen de datos", selection: $modeSelection) {
-                Text("GPS").tag(LocationSelectionMode.gps)
-                Text("Manual").tag(LocationSelectionMode.manual)
+                Text("GPS").tag(LocationMode.gps)
+                Text("Manual").tag(LocationMode.manual)
             }
             .pickerStyle(.segmented)
             .onChange(of: modeSelection) { _, newMode in
@@ -28,24 +30,68 @@ struct LocationSettingsSection: View {
                         Text("Ubicación configurada")
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(cityName.isEmpty ? "Sin ubicación definida" : cityName)
+                        Text((locationState.manualCityName?.isEmpty ?? true) ? "Sin ubicación definida" : locationState.manualCityName!)
                             .font(.body)
                             .foregroundStyle(Color("TextPrimary"))
                     }
                     Spacer()
                     Button("Cambiar") {
+                        tempCityName = locationState.manualCityName ?? ""
+                        if let lat = locationState.manualLatitude, let lon = locationState.manualLongitude {
+                            tempCoordinate = GeographicCoordinate(latitude: lat, longitude: lon)
+                        } else {
+                            tempCoordinate = nil
+                        }
                         showMapSheet = true
                     }
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color("AccentColor"))
                 }
+                .sheet(isPresented: $showMapSheet) {
+                    NavigationStack {
+                        VStack {
+                            InteractiveCityMapView(
+                                cityName: $tempCityName,
+                                coordinate: $tempCoordinate,
+                                locationService: locationService
+                            )
+                        }
+                        .padding()
+                        .background(Color("BackgroundBase"))
+                        .navigationTitle("Seleccionar ciudad")
+                        .navigationBarTitleDisplayMode(.inline)
+                        .toolbar {
+                            ToolbarItem(placement: .confirmationAction) {
+                                Button("Listo") {
+                                    locationState.manualCityName = tempCityName
+                                    if let c = tempCoordinate {
+                                        locationState.manualLatitude = c.latitude
+                                        locationState.manualLongitude = c.longitude
+                                    }
+                                    locationState.modeRaw = LocationMode.manual.rawValue
+                                    locationState.lastUpdated = .now
+                                    
+                                    persistContext()
+                                    showMapSheet = false
+                                }
+                            }
+                        }
+                    }
+                }
             } else {
                 HStack(spacing: 8) {
                     Image(systemName: "location.fill")
-                        .foregroundStyle(Color("AccentColor"))
-                    Text(locationState.cityName ?? "Ubicación dinámica")
-                        .font(.body)
-                        .foregroundStyle(Color("TextPrimary"))
+                        .foregroundStyle(locationState.gpsCityName != nil ? Color("AccentColor") : .red)
+                    
+                    if let cityName = locationState.gpsCityName {
+                        Text(cityName)
+                            .font(.body)
+                            .foregroundStyle(Color("TextPrimary"))
+                    } else {
+                        Text("No hay permiso de localización")
+                            .font(.body)
+                            .foregroundStyle(.red)
+                    }
                 }
             }
         } header: {
@@ -57,61 +103,43 @@ struct LocationSettingsSection: View {
             }
         }
         .listRowBackground(Color("SurfaceElevated"))
-        .sheet(isPresented: $showMapSheet) {
-            NavigationStack {
-                VStack {
-                    InteractiveCityMapView(cityName: $cityName, locationService: locationService)
-                }
-                .padding()
-                .background(Color("BackgroundBase"))
-                .navigationTitle("Seleccionar ciudad")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Listo") {
-                            locationState.cityName = cityName
-                            locationState.modeRaw = "manualCity"
-                            locationState.lastUpdated = .now
-                            showMapSheet = false
-                        }
-                    }
-                }
-            }
-        }
         .task(id: locationState.modeRaw) {
-            syncStateFromModel()
-        }
-        .task(id: locationState.cityName) {
             syncStateFromModel()
         }
     }
 
     private func syncStateFromModel() {
         isSyncingFromModel = true
-        if locationState.modeRaw == "manualCity" {
-            modeSelection = .manual
-            cityName = locationState.cityName ?? ""
-        } else {
-            modeSelection = .gps
-            cityName = locationState.cityName ?? ""
-        }
+        modeSelection = LocationMode(rawValue: locationState.modeRaw) ?? .gps
         isSyncingFromModel = false
     }
 
-    private func applyModeChange(_ mode: LocationSelectionMode) {
+    private func applyModeChange(_ mode: LocationMode) {
+        locationState.modeRaw = mode.rawValue
+        locationState.lastUpdated = .now
+        persistContext()
+        
         if mode == .gps {
-            locationState.modeRaw = "foregroundGPS"
-            locationState.lastUpdated = .now
             Task {
-                if let coord = try? await locationService.getCurrentLocation() {
-                    locationState.latitude = coord.latitude
-                    locationState.longitude = coord.longitude
-                    locationState.cityName = try? await locationService.reverseGeocode(coordinate: coord)
+                let status = await locationService.requestAuthorization()
+                if status == .authorized {
+                    if let coord = try? await locationService.getCurrentLocation() {
+                        locationState.gpsLatitude = coord.latitude
+                        locationState.gpsLongitude = coord.longitude
+                        locationState.gpsCityName = try? await locationService.reverseGeocode(coordinate: coord)
+                        locationState.lastUpdated = .now
+                        persistContext()
+                    }
                 }
             }
-        } else {
-            locationState.modeRaw = "manualCity"
-            locationState.lastUpdated = .now
+        }
+    }
+
+    private func persistContext() {
+        do {
+            try modelContext.save()
+        } catch {
+            print("⚠️ Error al persistir LocationStateEntity en Settings: \(error)")
         }
     }
 }

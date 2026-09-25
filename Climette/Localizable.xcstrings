@@ -623,23 +623,6 @@
         }
       }
     },
-    "El Índice Térmico requiere condiciones hiperlocales." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Thermal Index requires hyperlocal conditions."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "El Índice Térmico requiere condiciones hiperlocales."
-          }
-        }
-      }
-    },
     "El Índice Térmico requiere condiciones locales." : {
       "comment" : "A footer for the location and weather section of the settings.",
       "extractionState" : "manual",
@@ -1069,23 +1052,23 @@
         }
       }
     },
-    "Necesario para precisión hiperlocal." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required for hyperlocal accuracy."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Necesario para precisión hiperlocal."
-          }
+  "Necesario para precisión en cambios de localización." : {
+    "extractionState" : "manual",
+    "localizations" : {
+      "en" : {
+        "stringUnit" : {
+          "state" : "translated",
+          "value" : "Required for localization accuracy."
+        }
+      },
+      "es" : {
+        "stringUnit" : {
+          "state" : "translated",
+          "value" : "Necesario para precisión en cambios de localización."
         }
       }
-    },
+    }
+  },
     "Necesario para recomendaciones." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1777,19 +1760,19 @@
         }
       }
     },
-    "Ubicación dinámica" : {
+    "No hay permiso de localización" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dynamic location"
+            "value" : "No location permission"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ubicación dinámica"
+            "value" : "No hay permiso de localización"
           }
         }
       }

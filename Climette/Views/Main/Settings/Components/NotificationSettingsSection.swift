@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftData
 
 struct NotificationSettingsSection: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var userProfile: UserProfileEntity
     var notificationService: NotificationServiceProtocol = NotificationService()
     
@@ -19,7 +20,7 @@ struct NotificationSettingsSection: View {
                 let comp = Calendar.current.dateComponents([.hour, .minute], from: newValue)
                 userProfile.weekdayMorningHour = comp.hour ?? 7
                 userProfile.weekdayMorningMinute = comp.minute ?? 45
-                updateSchedule()
+                updateScheduleAndPersist()
             }
 
             DatePicker(
@@ -31,12 +32,12 @@ struct NotificationSettingsSection: View {
                 let comp = Calendar.current.dateComponents([.hour, .minute], from: newValue)
                 userProfile.nightFeedbackHour = comp.hour ?? 20
                 userProfile.nightFeedbackMinute = comp.minute ?? 30
-                updateSchedule()
+                updateScheduleAndPersist()
             }
 
             Toggle("Desactivar en fin de semana", isOn: $userProfile.isWeekendMuted)
                 .onChange(of: userProfile.isWeekendMuted) { _, _ in
-                    updateSchedule()
+                    updateScheduleAndPersist()
                 }
         } header: {
             VStack(alignment: .leading, spacing: 4) {
@@ -64,8 +65,15 @@ struct NotificationSettingsSection: View {
         nightDate = Calendar.current.date(from: c3) ?? .now
     }
 
-    private func updateSchedule() {
+    private func updateScheduleAndPersist() {
         userProfile.updatedAt = .now
+        
+        do {
+            try modelContext.save()
+        } catch {
+            print("⚠️ Error al guardar UserProfileEntity en Settings: \(error)")
+        }
+
         let alertTimes = userProfile.toDomain().alertTimes
         Task {
             try? await notificationService.scheduleRoutineNotifications(alertTimes: alertTimes)

@@ -4,12 +4,14 @@ import CoreLocation
 
 struct InteractiveCityMapView: View {
     @Binding var cityName: String
+    @Binding var coordinate: GeographicCoordinate?
     var locationService: LocationServiceProtocol = LocationService()
     
     @State private var position: MapCameraPosition = .automatic
     @State private var selectedCoordinate: CLLocationCoordinate2D?
     @State private var isGeocoding: Bool = false
     @State private var showSearchSheet: Bool = false
+    @State private var mapErrorMessage: String?
     
     var body: some View {
         VStack(spacing: 8) {
@@ -25,6 +27,14 @@ struct InteractiveCityMapView: View {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
+            }
+            
+            if let mapErrorMessage {
+                Text(mapErrorMessage)
+                    .font(.caption)
+                    .foregroundStyle(.red)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 4)
             }
             
             MapReader { proxy in
@@ -57,6 +67,7 @@ struct InteractiveCityMapView: View {
                 .onTapGesture { screenCoord in
                     guard let location = proxy.convert(screenCoord, from: .local) else { return }
                     selectedCoordinate = location
+                    coordinate = GeographicCoordinate(latitude: location.latitude, longitude: location.longitude)
                     Task {
                         await resolveCoordinate(location)
                     }
@@ -76,24 +87,45 @@ struct InteractiveCityMapView: View {
     }
     
     @MainActor
-    private func resolveCoordinate(_ coordinate: CLLocationCoordinate2D) async {
+    private func resolveCoordinate(_ coord: CLLocationCoordinate2D) async {
         isGeocoding = true
+        mapErrorMessage = nil
         defer { isGeocoding = false }
         
         do {
-            if let resolved = try await locationService.reverseGeocode(coordinate: GeographicCoordinate(latitude: coordinate.latitude, longitude: coordinate.longitude)),
-               !resolved.isEmpty,
-               resolved != cityName {
+            if let resolved = try await locationService.reverseGeocode(
+                coordinate: GeographicCoordinate(latitude: coord.latitude, longitude: coord.longitude)
+            ),
+            !resolved.isEmpty,
+            resolved != cityName {
                 cityName = resolved
             }
+        } catch let error as LocalizedError {
+            mapErrorMessage = error.errorDescription ?? error.localizedDescription
+            print("⚠️ Error en reverseGeocode: \(error.localizedDescription)")
         } catch {
-            // Manejo silencioso de errores de resolución inversa
+            mapErrorMessage = error.localizedDescription
+            print("⚠️ Error inesperado en reverseGeocode: \(error)")
         }
     }
     
     @MainActor
     private func searchLocation(for query: String) async {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        mapErrorMessage = nil
+        
+        if let existingCoord = coordinate, selectedCoordinate == nil {
+            let center = CLLocationCoordinate2D(latitude: existingCoord.latitude, longitude: existingCoord.longitude)
+            selectedCoordinate = center
+            position = .region(
+                MKCoordinateRegion(
+                    center: center,
+                    span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+                )
+            )
+            if trimmed.isEmpty { return }
+        }
+        
         guard !trimmed.isEmpty else { return }
         
         isGeocoding = true
@@ -101,24 +133,33 @@ struct InteractiveCityMapView: View {
         
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = trimmed
-        request.resultTypes = .address
+        request.resultTypes = [.address, .pointOfInterest]
         
         do {
             let response = try await MKLocalSearch(request: request).start()
-            guard let item = response.mapItems.first else { return }
-            let coordinate = item.location.coordinate
+            guard let item = response.mapItems.first else {
+                mapErrorMessage = "No se encontraron resultados para: \(trimmed)"
+                return
+            }
+            let mapCoord = item.location.coordinate
             
-            selectedCoordinate = coordinate
+            selectedCoordinate = mapCoord
+            coordinate = GeographicCoordinate(latitude: mapCoord.latitude, longitude: mapCoord.longitude)
+            
             withAnimation(.easeInOut) {
                 position = .region(
                     MKCoordinateRegion(
-                        center: coordinate,
+                        center: mapCoord,
                         span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
                     )
                 )
             }
+        } catch let error as MKError {
+            mapErrorMessage = "Fallo al buscar ubicación: \(error.localizedDescription)"
+            print("⚠️ Error MKLocalSearch: código \(error.errorCode), \(error.localizedDescription)")
         } catch {
-            // Manejo silencioso en caso de no encontrar coincidencia
+            mapErrorMessage = error.localizedDescription
+            print("⚠️ Error inesperado en searchLocation: \(error)")
         }
     }
 }
@@ -133,21 +174,25 @@ final class LocationSearchViewModel: NSObject, MKLocalSearchCompleterDelegate {
         }
     }
     var results: [MKLocalSearchCompletion] = []
+    var completerErrorMessage: String?
     
     private let completer = MKLocalSearchCompleter()
     
     override init() {
         super.init()
         completer.delegate = self
-        completer.resultTypes = .address
+        completer.resultTypes = [.address, .pointOfInterest]
     }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         self.results = completer.results
+        self.completerErrorMessage = nil
     }
     
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         self.results = []
+        self.completerErrorMessage = error.localizedDescription
+        print("⚠️ Error en completer de búsqueda: \(error.localizedDescription)")
     }
 }
 
@@ -158,19 +203,27 @@ struct LocationSearchListView: View {
     
     var body: some View {
         NavigationStack {
-            List(viewModel.results, id: \.self) { result in
-                Button {
-                    let formatted = result.subtitle.isEmpty ? result.title : "\(result.title), \(result.subtitle)"
-                    onSelect(formatted)
-                } label: {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(result.title)
-                            .foregroundStyle(.primary)
-                            .font(.body)
-                        if !result.subtitle.isEmpty {
-                            Text(result.subtitle)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+            List {
+                if let error = viewModel.completerErrorMessage {
+                    Text(error)
+                        .font(.caption)
+                        .foregroundStyle(.red)
+                }
+                
+                ForEach(viewModel.results, id: \.self) { result in
+                    Button {
+                        let formatted = result.subtitle.isEmpty ? result.title : "\(result.title), \(result.subtitle)"
+                        onSelect(formatted)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(result.title)
+                                .foregroundStyle(.primary)
+                                .font(.body)
+                            if !result.subtitle.isEmpty {
+                                Text(result.subtitle)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
                         }
                     }
                 }
