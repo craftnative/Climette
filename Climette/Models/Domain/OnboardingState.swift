@@ -41,12 +41,10 @@ public final class OnboardingState {
     public func createNotificationAlertTimes() -> NotificationAlertTimes {
         let calendar = Calendar.current
         let weekdayComponents = calendar.dateComponents([.hour, .minute], from: weekdayMorningAlert)
-        let weekendComponents = calendar.dateComponents([.hour, .minute], from: weekendMorningAlert)
         let nightComponents = calendar.dateComponents([.hour, .minute], from: nightReview)
 
         return NotificationAlertTimes(
             weekdayMorning: DateComponents(hour: weekdayComponents.hour ?? 7, minute: weekdayComponents.minute ?? 45),
-            weekendMorning: DateComponents(hour: weekendComponents.hour ?? 10, minute: weekendComponents.minute ?? 30),
             nightFeedback: DateComponents(hour: nightComponents.hour ?? 20, minute: nightComponents.minute ?? 30),
             isWeekendMuted: muteWeekends
         )

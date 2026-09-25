@@ -6,7 +6,6 @@ struct NotificationSettingsSection: View {
     var notificationService: NotificationServiceProtocol = NotificationService()
     
     @State private var weekdayDate: Date = .now
-    @State private var weekendDate: Date = .now
     @State private var nightDate: Date = .now
 
     var body: some View {
@@ -20,19 +19,6 @@ struct NotificationSettingsSection: View {
                 let comp = Calendar.current.dateComponents([.hour, .minute], from: newValue)
                 userProfile.weekdayMorningHour = comp.hour ?? 7
                 userProfile.weekdayMorningMinute = comp.minute ?? 45
-                updateSchedule()
-            }
-
-            DatePicker(
-                "Recomendación fin de semana",
-                selection: $weekendDate,
-                displayedComponents: .hourAndMinute
-            )
-            .disabled(userProfile.isWeekendMuted)
-            .onChange(of: weekendDate) { _, newValue in
-                let comp = Calendar.current.dateComponents([.hour, .minute], from: newValue)
-                userProfile.weekendMorningHour = comp.hour ?? 10
-                userProfile.weekendMorningMinute = comp.minute ?? 30
                 updateSchedule()
             }
 
@@ -71,11 +57,6 @@ struct NotificationSettingsSection: View {
         c1.hour = userProfile.weekdayMorningHour
         c1.minute = userProfile.weekdayMorningMinute
         weekdayDate = Calendar.current.date(from: c1) ?? .now
-
-        var c2 = DateComponents()
-        c2.hour = userProfile.weekendMorningHour
-        c2.minute = userProfile.weekendMorningMinute
-        weekendDate = Calendar.current.date(from: c2) ?? .now
 
         var c3 = DateComponents()
         c3.hour = userProfile.nightFeedbackHour

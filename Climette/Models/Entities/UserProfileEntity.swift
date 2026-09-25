@@ -8,8 +8,6 @@ public final class UserProfileEntity {
     
     public var weekdayMorningHour: Int = 0
     public var weekdayMorningMinute: Int = 0
-    public var weekendMorningHour: Int = 0
-    public var weekendMorningMinute: Int = 0
     public var nightFeedbackHour: Int = 0
     public var nightFeedbackMinute: Int = 0
     public var isWeekendMuted: Bool = false
@@ -22,8 +20,6 @@ public final class UserProfileEntity {
         sensitivityRaw: String,
         weekdayMorningHour: Int,
         weekdayMorningMinute: Int,
-        weekendMorningHour: Int,
-        weekendMorningMinute: Int,
         nightFeedbackHour: Int,
         nightFeedbackMinute: Int,
         isWeekendMuted: Bool,
@@ -34,8 +30,6 @@ public final class UserProfileEntity {
         self.sensitivityRaw = sensitivityRaw
         self.weekdayMorningHour = weekdayMorningHour
         self.weekdayMorningMinute = weekdayMorningMinute
-        self.weekendMorningHour = weekendMorningHour
-        self.weekendMorningMinute = weekendMorningMinute
         self.nightFeedbackHour = nightFeedbackHour
         self.nightFeedbackMinute = nightFeedbackMinute
         self.isWeekendMuted = isWeekendMuted

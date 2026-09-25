@@ -48,8 +48,8 @@ public final class NotificationService: NotificationServiceProtocol {
         if !alertTimes.isWeekendMuted {
             for weekendDay in weekends {
                 try await scheduleMorningAlert(
-                    hour: alertTimes.weekendMorning.hour ?? 10,
-                    minute: alertTimes.weekendMorning.minute ?? 30,
+                    hour: alertTimes.weekdayMorning.hour ?? 7,
+                    minute: alertTimes.weekdayMorning.minute ?? 45,
                     weekday: weekendDay,
                     identifier: "climette.alert.morning.weekend.\(weekendDay)"
                 )

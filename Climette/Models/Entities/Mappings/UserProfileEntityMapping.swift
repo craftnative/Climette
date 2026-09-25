@@ -5,7 +5,6 @@ extension UserProfileEntity {
     public func toDomain() -> UserProfile {
         let alertTimes = NotificationAlertTimes(
             weekdayMorning: DateComponents(hour: weekdayMorningHour, minute: weekdayMorningMinute),
-            weekendMorning: DateComponents(hour: weekendMorningHour, minute: weekendMorningMinute),
             nightFeedback: DateComponents(hour: nightFeedbackHour, minute: nightFeedbackMinute),
             isWeekendMuted: isWeekendMuted
         )
@@ -25,8 +24,6 @@ extension UserProfileEntity {
             sensitivityRaw: domain.sensitivity.rawValue,
             weekdayMorningHour: domain.alertTimes.weekdayMorning.hour ?? 7,
             weekdayMorningMinute: domain.alertTimes.weekdayMorning.minute ?? 45,
-            weekendMorningHour: domain.alertTimes.weekendMorning.hour ?? 10,
-            weekendMorningMinute: domain.alertTimes.weekendMorning.minute ?? 30,
             nightFeedbackHour: domain.alertTimes.nightFeedback.hour ?? 20,
             nightFeedbackMinute: domain.alertTimes.nightFeedback.minute ?? 30,
             isWeekendMuted: domain.alertTimes.isWeekendMuted,
