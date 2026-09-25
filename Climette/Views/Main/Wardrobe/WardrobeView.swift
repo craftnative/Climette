@@ -88,7 +88,7 @@ struct WardrobeView: View {
     private func metricBadge(icon: String, value: Int, isOverride: Bool) -> some View {
         HStack(spacing: 4) {
             Image(systemName: icon)
-            Text("\(value)/10")
+            Text(verbatim: "\(value)/10")
         }
         .font(.caption2.weight(.semibold))
         .padding(.horizontal, 6)

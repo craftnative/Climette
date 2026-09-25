@@ -2,7 +2,6 @@
   "sourceLanguage" : "es",
   "strings" : {
     "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema." : {
-      "comment" : "Text displayed in a notification that asks the user to rate their clothing choices for the day.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -19,11 +18,7 @@
         }
       }
     },
-    "%lld/10" : {
-
-    },
     "Abrir Ajustes" : {
-      "comment" : "A button that opens the system settings.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -58,7 +53,6 @@
       }
     },
     "Aguanté con lo puesto" : {
-      "comment" : "Modelos: FeedbackRecord - Reacción física del usuario sin ajustar ropa",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -76,7 +70,6 @@
       }
     },
     "Ajusta las recomendaciones según el clima de tu zona." : {
-      "comment" : "Onboarding: Descripción de la pantalla de condiciones locales",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -93,8 +86,24 @@
         }
       }
     },
+    "Ajustado" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adjusted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustado"
+          }
+        }
+      }
+    },
     "Ajustes" : {
-      "comment" : "Main tab: Título de la pestaña de configuración",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -128,43 +137,7 @@
         }
       }
     },
-    "Almacenamiento y Nube" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Storage & Cloud"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Almacenamiento y Nube"
-          }
-        }
-      }
-    },
-    "Área del mapa interactivo" : {
-      "comment" : "Onboarding: Etiqueta de accesibilidad para el mapa temporal",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Interactive map area"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Área del mapa interactivo"
-          }
-        }
-      }
-    },
     "Armario" : {
-      "comment" : "Main tab: Título de la pestaña de armario",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -181,8 +154,24 @@
         }
       }
     },
+    "Borrado" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deleted"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrado"
+          }
+        }
+      }
+    },
     "Buscar" : {
-      "comment" : "A button title that translates to \"Search\" in Spanish.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -200,7 +189,6 @@
       }
     },
     "Buscar dirección o ciudad" : {
-      "comment" : "A search bar prompt for location search.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -218,7 +206,6 @@
       }
     },
     "Buscar ubicación" : {
-      "comment" : "Onboarding: Placeholder y accesibilidad para el campo de texto de ciudad",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -235,11 +222,41 @@
         }
       }
     },
+    "Cabeza / Cuello" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Head / Neck"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cabeza / Cuello"
+          }
+        }
+      }
+    },
     "Calculando Índice Térmico..." : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculating Thermal Index..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculando Índice Térmico..."
+          }
+        }
+      }
     },
     "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado." : {
-      "comment" : "Onboarding: Descripción principal del perfil térmico",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -257,7 +274,6 @@
       }
     },
     "Caluroso" : {
-      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (tolera el frío, sufre el calor)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -275,7 +291,6 @@
       }
     },
     "Cambiar" : {
-      "comment" : "A button that changes the location.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -293,7 +308,6 @@
       }
     },
     "Capa Base" : {
-      "comment" : "Modelos: ClothingItem - Primera capa de ropa (pegada al cuerpo)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -311,7 +325,6 @@
       }
     },
     "Capa Exterior" : {
-      "comment" : "Modelos: ClothingItem - Tercera capa de ropa (abrigos, cortavientos)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -329,7 +342,6 @@
       }
     },
     "Capa Intermedia" : {
-      "comment" : "Modelos: ClothingItem - Segunda capa de ropa (jerséis, sudaderas)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -347,8 +359,21 @@
       }
     },
     "Cargando clima..." : {
-      "comment" : "A loading message indicating that weather data is being fetched.",
-      "isCommentAutoGenerated" : true
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading weather..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargando clima..."
+          }
+        }
+      }
     },
     "Cargando perfil..." : {
       "extractionState" : "manual",
@@ -385,7 +410,6 @@
       }
     },
     "Cerrar" : {
-      "comment" : "A button that dismisses the current view.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -403,7 +427,6 @@
       }
     },
     "Clavada / Perfecto" : {
-      "comment" : "Modelos: FeedbackRecord - Percepción térmica ideal reportada por el usuario",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -438,7 +461,6 @@
       }
     },
     "Comenzar" : {
-      "comment" : "Onboarding: Botón final para finalizar la configuración",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -455,11 +477,41 @@
         }
       }
     },
+    "Complementos / Accesorios" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Accessories"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complementos / Accesorios"
+          }
+        }
+      }
+    },
     "Condiciones estables" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stable conditions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones estables"
+          }
+        }
+      }
     },
     "Condiciones Locales" : {
-      "comment" : "Onboarding: Título de la pantalla de configuración de ubicación",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -494,7 +546,6 @@
       }
     },
     "Configura las horas de aviso para la recomendación matutina y el registro nocturno." : {
-      "comment" : "Onboarding: Descripción de la pantalla de rutinas",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -512,7 +563,6 @@
       }
     },
     "Consulta el atuendo calibrado para el clima de hoy." : {
-      "comment" : "Text of a notification that reminds the user to check the clothing recommendations for the day.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -529,8 +579,24 @@
         }
       }
     },
+    "Correcto" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correct"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correcto"
+          }
+        }
+      }
+    },
     "Cubierto" : {
-      "comment" : "Modelos: Weather - Estado del cielo (nublado)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -548,10 +614,23 @@
       }
     },
     "Datos de Apple Weather" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Weather Data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datos de Apple Weather"
+          }
+        }
+      }
     },
     "Debes completar la información requerida para continuar." : {
-      "comment" : "Onboarding: Hint de accesibilidad cuando el botón siguiente está desactivado",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -586,7 +665,6 @@
       }
     },
     "Desactivar en fin de semana" : {
-      "comment" : "Onboarding: Etiqueta del interruptor para silenciar notificaciones en fines de semana",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -621,7 +699,6 @@
       }
     },
     "Despejado" : {
-      "comment" : "Modelos: Weather - Estado del cielo (sin nubes)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -656,7 +733,6 @@
       }
     },
     "El Índice Térmico requiere condiciones locales." : {
-      "comment" : "A footer for the location and weather section of the settings.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -691,7 +767,6 @@
       }
     },
     "Equilibrio estándar respecto a las condiciones registradas." : {
-      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Normal'",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -760,7 +835,6 @@
       }
     },
     "Estado de iCloud" : {
-      "comment" : "A label displayed under the iCloud toggle.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -777,76 +851,7 @@
         }
       }
     },
-    "estado_recopilacion_ajustado" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjusted (Cold/Hot)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ajustado Frío/Calor"
-          }
-        }
-      }
-    },
-    "estado_recopilacion_borrado" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deleted"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eliminado"
-          }
-        }
-      }
-    },
-    "estado_recopilacion_correcto" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correct"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correcto"
-          }
-        }
-      }
-    },
-    "estado_recopilacion_ignorado" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notification ignored"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notificación ignorada"
-          }
-        }
-      }
-    },
     "Estuve perfecto" : {
-      "comment" : "Modelos: FeedbackRecord - Estado posterior tras haberse ajustado la ropa",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -864,7 +869,6 @@
       }
     },
     "Evita recibir notificaciones durante los fines de semana." : {
-      "comment" : "Onboarding: Hint de accesibilidad para el toggle de fin de semana",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -877,24 +881,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evita recibir notificaciones durante los fines de semana."
-          }
-        }
-      }
-    },
-    "exclamation_mark" : {
-      "comment" : "An exclamation mark.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "!"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "!"
           }
         }
       }
@@ -934,7 +920,6 @@
       }
     },
     "Fallo en Base de Datos" : {
-      "comment" : "A title for a section that displays a database error.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -952,7 +937,6 @@
       }
     },
     "Friolero" : {
-      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (sufre el frío)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -970,10 +954,23 @@
       }
     },
     "Fuerte amplitud térmica diaria" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High daily thermal amplitude"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fuerte amplitud térmica diaria"
+          }
+        }
+      }
     },
     "GPS" : {
-      "comment" : "Onboarding: Opción de selector para usar ubicación automática",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -991,7 +988,6 @@
       }
     },
     "Historial" : {
-      "comment" : "Main tab: Título de la pestaña de historial",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1008,44 +1004,24 @@
         }
       }
     },
-    "history_empty_description" : {
-      "comment" : "A description of the empty state of the history screen.",
+    "Hora" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your past recommendations and feedback will appear here."
+            "value" : "Time"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tus recomendaciones y valoraciones pasadas aparecerán aquí."
-          }
-        }
-      }
-    },
-    "history_empty_title" : {
-      "comment" : "The title of the empty state for the history screen.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No History"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin historial"
+            "value" : "Hora"
           }
         }
       }
     },
     "Húmedo" : {
-      "comment" : "Modelos: Weather - Estado de precipitación",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1058,6 +1034,40 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Húmedo"
+          }
+        }
+      }
+    },
+    "ITP Activo: %@°" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active PTI: %@°"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ITP Activo: %@°"
+          }
+        }
+      }
+    },
+    "Ignorado" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ignored"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ignorado"
           }
         }
       }
@@ -1079,11 +1089,7 @@
         }
       }
     },
-    "ITP Activo: %@°" : {
-
-    },
     "Listo" : {
-      "comment" : "A button that saves the selected city and closes the map sheet.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1100,8 +1106,24 @@
         }
       }
     },
+    "Lluvia" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rain"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lluvia"
+          }
+        }
+      }
+    },
     "Los cambios en la sincronización se aplicarán al reiniciar la aplicación." : {
-      "comment" : "A description of the effect of toggling iCloud sync.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1119,7 +1141,6 @@
       }
     },
     "Mantiene calibrada la recomendación climática local sin intervención manual." : {
-      "comment" : "Onboarding: Descripción explicativa de la opción GPS",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1137,7 +1158,6 @@
       }
     },
     "Manual" : {
-      "comment" : "Onboarding: Opción de selector para ingresar ubicación escrita",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1154,26 +1174,41 @@
         }
       }
     },
-    "MAPA" : {
-      "comment" : "Onboarding: Placeholder de UI para el componente del mapa interactivo",
+    "Manos" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MAP"
+            "value" : "Hands"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "MAPA"
+            "value" : "Manos"
+          }
+        }
+      }
+    },
+    "Mañana" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tomorrow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mañana"
           }
         }
       }
     },
     "Me añadí/quité ropa" : {
-      "comment" : "Modelos: FeedbackRecord - Reacción física del usuario (modificó sus capas)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1191,7 +1226,6 @@
       }
     },
     "Mediodía - Tarde" : {
-      "comment" : "Modelos: Weather - Periodo de evaluación del día",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1204,42 +1238,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mediodía - Tarde"
-          }
-        }
-      }
-    },
-    "Mismo clima, distintas sensaciones" : {
-      "comment" : "General/LaunchScreen: Lema principal de la marca y proyecto",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Same weather, different sensations"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mismo clima, distintas sensaciones"
-          }
-        }
-      }
-    },
-    "Navegación respeta los límites" : {
-      "comment" : "Tests: Descripción del test unitario de OnboardingState (límites tabulares)",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navigation respects bounds"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Navegación respeta los límites"
           }
         }
       }
@@ -1329,6 +1327,23 @@
         }
       }
     },
+    "No se pudieron obtener las condiciones actuales." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not fetch current weather conditions."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudieron obtener las condiciones actuales."
+          }
+        }
+      }
+    },
     "No se pudo obtener la posición geográfica actual." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1347,7 +1362,6 @@
       }
     },
     "Normal" : {
-      "comment" : "Modelos: UserProfile - Nivel de sensibilidad térmica (estándar)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1398,8 +1412,24 @@
         }
       }
     },
+    "Nubosidad" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cloud Cover"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nubosidad"
+          }
+        }
+      }
+    },
     "Origen de datos" : {
-      "comment" : "Onboarding: Título para el selector de origen de ubicación (GPS/Manual)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1416,26 +1446,7 @@
         }
       }
     },
-    "Pantalla Principal de Climette" : {
-      "comment" : "RootView: Texto provisional de la pantalla principal / validación de tests",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Climette Main Screen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pantalla Principal de Climette"
-          }
-        }
-      }
-    },
     "Pasé calor" : {
-      "comment" : "Modelos: FeedbackRecord - Percepción térmica (exceso de abrigo)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1453,7 +1464,6 @@
       }
     },
     "Pasé frío" : {
-      "comment" : "Modelos: FeedbackRecord - Percepción térmica (falta de abrigo)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1471,7 +1481,6 @@
       }
     },
     "Paso %lld de %lld" : {
-      "comment" : "OnboardingBottomBar: Accesibilidad para indicar el indicador de progreso tabular",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1484,23 +1493,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paso %1$lld de %2$lld"
-          }
-        }
-      }
-    },
-    "Permisos de notificación no otorgados." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notification permissions not granted."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permisos de notificación no otorgados."
           }
         }
       }
@@ -1522,26 +1514,58 @@
         }
       }
     },
-    "Persistencia de datos en ModelContext" : {
-      "comment" : "Tests: Descripción del test de guardado SwiftData",
+    "Permisos de notificación no otorgados." : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ModelContext data persistence"
+            "value" : "Notification permissions not granted."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Persistencia de datos en ModelContext"
+            "value" : "Permisos de notificación no otorgados."
+          }
+        }
+      }
+    },
+    "Piernas / Inferior" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legs / Lower Body"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piernas / Inferior"
+          }
+        }
+      }
+    },
+    "Pies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pies"
           }
         }
       }
     },
     "Por la mañana" : {
-      "comment" : "Modelos: Weather - Periodo de evaluación del día / Onboarding rutina matutina",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1559,7 +1583,6 @@
       }
     },
     "Por la noche" : {
-      "comment" : "Onboarding: Subtítulo para la valoración del día",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1577,7 +1600,6 @@
       }
     },
     "Prefieres prendas más ligeras o toleras menor abrigo." : {
-      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Caluroso'",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1595,11 +1617,23 @@
       }
     },
     "Previsión por horas" : {
-      "comment" : "A heading for hourly weather forecasts.",
-      "isCommentAutoGenerated" : true
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hourly forecast"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsión por horas"
+          }
+        }
+      }
     },
     "Recomendación" : {
-      "comment" : "Main tab: Título de la pestaña de recomendaciones",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1617,7 +1651,6 @@
       }
     },
     "Recomendación de ropa" : {
-      "comment" : "Onboarding: Título del selector horario de mañanas",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1630,28 +1663,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Recomendación de ropa"
-          }
-        }
-      }
-    },
-    "Recomendación de Ropa" : {
-      "comment" : "A title for the clothing recommendation section.",
-      "isCommentAutoGenerated" : true
-    },
-    "Recomendación fin de semana" : {
-      "comment" : "A label for the time of day to send morning weather recommendations on weekends.",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weekend recommendation"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recomendación fin de semana"
           }
         }
       }
@@ -1691,7 +1702,6 @@
       }
     },
     "Rutina" : {
-      "comment" : "Onboarding: Título de la pantalla de configuración de alertas (paso 3)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1709,7 +1719,6 @@
       }
     },
     "Seco" : {
-      "comment" : "Modelos: Weather - Estado de precipitación nula o mínima",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1727,7 +1736,6 @@
       }
     },
     "Seguí destemplado" : {
-      "comment" : "Modelos: FeedbackRecord - Estado posterior (el ajuste no solucionó el malestar)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1745,7 +1753,6 @@
       }
     },
     "Selecciona tu perfil de sensibilidad térmica." : {
-      "comment" : "Onboarding: Hint de accesibilidad para la botonera de perfiles térmicos",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1763,7 +1770,6 @@
       }
     },
     "Seleccionar ciudad" : {
-      "comment" : "A title for a screen that allows the user to select a city.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1781,7 +1787,6 @@
       }
     },
     "Sensibilidad Térmica" : {
-      "comment" : "Onboarding: Título de la pantalla de selección térmica (paso 1)",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1799,7 +1804,6 @@
       }
     },
     "Siguiente" : {
-      "comment" : "Onboarding: Botón genérico para avanzar en las pestañas del wizard",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1868,7 +1872,6 @@
       }
     },
     "Sincroniza historial y armario privadamente." : {
-      "comment" : "A description of the iCloud sync settings.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1903,7 +1906,6 @@
       }
     },
     "Sueles necesitar una capa adicional frente a la media." : {
-      "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Friolero'",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -1920,83 +1922,41 @@
         }
       }
     },
-    "tab_history_accessibility_hint" : {
-      "comment" : "Accesibilidad: Hint para la pestaña Historial",
+    "Temp" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Double-tap to view your recommendation and feedback history."
+            "value" : "Temp"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toca dos veces para revisar el registro de recomendaciones pasadas y valoraciones."
-          }
-        }
-      }
-    },
-    "tab_recommendation_accessibility_hint" : {
-      "comment" : "Accesibilidad: Hint para la pestaña Recomendaciones",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to open recommendations and personalized suggestions."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para ver las recomendaciones y sugerencias personalizadas."
-          }
-        }
-      }
-    },
-    "tab_settings_accessibility_hint" : {
-      "comment" : "Accesibilidad: Hint para la pestaña Ajustes",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to adjust preferences and app settings."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para configurar tus preferencias y opciones de la app."
-          }
-        }
-      }
-    },
-    "tab_wardrobe_accessibility_hint" : {
-      "comment" : "Accesibilidad: Hint para la pestaña Armario",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to view and manage clothing items."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para consultar y gestionar tus prendas del armario."
+            "value" : "Temp"
           }
         }
       }
     },
     "Tiempo" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weather"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo"
+          }
+        }
+      }
     },
     "Todo el día" : {
-      "comment" : "Modelos: Weather - Periodo de evaluación del día",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2009,6 +1969,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Todo el día"
+          }
+        }
+      }
+    },
+    "Torso superior" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Upper Torso"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Torso superior"
           }
         }
       }
@@ -2031,7 +2008,6 @@
       }
     },
     "Ubicación configurada" : {
-      "comment" : "A label displayed in the manual location section of the settings.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2044,6 +2020,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ubicación configurada"
+          }
+        }
+      }
+    },
+    "Ubicación desconocida" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación desconocida"
           }
         }
       }
@@ -2065,24 +2058,6 @@
         }
       }
     },
-    "Ubicación específica" : {
-      "comment" : "Onboarding: Etiqueta sobre el campo de texto manual",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Specific location"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ubicación específica"
-          }
-        }
-      }
-    },
     "Ubicación y Clima" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2100,26 +2075,7 @@
         }
       }
     },
-    "Validación de ingreso manual de ubicación" : {
-      "comment" : "Tests: Descripción del test unitario de campos de texto",
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manual location entry validation"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Validación de ingreso manual de ubicación"
-          }
-        }
-      }
-    },
     "Valoración del día" : {
-      "comment" : "Onboarding: Título del selector horario de noches",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2137,7 +2093,6 @@
       }
     },
     "Valoración nocturna" : {
-      "comment" : "A label for the time when the user can provide feedback on the weather.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2154,26 +2109,126 @@
         }
       }
     },
-    "Valores por defecto iniciales" : {
-      "comment" : "Tests: Descripción del test unitario de estado inicial",
+    "Viento" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Initial default values"
+            "value" : "Wind"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valores por defecto iniciales"
+            "value" : "Viento"
+          }
+        }
+      }
+    },
+    "history_empty_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your past recommendations and feedback will appear here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus recomendaciones y valoraciones pasadas aparecerán aquí."
+          }
+        }
+      }
+    },
+    "history_empty_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No History"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin historial"
+          }
+        }
+      }
+    },
+    "tab_history_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to view your recommendation and feedback history."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para revisar el registro de recomendaciones pasadas y valoraciones."
+          }
+        }
+      }
+    },
+    "tab_recommendation_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to open recommendations and personalized suggestions."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para ver las recomendaciones y sugerencias personalizadas."
+          }
+        }
+      }
+    },
+    "tab_settings_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to adjust preferences and app settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para configurar tus preferencias y opciones de la app."
+          }
+        }
+      }
+    },
+    "tab_wardrobe_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to view and manage clothing items."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para consultar y gestionar tus prendas del armario."
           }
         }
       }
     },
     "wardrobe_empty_description" : {
-      "comment" : "A description of the empty wardrobe screen.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2191,7 +2246,6 @@
       }
     },
     "wardrobe_empty_title" : {
-      "comment" : "The title of the empty wardrobe view.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2209,7 +2263,6 @@
       }
     },
     "weather_empty_description" : {
-      "comment" : "A description of the weather screen when there is no weather data.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -2227,7 +2280,6 @@
       }
     },
     "weather_empty_title" : {
-      "comment" : "The title of the weather screen when there is no weather data.",
       "extractionState" : "manual",
       "localizations" : {
         "en" : {

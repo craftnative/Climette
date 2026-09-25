@@ -181,7 +181,7 @@ extension WeatherView {
                     .foregroundStyle(Color("BrandWarmth"))
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Recomendación de Ropa")
+                    Text("Recomendación de ropa")
                         .font(.headline)
                         .foregroundStyle(Color("TextPrimary"))
 
