@@ -1,24 +1,6 @@
 {
   "sourceLanguage" : "es",
   "strings" : {
-      "exclamation_mark" : {
-            "comment" : "An exclamation mark.",
-            "extractionState" : "manual",
-            "localizations" : {
-              "en" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "!"
-                }
-              },
-              "es" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "!"
-                }
-              }
-            }
-          },
     "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema." : {
       "comment" : "Text displayed in a notification that asks the user to rate their clothing choices for the day.",
       "extractionState" : "manual",
@@ -570,6 +552,23 @@
         }
       }
     },
+    "Desactivado" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabled"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactivado"
+          }
+        }
+      }
+    },
     "Desactivar en fin de semana" : {
       "comment" : "Onboarding: Etiqueta del interruptor para silenciar notificaciones en fines de semana",
       "extractionState" : "manual",
@@ -623,6 +622,23 @@
         }
       }
     },
+    "El acceso a la ubicación no ha sido autorizado." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location access has not been authorized."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El acceso a la ubicación no ha sido autorizado."
+          }
+        }
+      }
+    },
     "El Índice Térmico requiere condiciones locales." : {
       "comment" : "A footer for the location and weather section of the settings.",
       "extractionState" : "manual",
@@ -641,6 +657,23 @@
         }
       }
     },
+    "El servicio de ubicación dejó de estar disponible durante la operación." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The location service became unavailable during the operation."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El servicio de ubicación dejó de estar disponible durante la operación."
+          }
+        }
+      }
+    },
     "Equilibrio estándar respecto a las condiciones registradas." : {
       "comment" : "Onboarding: Descripción para la sensibilidad térmica 'Normal'",
       "extractionState" : "manual",
@@ -655,6 +688,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Equilibrio estándar respecto a las condiciones registradas."
+          }
+        }
+      }
+    },
+    "Error al resolver la localidad mediante geocodificación inversa." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error resolving the locality via reverse geocoding."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error al resolver la localidad mediante geocodificación inversa."
           }
         }
       }
@@ -743,6 +793,58 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Evita recibir notificaciones durante los fines de semana."
+          }
+        }
+      }
+    },
+    "exclamation_mark" : {
+      "comment" : "An exclamation mark.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "!"
+          }
+        }
+      }
+    },
+    "Fallo al buscar ubicación: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to search location: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallo al buscar ubicación: %@"
+          }
+        }
+      }
+    },
+    "Fallo al programar la notificación: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to schedule notification: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fallo al programar la notificación: %@"
           }
         }
       }
@@ -1052,23 +1154,23 @@
         }
       }
     },
-  "Necesario para precisión en cambios de localización." : {
-    "extractionState" : "manual",
-    "localizations" : {
-      "en" : {
-        "stringUnit" : {
-          "state" : "translated",
-          "value" : "Required for localization accuracy."
-        }
-      },
-      "es" : {
-        "stringUnit" : {
-          "state" : "translated",
-          "value" : "Necesario para precisión en cambios de localización."
+    "Necesario para precisión en cambios de localización." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required for localization accuracy."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Necesario para precisión en cambios de localización."
+          }
         }
       }
-    }
-  },
+    },
     "Necesario para recomendaciones." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1099,6 +1201,57 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No disponible"
+          }
+        }
+      }
+    },
+    "No hay permiso de localización" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No location permission"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay permiso de localización"
+          }
+        }
+      }
+    },
+    "No se encontraron resultados para: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No results found for: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se encontraron resultados para: %@"
+          }
+        }
+      }
+    },
+    "No se pudo obtener la posición geográfica actual." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not get current geographic position."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo obtener la posición geográfica actual."
           }
         }
       }
@@ -1241,6 +1394,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paso %1$lld de %2$lld"
+          }
+        }
+      }
+    },
+    "Permisos de notificación no otorgados." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification permissions not granted."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permisos de notificación no otorgados."
           }
         }
       }
@@ -1530,6 +1700,23 @@
         }
       }
     },
+    "Sin conexión" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin conexión"
+          }
+        }
+      }
+    },
     "Sin cuenta" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1725,6 +1912,23 @@
         }
       }
     },
+    "Ubicación" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación"
+          }
+        }
+      }
+    },
     "Ubicación configurada" : {
       "comment" : "A label displayed in the manual location section of the settings.",
       "extractionState" : "manual",
@@ -1756,23 +1960,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ubicación desactivada"
-          }
-        }
-      }
-    },
-    "No hay permiso de localización" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No location permission"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No hay permiso de localización"
           }
         }
       }
