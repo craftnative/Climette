@@ -10,10 +10,21 @@ public enum RecommendationPriority: Int, Codable, Comparable, Sendable {
     }
 }
 
+public struct ZoneDiagnostic: Codable, Sendable, Equatable {
+    public let isWindThresholdMet: Bool
+    public let isWaterThresholdMet: Bool
+    
+    public init(isWindThresholdMet: Bool, isWaterThresholdMet: Bool) {
+        self.isWindThresholdMet = isWindThresholdMet
+        self.isWaterThresholdMet = isWaterThresholdMet
+    }
+}
+
 public struct ClothingRecommendation: Identifiable, Codable, Sendable, Equatable {
     public let id: UUID
     public let priority: RecommendationPriority
     public let outfit: Outfit
+    public let zoneDiagnostics: [BodyZone: ZoneDiagnostic]?
     public let headline: String
     public let formattedMessage: String
     public let correctiveWarning: String?
@@ -24,6 +35,7 @@ public struct ClothingRecommendation: Identifiable, Codable, Sendable, Equatable
         id: UUID = UUID(),
         priority: RecommendationPriority,
         outfit: Outfit,
+        zoneDiagnostics: [BodyZone: ZoneDiagnostic]? = nil,
         headline: String,
         formattedMessage: String,
         correctiveWarning: String? = nil,
@@ -33,6 +45,7 @@ public struct ClothingRecommendation: Identifiable, Codable, Sendable, Equatable
         self.id = id
         self.priority = priority
         self.outfit = outfit
+        self.zoneDiagnostics = zoneDiagnostics
         self.headline = headline
         self.formattedMessage = formattedMessage
         self.correctiveWarning = correctiveWarning

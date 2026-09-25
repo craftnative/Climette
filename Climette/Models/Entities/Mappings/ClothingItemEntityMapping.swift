@@ -2,22 +2,42 @@ import Foundation
 
 extension ClothingItemEntity {
     @MainActor public func toDomain() -> Garment {
+        let archetype = GarmentArchetype(
+            id: archetypeId,
+            canonicalName: canonicalName,
+            bodyZone: BodyZone(rawValue: bodyZoneRaw) ?? .upperTorso,
+            supportedLayer: layerRaw != nil ? ClothingLayer(rawValue: layerRaw!) : nil,
+            baseProtection: EnvironmentalProtection(thermal: baseThermal, wind: baseWind, water: baseWater)
+        )
+        
         return Garment(
             id: id,
-            layer: ClothingLayer(rawValue: layerRaw) ?? .base,
-            ontology: SystemOntology(rawValue: ontologyRaw) ?? .breathableBase,
+            archetype: archetype,
             userNickname: userNickname,
-            functionalDescriptor: functionalDescriptor
+            color: color,
+            isAvailable: isAvailable,
+            overrideThermal: overrideThermal,
+            overrideWind: overrideWind,
+            overrideWater: overrideWater
         )
     }
     
     public convenience init(from domain: Garment) {
         self.init(
             id: domain.id,
-            layerRaw: domain.layer.rawValue,
-            ontologyRaw: domain.ontology.rawValue,
+            archetypeId: domain.archetype.id,
+            canonicalName: domain.archetype.canonicalName,
+            bodyZoneRaw: domain.archetype.bodyZone.rawValue,
+            layerRaw: domain.archetype.supportedLayer?.rawValue,
+            baseThermal: domain.archetype.baseProtection.thermal,
+            baseWind: domain.archetype.baseProtection.wind,
+            baseWater: domain.archetype.baseProtection.water,
             userNickname: domain.userNickname,
-            functionalDescriptor: domain.functionalDescriptor
+            color: domain.color,
+            isAvailable: domain.isAvailable,
+            overrideThermal: domain.overrideThermal,
+            overrideWind: domain.overrideWind,
+            overrideWater: domain.overrideWater
         )
     }
 }

@@ -32,9 +32,10 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
     public let wornOutfit: Outfit
     public let perception: ThermalPerception
     public let isIndoorDistortion: Bool
+    
+    public let affectedZone: BodyZone?
     public let physicalReaction: PhysicalReaction?
     public let adjustedGarment: Garment?
-    public let isGarmentAddition: Bool?
     public let postAdjustmentState: PostAdjustmentState?
     public var collectionState: DailyCollectionState
 
@@ -57,9 +58,9 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         wornOutfit: Outfit,
         perception: ThermalPerception,
         isIndoorDistortion: Bool = false,
+        affectedZone: BodyZone? = nil,
         physicalReaction: PhysicalReaction? = nil,
         adjustedGarment: Garment? = nil,
-        isGarmentAddition: Bool? = nil,
         postAdjustmentState: PostAdjustmentState? = nil,
         collectionState: DailyCollectionState = .correct
     ) {
@@ -71,9 +72,9 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         self.wornOutfit = wornOutfit
         self.perception = perception
         self.isIndoorDistortion = isIndoorDistortion
+        self.affectedZone = affectedZone
         self.physicalReaction = physicalReaction
         self.adjustedGarment = adjustedGarment
-        self.isGarmentAddition = isGarmentAddition
         self.postAdjustmentState = postAdjustmentState
         self.collectionState = collectionState
     }

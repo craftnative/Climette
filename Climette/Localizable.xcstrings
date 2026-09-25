@@ -19,6 +19,9 @@
         }
       }
     },
+    "%lld/10" : {
+
+    },
     "Abrir Ajustes" : {
       "comment" : "A button that opens the system settings.",
       "extractionState" : "manual",

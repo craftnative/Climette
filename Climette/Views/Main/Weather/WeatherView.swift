@@ -174,31 +174,55 @@ extension WeatherView {
     }
 
     private func clothingBanner() -> some View {
-        HStack(spacing: 16) {
-            Image(systemName: "tshirt.fill")
-                .font(.largeTitle)
-                .foregroundStyle(Color("BrandWarmth"))
+        VStack(alignment: .leading, spacing: 16) {
+            HStack(spacing: 16) {
+                Image(systemName: "tshirt.fill")
+                    .font(.largeTitle)
+                    .foregroundStyle(Color("BrandWarmth"))
 
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Recomendación de Ropa")
-                    .font(.headline)
-                    .foregroundStyle(Color("TextPrimary"))
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Recomendación de Ropa")
+                        .font(.headline)
+                        .foregroundStyle(Color("TextPrimary"))
 
-                if let weather = viewModel.domainWeather {
-                    Text("ITP Activo: \(weather.personalThermalIndex.formatted())°")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color("AccentColor"))
+                    if let weather = viewModel.domainWeather {
+                        Text("ITP Activo: \(weather.personalThermalIndex.formatted())°")
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(Color("AccentColor"))
 
-                    Text(weather.hasThermalDistortion ? "Fuerte amplitud térmica diaria" : "Condiciones estables")
-                        .font(.caption)
-                        .foregroundStyle(Color("TextSecondary"))
-                } else {
-                    Text("Calculando Índice Térmico...")
-                        .font(.subheadline)
-                        .foregroundStyle(Color("TextSecondary"))
+                        Text(weather.hasThermalDistortion ? "Fuerte amplitud térmica diaria" : "Condiciones estables")
+                            .font(.caption)
+                            .foregroundStyle(Color("TextSecondary"))
+                    } else {
+                        Text("Calculando Índice Térmico...")
+                            .font(.subheadline)
+                            .foregroundStyle(Color("TextSecondary"))
+                    }
+                }
+                Spacer()
+            }
+            
+            // Placeholder para inyectar Outfit estructurado si estuviera en viewModel
+            // Ejemplo de renderizado de la recomendación multi-zona iterando BodyZone
+            /*
+            if let recommendation = viewModel.currentRecommendation {
+                Divider().background(Color("SeparatorBase"))
+                ForEach(BodyZone.allCases, id: \.self) { zone in
+                    if let garments = recommendation.outfit.garmentsByZone[zone], !garments.isEmpty {
+                        HStack {
+                            Text(zone.rawValue)
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(Color("TextSecondary"))
+                                .frame(width: 80, alignment: .leading)
+                            
+                            Text(garments.map { $0.resolvedDisplayName }.joined(separator: ", "))
+                                .font(.subheadline)
+                                .foregroundStyle(Color("TextPrimary"))
+                        }
+                    }
                 }
             }
-            Spacer()
+            */
         }
         .padding()
         .background(Color("SurfaceElevated"))
@@ -207,47 +231,47 @@ extension WeatherView {
     }
 
     private func hourlyForecastTable() -> some View {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Previsión por horas")
-                    .font(.headline)
-                    .foregroundStyle(Color("TextPrimary"))
-                    .padding(.horizontal)
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Previsión por horas")
+                .font(.headline)
+                .foregroundStyle(Color("TextPrimary"))
+                .padding(.horizontal)
 
-                HStack(spacing: 0) {
-                    // Columna fija de etiquetas
-                    VStack(alignment: .leading, spacing: 20) {
-                        tableLabel("Hora", icon: "clock")
-                        tableLabel("Temp", icon: "thermometer.medium")
-                        tableLabel("Lluvia", icon: "drop.fill")
-                        tableLabel("Nubosidad", icon: "cloud.sun.fill")
-                        tableLabel("Viento", icon: "wind")
-                    }
-                    .padding(.horizontal)
-                    .background(Color("SurfaceElevated"))
-                    .zIndex(1)
+            HStack(spacing: 0) {
+                // Columna fija de etiquetas
+                VStack(alignment: .leading, spacing: 20) {
+                    tableLabel("Hora", icon: "clock")
+                    tableLabel("Temp", icon: "thermometer.medium")
+                    tableLabel("Lluvia", icon: "drop.fill")
+                    tableLabel("Nubosidad", icon: "cloud.sun.fill")
+                    tableLabel("Viento", icon: "wind")
+                }
+                .padding(.horizontal)
+                .background(Color("SurfaceElevated"))
+                .zIndex(1)
 
-                    // Contenido desplazable horizontalmente
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 24) {
-                            ForEach(viewModel.hourlyForecast, id: \.date) { hour in
-                                VStack(spacing: 20) {
-                                    tableCell(formatTime(hour.date), isHighlight: isNewDay(hour.date))
-                                    tableCell(String(format: "%.0f°", hour.temperature))
-                                    tableCell(hour.precipitationChance.formatted(.percent))
-                                    tableCell(hour.cloudCoverFraction.formatted(.percent))
-                                    tableCell(String(format: "%.0f km/h", hour.windSpeedKmh))
-                                }
+                // Contenido desplazable horizontalmente
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 24) {
+                        ForEach(viewModel.hourlyForecast, id: \.date) { hour in
+                            VStack(spacing: 20) {
+                                tableCell(formatTime(hour.date), isHighlight: isNewDay(hour.date))
+                                tableCell(String(format: "%.0f°", hour.temperature))
+                                tableCell(hour.precipitationChance.formatted(.percent))
+                                tableCell(hour.cloudCoverFraction.formatted(.percent))
+                                tableCell(String(format: "%.0f km/h", hour.windSpeedKmh))
                             }
                         }
-                        .padding(.trailing, 20)
                     }
+                    .padding(.trailing, 20)
                 }
             }
-            .padding(.vertical)
-            .background(Color("SurfaceElevated"))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .padding(.horizontal)
         }
+        .padding(.vertical)
+        .background(Color("SurfaceElevated"))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal)
+    }
 
     private func tableLabel(_ text: String, icon: String? = nil) -> some View {
         HStack(spacing: 6) {

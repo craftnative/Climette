@@ -12,25 +12,18 @@ public final class FeedbackRecordEntity {
     public var originPriorityRaw: Int = 0
     public var evaluatedPeriodRaw: String?
     
-    @Relationship(inverse: \ClothingItemEntity.baseLayerFeedbacks)
-    public var baseLayer: ClothingItemEntity?
-    
-    @Relationship(inverse: \ClothingItemEntity.midLayerFeedbacks)
-    public var midLayer: ClothingItemEntity?
-    
-    @Relationship(inverse: \ClothingItemEntity.outerLayerFeedbacks)
-    public var outerLayer: ClothingItemEntity?
+    @Relationship
+    public var wornGarments: [ClothingItemEntity]?
     
     public var perceptionRaw: String = ""
     public var isIndoorDistortion: Bool = false
+    public var affectedZoneRaw: String?
     public var physicalReactionRaw: String?
     
-    @Relationship(inverse: \ClothingItemEntity.adjustedGarmentFeedbacks)
+    @Relationship
     public var adjustedGarment: ClothingItemEntity?
     
-    public var isGarmentAddition: Bool?
     public var postAdjustmentStateRaw: String?
-    
     public var collectionStateRaw: String = ""
 
     public init(
@@ -39,14 +32,12 @@ public final class FeedbackRecordEntity {
         weatherSnapshot: WeatherSnapshotEntity? = nil,
         originPriorityRaw: Int,
         evaluatedPeriodRaw: String? = nil,
-        baseLayer: ClothingItemEntity? = nil,
-        midLayer: ClothingItemEntity? = nil,
-        outerLayer: ClothingItemEntity? = nil,
+        wornGarments: [ClothingItemEntity]? = nil,
         perceptionRaw: String,
         isIndoorDistortion: Bool,
+        affectedZoneRaw: String? = nil,
         physicalReactionRaw: String? = nil,
         adjustedGarment: ClothingItemEntity? = nil,
-        isGarmentAddition: Bool? = nil,
         postAdjustmentStateRaw: String? = nil,
         collectionStateRaw: String = "Correcto"
     ) {
@@ -55,14 +46,12 @@ public final class FeedbackRecordEntity {
         self.weatherSnapshot = weatherSnapshot
         self.originPriorityRaw = originPriorityRaw
         self.evaluatedPeriodRaw = evaluatedPeriodRaw
-        self.baseLayer = baseLayer
-        self.midLayer = midLayer
-        self.outerLayer = outerLayer
+        self.wornGarments = wornGarments
         self.perceptionRaw = perceptionRaw
         self.isIndoorDistortion = isIndoorDistortion
+        self.affectedZoneRaw = affectedZoneRaw
         self.physicalReactionRaw = physicalReactionRaw
         self.adjustedGarment = adjustedGarment
-        self.isGarmentAddition = isGarmentAddition
         self.postAdjustmentStateRaw = postAdjustmentStateRaw
         self.collectionStateRaw = collectionStateRaw
     }
