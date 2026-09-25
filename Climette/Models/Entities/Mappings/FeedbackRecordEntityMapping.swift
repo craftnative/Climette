@@ -6,7 +6,7 @@ extension FeedbackRecordEntity {
               let baseLayer = baseLayer?.toDomain() else { return nil }
         
         let outfit = Outfit(
-            id: UUID(), // ID regenerado en memoria
+            id: UUID(),
             baseLayer: baseLayer,
             midLayer: midLayer?.toDomain(),
             outerLayer: outerLayer?.toDomain()
@@ -39,7 +39,8 @@ extension FeedbackRecordEntity {
             physicalReaction: physicalReaction,
             adjustedGarment: adjustedGarment?.toDomain(),
             isGarmentAddition: isGarmentAddition,
-            postAdjustmentState: postAdjState
+            postAdjustmentState: postAdjState,
+            collectionState: DailyCollectionState(rawValue: collectionStateRaw) ?? .correct
         )
     }
     
@@ -58,7 +59,8 @@ extension FeedbackRecordEntity {
             physicalReactionRaw: domain.physicalReaction?.rawValue,
             adjustedGarment: adjustedEntity,
             isGarmentAddition: domain.isGarmentAddition,
-            postAdjustmentStateRaw: domain.postAdjustmentState?.rawValue
+            postAdjustmentStateRaw: domain.postAdjustmentState?.rawValue,
+            collectionStateRaw: domain.collectionState.rawValue
         )
     }
 }

@@ -6,6 +6,18 @@ public final class NotificationService: NotificationServiceProtocol {
 
     public init(center: UNUserNotificationCenter = .current()) {
         self.center = center
+        configureCategories()
+    }
+
+    private func configureCategories() {
+        // Define una categoría con .customDismissAction para interceptar cuando el usuario descarta manualmente la alerta (estado: ignorado notificacion).
+        let feedbackCategory = UNNotificationCategory(
+            identifier: "NIGHT_FEEDBACK_CATEGORY",
+            actions: [],
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+        center.setNotificationCategories([feedbackCategory])
     }
 
     public func getAuthorizationStatus() async -> NotificationPermissionStatus {
@@ -103,6 +115,9 @@ public final class NotificationService: NotificationServiceProtocol {
         content.title = String(localized: "Valoración del día")
         content.body = String(localized: "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema.")
         content.sound = .default
+        
+        // Enlace al categoryIdentifier que expone la acción delegada cuando se ignora
+        content.categoryIdentifier = "NIGHT_FEEDBACK_CATEGORY"
 
         var triggerComponents = DateComponents()
         triggerComponents.weekday = weekday

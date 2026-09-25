@@ -16,6 +16,13 @@ public enum PostAdjustmentState: String, Codable, Sendable {
     case stillUncomfortable = "Seguí destemplado"
 }
 
+public enum DailyCollectionState: String, Codable, CaseIterable, Sendable {
+    case correct = "Correcto"
+    case adjusted = "Ajustado"
+    case ignored = "Ignorado"
+    case deleted = "Borrado"
+}
+
 public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
     public let id: UUID
     public let timestamp: Date
@@ -29,8 +36,10 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
     public let adjustedGarment: Garment?
     public let isGarmentAddition: Bool?
     public let postAdjustmentState: PostAdjustmentState?
+    public var collectionState: DailyCollectionState
 
     public var resolvesAsSuccess: Bool {
+        if collectionState == .deleted || collectionState == .ignored { return false }
         if isIndoorDistortion { return false }
         if perception == .perfect { return true }
         if physicalReaction == .adjustedClothing && postAdjustmentState == .stabilized {
@@ -51,7 +60,8 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         physicalReaction: PhysicalReaction? = nil,
         adjustedGarment: Garment? = nil,
         isGarmentAddition: Bool? = nil,
-        postAdjustmentState: PostAdjustmentState? = nil
+        postAdjustmentState: PostAdjustmentState? = nil,
+        collectionState: DailyCollectionState = .correct
     ) {
         self.id = id
         self.timestamp = timestamp
@@ -65,5 +75,6 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         self.adjustedGarment = adjustedGarment
         self.isGarmentAddition = isGarmentAddition
         self.postAdjustmentState = postAdjustmentState
+        self.collectionState = collectionState
     }
 }

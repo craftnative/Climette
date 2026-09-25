@@ -30,6 +30,8 @@ public final class FeedbackRecordEntity {
     
     public var isGarmentAddition: Bool?
     public var postAdjustmentStateRaw: String?
+    
+    public var collectionStateRaw: String = ""
 
     public init(
         id: UUID = UUID(),
@@ -45,7 +47,8 @@ public final class FeedbackRecordEntity {
         physicalReactionRaw: String? = nil,
         adjustedGarment: ClothingItemEntity? = nil,
         isGarmentAddition: Bool? = nil,
-        postAdjustmentStateRaw: String? = nil
+        postAdjustmentStateRaw: String? = nil,
+        collectionStateRaw: String = "Correcto"
     ) {
         self.id = id
         self.timestamp = timestamp
@@ -61,5 +64,6 @@ public final class FeedbackRecordEntity {
         self.adjustedGarment = adjustedGarment
         self.isGarmentAddition = isGarmentAddition
         self.postAdjustmentStateRaw = postAdjustmentStateRaw
+        self.collectionStateRaw = collectionStateRaw
     }
 }
