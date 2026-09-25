@@ -4,12 +4,6 @@ import SwiftData
 @main
 struct ClimetteApp: App {
 
-    #if DEBUG
-    init() {
-        UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
-    }
-    #endif
-
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             UserProfileEntity.self,

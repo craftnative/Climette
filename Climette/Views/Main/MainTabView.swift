@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum MainTab: Hashable {
-    case weather
+    case recommendation
     case wardrobe
     case history
     case settings
@@ -9,7 +9,7 @@ enum MainTab: Hashable {
 
 struct MainTabView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @State private var selectedTab: MainTab = .weather
+    @State private var selectedTab: MainTab = .recommendation
     @State private var hasMissingPermissions: Bool = false
     
     var locationService: LocationServiceProtocol = LocationService()
@@ -21,11 +21,11 @@ struct MainTabView: View {
                 WeatherView()
             }
             .tabItem {
-                Label("Tiempo", systemImage: "cloud.sun.fill")
+                Label("Recomendación", systemImage: "sparkles")
             }
-            .accessibilityLabel(Text("Tiempo"))
-            .accessibilityHint(Text("tab_weather_accessibility_hint"))
-            .tag(MainTab.weather)
+            .accessibilityLabel(Text("Recomendación"))
+            .accessibilityHint(Text("tab_recommendation_accessibility_hint"))
+            .tag(MainTab.recommendation)
 
             NavigationStack {
                 WardrobeView()
@@ -59,11 +59,9 @@ struct MainTabView: View {
             .tag(MainTab.settings)
         }
         .tint(Color("AccentColor"))
-        // Reevalúa al cambiar de pestaña y en la carga inicial
         .task(id: selectedTab) {
             await evaluatePermissions()
         }
-        // Reevalúa cuando la app vuelve desde Ajustes de iOS a primer plano
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {
                 Task {
