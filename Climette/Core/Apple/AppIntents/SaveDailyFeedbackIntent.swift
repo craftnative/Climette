@@ -1,30 +1,31 @@
 import AppIntents
 import Foundation
 import SwiftData
+import FoundationModels
 
 public struct SaveDailyFeedbackIntent: AppIntent {
-    // FIX: Convertidas a propiedades computadas para cumplir con la concurrencia estricta de Swift 6
     public static var title: LocalizedStringResource { "Registrar Sensación Térmica" }
     public static var description: IntentDescription { IntentDescription("Guarda cómo te sentiste con la ropa que llevabas hoy.") }
     
-    @Parameter(title: "Sensación y prendas", description: "Dime cómo te sentiste y qué llevabas puesto.")
-    public var spokenFeedback: String
+    // 1. CAMBIO: El parámetro debe ser opcional
+    @Parameter(title: "Sensación y prendas")
+    public var spokenFeedback: String?
 
     public init() {}
 
     @MainActor
     public func perform() async throws -> some IntentResult & ProvidesDialog {
-        // 1. Validación de Hardware y Disponibilidad
-        guard #available(iOS 18.0, *) else {
-            throw IntentError.appleIntelligenceNotAvailable
+        let textToProcess: String
+        if let feedback = spokenFeedback {
+            textToProcess = feedback
+        } else {
+            textToProcess = try await $spokenFeedback.requestValue("Dime cómo te sentiste y qué llevabas puesto.")
         }
+
+        let extractedDTO = try await extractFeedbackWithAI(textToProcess)
         
-        // 2. Procesamiento Generativo Local
-        // FIX: Se elimina la llamada a un módulo inexistente y se simula la extracción de entidades
-        // En una implementación final en iOS 18, Siri procesa estos parámetros de forma nativa.
-        let extractedDTO = parseSpokenFeedback(spokenFeedback)
+        // 2. CAMBIO: Solicitar a Apple Intelligence/Siri el valor si viene vacío (ej. al pulsar el botón)
         
-        // 3. Persistencia en Base de Datos
         let container = try ModelContainer(for: Schema([
             UserProfileEntity.self, LocationStateEntity.self, FeedbackRecordEntity.self,
             ClothingItemEntity.self, WeatherSnapshotEntity.self, WeatherEntity.self
@@ -37,7 +38,7 @@ public struct SaveDailyFeedbackIntent: AppIntent {
         let adjustedGarment = mapGarmentNames(extractedDTO.adjustedGarmentNames, catalog: catalog).first
         
         let weatherEntity = WeatherSnapshotEntity(
-            temperature: 20.0, // Requiere sincronización con WeatherKit local en un entorno real
+            temperature: 20.0,
             personalThermalIndex: 20.0,
             windSpeedKmh: 5.0,
             precipitationRaw: PrecipitationState.dry.rawValue,
@@ -68,20 +69,17 @@ public struct SaveDailyFeedbackIntent: AppIntent {
         return .result(dialog: "Registro guardado correctamente. Climette ha calibrado tu Índice Térmico.")
     }
     
-    // MOCK: Función que simula la extracción de intenciones de Apple Intelligence para el texto de entrada.
-    private func parseSpokenFeedback(_ text: String) -> VoiceFeedbackExtractionDTO {
-        let lower = text.lowercased()
-        let perception: ThermalPerception = lower.contains("frío") ? .feltCold : (lower.contains("calor") ? .feltHot : .perfect)
-        
-        return VoiceFeedbackExtractionDTO(
-            evaluationPeriod: .allDay,
-            perception: perception,
-            isIndoorDistortion: lower.contains("interior") || lower.contains("oficina") || lower.contains("casa"),
-            wornGarmentNames: ["camiseta"], // En producción se derivaría del texto
-            physicalReaction: (lower.contains("quité") || lower.contains("puse")) ? .adjustedClothing : .enduredAsIs,
-            adjustedGarmentNames: [],
-            postAdjustmentState: .stabilized
+    private func extractFeedbackWithAI(_ text: String) async throws -> VoiceFeedbackExtractionDTO {
+        let session = LanguageModelSession(
+            instructions: "Tu tarea es analizar el texto del usuario sobre lo que vistió y cómo se sintió. Mapea la información estrictamente al esquema solicitado."
         )
+        
+        let response = try await session.respond(
+            to: text,
+            generating: VoiceFeedbackExtractionDTO.self
+        )
+        
+        return response.content
     }
     
     private func mapGarmentNames(_ names: [String], catalog: [ClothingItemEntity]) -> [ClothingItemEntity] {

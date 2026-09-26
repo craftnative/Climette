@@ -6,12 +6,10 @@ public struct ClimetteShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: GetClothingRecommendationIntent(),
             phrases: [
-                "Clima en \(.applicationName)",
-                "Qué ropa me pongo con \(.applicationName)",
-                "Recomendación del día en \(.applicationName)",
-                "Qué me pongo hoy en \(.applicationName)",
-                "Consultar recomendación para mañana por la tarde en \(.applicationName)",
-                "Qué ropa necesito para el clima de hoy en \(.applicationName)"
+                "Recomendación de ropa para \(\.$targetDay) en \(.applicationName)",
+                "Qué me pongo \(\.$targetDay) en \(.applicationName)",
+                "Qué me puse \(\.$targetDay) en \(.applicationName)",
+                "Qué ropa me puse \(\.$targetDay) con \(.applicationName)"
             ],
             shortTitle: "Recomendación de Ropa",
             systemImageName: "tshirt"
@@ -20,9 +18,10 @@ public struct ClimetteShortcutsProvider: AppShortcutsProvider {
         AppShortcut(
             intent: SaveDailyFeedbackIntent(),
             phrases: [
-                "Registrar mi sensación en \(.applicationName)",
-                "Guardar la ropa de hoy en \(.applicationName)",
-                "Grabar cómo estuve hoy en \(.applicationName)"
+                "Registrar sensación térmica de hoy en \(.applicationName)",
+                "Sensación térmica de hoy en \(.applicationName)",
+                "Sensación de ropa de hoy en \(.applicationName)",
+                "Registrar mi sensación en \(.applicationName)"
             ],
             shortTitle: "Registrar Sensación",
             systemImageName: "thermometer.sun"

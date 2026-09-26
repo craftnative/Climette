@@ -2,18 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>BackgroundBase</string>
-		<key>UIImageName</key>
-		<string>AppLogo</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
-	</dict>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
+    <key>UILaunchScreen</key>
+    <dict>
+        <key>UIColorName</key>
+        <string>BackgroundBase</string>
+        <key>UIImageName</key>
+        <string>AppLogo</string>
+        <key>UIImageRespectsSafeAreaInsets</key>
+        <true/>
+    </dict>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Climette necesita acceso al micrófono para que puedas registrar tus sensaciones térmicas mediante voz.</string>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>Climette analiza tus grabaciones de voz para autocompletar las prendas y sensaciones registradas.</string>
+    <key>NSSiriUsageDescription</key>
+    <string>Climette utiliza Siri para procesar tus registros de ropa de forma natural.</string>
 </dict>
 </plist>

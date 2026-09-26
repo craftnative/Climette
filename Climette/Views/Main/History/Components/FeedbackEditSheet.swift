@@ -1,9 +1,23 @@
 import SwiftUI
 import SwiftData
+import AppIntents
+import FoundationModels
 
 private struct GarmentReplacementContext: Identifiable {
     var id: UUID { garment.id }
     let garment: ClothingItemEntity
+}
+private var isAppleIntelligenceReady: Bool {
+    switch SystemLanguageModel.default.availability {
+    case .available:
+        return true // Hardware compatible y AI activada
+    case .unavailable(.appleIntelligenceNotEnabled), .unavailable(.modelNotReady):
+        return false // Hardware compatible (chip A17+), pero apagada en Ajustes o descargando modelos
+    case .unavailable(.deviceNotEligible):
+        return false // El chip del dispositivo no soporta Apple Intelligence
+    @unknown default:
+        return false
+    }
 }
 
 struct FeedbackEditSheet: View {
@@ -28,6 +42,7 @@ struct FeedbackEditSheet: View {
     @State private var currentGarments: [ClothingItemEntity] = []
     @State private var isShowingAddSheet: Bool = false
     @State private var garmentToReplaceContext: GarmentReplacementContext?
+    @State private var isProcessingAI: Bool = false
 
     init(recordEntity: FeedbackRecordEntity, isEligibleForEdit: Bool, initialEditMode: Bool = false) {
         self.recordEntity = recordEntity
@@ -37,12 +52,18 @@ struct FeedbackEditSheet: View {
     }
 
     var body: some View {
-        NavigationStack {
-            Form {
-                detailsSection
-                evaluationSection
-                garmentsSection
-            }
+            NavigationStack {
+                Form {
+                    if isEditing {
+                        if isAppleIntelligenceReady {
+                            appleIntelligenceSection
+                        }
+                    }
+                    
+                    detailsSection
+                    evaluationSection
+                    garmentsSection
+                }
             .scrollContentBackground(.hidden)
             .background(Color("BackgroundBase").ignoresSafeArea())
             .navigationTitle(isEditing ? Text("Editar registro") : Text("Detalle del registro"))
@@ -77,6 +98,80 @@ struct FeedbackEditSheet: View {
             .onAppear {
                 loadRecordData()
             }
+        }
+    }
+    
+    @ViewBuilder
+    private var appleIntelligenceSection: some View {
+        Section {
+            Button {
+                Task {
+                    await extractDataFromVoice()
+                }
+            } label: {
+                HStack(spacing: 8) {
+                    if isProcessingAI {
+                        ProgressView().tint(.white)
+                    } else {
+                        Image(systemName: "apple.intelligence")
+                    }
+                    Text(isProcessingAI ? "Analizando..." : "Describir con voz")
+                }
+                .font(.headline)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(Color.purple)
+            .disabled(isProcessingAI)
+        } header: {
+            Text("Apple Intelligence")
+        } footer: {
+            Text("Describe cómo te sentiste y qué ropa llevas para autocompletar este registro.")
+                .font(.caption)
+                .foregroundStyle(Color("TextSecondary"))
+        }
+        .listRowBackground(Color("SurfaceElevated"))
+    }
+    
+    @MainActor
+    private func extractDataFromVoice() async {
+        isProcessingAI = true
+        defer { isProcessingAI = false }
+        
+        do {
+            let promptText = "Hoy por la mañana llevaba mi camiseta básica blanca y los vaqueros 501. Pasé un poco de frío al principio, así que me puse la sudadera gris y ya estuve perfecto."
+            
+            let session = LanguageModelSession(
+                instructions: "Eres un asistente de moda y clima. Extrae los detalles del atuendo descrito y la sensación térmica del usuario según el esquema proporcionado."
+            )
+            
+            let response = try await session.respond(
+                to: promptText,
+                generating: VoiceFeedbackExtractionDTO.self
+            )
+            
+            let extractedDTO = response.content
+            
+            let editState = extractedDTO.mapToEditState(
+                catalog: allCatalogGarments,
+                currentWornGarments: currentGarments
+            )
+            
+            withAnimation {
+                self.evaluationPeriod = editState.evaluationPeriod
+                self.isIndoorDistortion = editState.isIndoorDistortion
+                self.currentGarments = editState.wornGarments
+                
+                if editState.perception == .perfect && editState.physicalReaction != .adjustedClothing {
+                    self.didWork = true
+                } else {
+                    self.didWork = false
+                    self.failureReason = editState.perception == .perfect ? .feltCold : editState.perception
+                }
+            }
+        } catch {
+            print("LanguageModelSession Falló: \(error.localizedDescription)")
         }
     }
     

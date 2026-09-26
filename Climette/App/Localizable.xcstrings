@@ -104,7 +104,13 @@
     "Añadir prenda" : {
 
     },
+    "Analizando..." : {
+
+    },
     "Aplicar" : {
+
+    },
+    "Apple Intelligence" : {
 
     },
     "Aquí tienes lo que registraste." : {
@@ -529,6 +535,12 @@
           }
         }
       }
+    },
+    "Describe cómo te sentiste y qué ropa llevas para autocompletar este registro." : {
+
+    },
+    "Describir con voz" : {
+
     },
     "Desde" : {
 

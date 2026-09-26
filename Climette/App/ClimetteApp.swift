@@ -1,6 +1,6 @@
-// FILE: Climette/App/ClimetteApp.swift
 import SwiftUI
 import SwiftData
+import AppIntents
 
 @main
 struct ClimetteApp: App {
@@ -50,6 +50,10 @@ struct ClimetteApp: App {
         }
         #endif
     }()
+
+    init() {
+        ClimetteShortcutsProvider.updateAppShortcutParameters()
+    }
 
     var body: some Scene {
         WindowGroup {
