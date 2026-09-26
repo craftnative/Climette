@@ -14,7 +14,7 @@
 		3C33D01E305C37AF0071425B /* Exceptions for "Climette" folder in "Climette" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"App/Info.plist",
+				App/Info.plist,
 			);
 			target = 3C33CFFC305C37AE0071425B /* Climette */;
 		};

@@ -57,7 +57,7 @@ struct LocationSettingsSection: View {
                         }
                         .padding()
                         .background(Color("BackgroundBase"))
-                        .navigationTitle("Seleccionar ciudad")
+                        .navigationTitle("Seleccionar ubicación")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
                             ToolbarItem(placement: .confirmationAction) {

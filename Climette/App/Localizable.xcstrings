@@ -1881,16 +1881,6 @@
         }
       }
     },
-    "Selecciona ciudad" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select u"
-          }
-        }
-      }
-    },
     "Selecciona tu perfil de sensibilidad térmica." : {
       "extractionState" : "manual",
       "localizations" : {
