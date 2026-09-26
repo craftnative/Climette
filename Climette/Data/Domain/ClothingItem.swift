@@ -3,6 +3,7 @@ import Foundation
 public enum BodyZone: String, Codable, CaseIterable, Sendable {
     case headNeck = "Cabeza / Cuello"
     case upperTorso = "Torso superior"
+    case fullBody = "Cuerpo entero / Vestidos"
     case lowerBody = "Piernas / Inferior"
     case feet = "Pies"
     case hands = "Manos"
@@ -13,6 +14,13 @@ public enum ClothingLayer: String, Codable, CaseIterable, Sendable {
     case base = "Capa Base"
     case mid = "Capa Intermedia"
     case outer = "Capa Exterior"
+}
+
+public enum GarmentStyleCategory: String, Codable, Sendable {
+    case pants = "pants"
+    case skirt = "skirt"
+    case dress = "dress"
+    case neutral = "neutral"
 }
 
 public struct EnvironmentalProtection: Codable, Sendable, Equatable {
@@ -33,13 +41,15 @@ public struct GarmentArchetype: Identifiable, Codable, Sendable, Equatable {
     public let bodyZone: BodyZone
     public let supportedLayer: ClothingLayer?
     public let baseProtection: EnvironmentalProtection
+    public let styleCategory: GarmentStyleCategory
     
-    public init(id: String, canonicalName: String, bodyZone: BodyZone, supportedLayer: ClothingLayer? = nil, baseProtection: EnvironmentalProtection) {
+    public init(id: String, canonicalName: String, bodyZone: BodyZone, supportedLayer: ClothingLayer? = nil, baseProtection: EnvironmentalProtection, styleCategory: GarmentStyleCategory = .neutral) {
         self.id = id
         self.canonicalName = canonicalName
         self.bodyZone = bodyZone
         self.supportedLayer = supportedLayer
         self.baseProtection = baseProtection
+        self.styleCategory = styleCategory
     }
 }
 

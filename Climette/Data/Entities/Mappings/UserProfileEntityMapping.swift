@@ -12,6 +12,7 @@ extension UserProfileEntity {
         return UserProfile(
             id: id,
             sensitivity: ThermalSensitivity(rawValue: sensitivityRaw) ?? .normal,
+            clothingPreference: ClothingPreference(rawValue: clothingPreferenceRaw) ?? .both,
             alertTimes: alertTimes,
             lastActiveTimestamp: lastActiveTimestamp,
             updatedAt: updatedAt
@@ -22,6 +23,7 @@ extension UserProfileEntity {
         self.init(
             id: domain.id,
             sensitivityRaw: domain.sensitivity.rawValue,
+            clothingPreferenceRaw: domain.clothingPreference.rawValue,
             weekdayMorningHour: domain.alertTimes.weekdayMorning.hour ?? 7,
             weekdayMorningMinute: domain.alertTimes.weekdayMorning.minute ?? 45,
             nightFeedbackHour: domain.alertTimes.nightFeedback.hour ?? 20,

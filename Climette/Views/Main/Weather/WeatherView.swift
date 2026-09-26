@@ -25,7 +25,8 @@ final class WeatherViewModel {
         for location: CLLocation,
         sensitivity: ThermalSensitivity,
         history: [FeedbackRecord],
-        wardrobe: [Garment]
+        wardrobe: [Garment],
+        preference: ClothingPreference
     ) async {
         isLoading = true
         errorMessage = nil
@@ -86,18 +87,16 @@ final class WeatherViewModel {
             let weather = responseDTO.toDomain(sensitivity: sensitivity)
             self.domainWeather = weather
 
-            // 1. Normalización calibrada mediante el algoritmo del motor de dominio
             let demand = thermalEngine.normalizeDemand(from: weather)
             self.currentDemand = demand
 
-            // 2. Resolución integral del atuendo por ThermalEngine
             let result = thermalEngine.resolveWithHistory(
                 currentDemand: demand,
                 history: history,
-                wardrobe: wardrobe
+                wardrobe: wardrobe,
+                preference: preference
             )
 
-            // 3. Extracción y publicación de resultados hacia la vista
             switch result {
             case .validated(let outfit, let message):
                 self.resolvedOutfit = outfit
@@ -135,7 +134,6 @@ struct WeatherView: View {
     @State private var viewModel = WeatherViewModel()
     @State private var resolvedLocation: CLLocation?
     @State private var locationPrimary: String = ""
-    @State private var locationCountry: String = ""
 
     private var locationService: LocationServiceProtocol = LocationService()
 
@@ -208,12 +206,6 @@ extension WeatherView {
                 .font(.title2.weight(.bold))
                 .foregroundStyle(Color("TextPrimary"))
 
-            if !locationCountry.isEmpty {
-                Text(locationCountry)
-                    .font(.footnote)
-                    .foregroundStyle(Color("TextSecondary"))
-            }
-
             Text(Date.now.formatted(.dateTime.weekday(.wide).day().month(.wide)))
                 .font(.subheadline)
                 .foregroundStyle(Color("TextSecondary"))
@@ -253,7 +245,6 @@ extension WeatherView {
                 Spacer()
             }
 
-            // Aviso reactivo emitido por el Closed-loop Feedback
             if let notice = viewModel.recommendationNotice {
                 HStack(spacing: 8) {
                     Image(systemName: "info.circle.fill")
@@ -267,7 +258,6 @@ extension WeatherView {
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             }
 
-            // Desglose de atuendo por zonas corporales
             if let outfit = viewModel.resolvedOutfit, !outfit.garments.isEmpty {
                 Divider()
                     .background(Color("SeparatorBase"))
@@ -276,7 +266,7 @@ extension WeatherView {
                     ForEach(BodyZone.allCases, id: \.self) { zone in
                         if let garmentsInZone = outfit.garmentsByZone[zone], !garmentsInZone.isEmpty {
                             HStack(alignment: .top, spacing: 12) {
-                                Text(zone.rawValue)
+                                Text(shortZoneName(for: zone))
                                     .font(.caption.weight(.bold))
                                     .foregroundStyle(Color("TextSecondary"))
                                     .frame(width: 90, alignment: .leading)
@@ -313,6 +303,17 @@ extension WeatherView {
         .padding(.horizontal)
     }
 
+    private func shortZoneName(for zone: BodyZone) -> String {
+        let raw = zone.rawValue.lowercased()
+        if raw.contains("cabeza") { return "Cabeza" }
+        if raw.contains("superior") || raw.contains("torso") { return "Torso" }
+        if raw.contains("cuerpo") || raw.contains("vestido") { return "Cuerpo Entero" }
+        if raw.contains("inferior") || raw.contains("pierna") { return "Piernas" }
+        if raw.contains("pie") || raw.contains("calzado") { return "Calzado" }
+        if raw.contains("comple") || raw.contains("accesor") { return "Accesorios" }
+        return zone.rawValue
+    }
+
     private func hourlyForecastTable() -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Previsión por horas")
@@ -321,7 +322,6 @@ extension WeatherView {
                 .padding(.horizontal)
 
             HStack(spacing: 0) {
-                // Columna fija de etiquetas
                 VStack(alignment: .leading, spacing: 20) {
                     tableLabel("Hora", icon: "clock")
                     tableLabel("Temp", icon: "thermometer.medium")
@@ -333,7 +333,6 @@ extension WeatherView {
                 .background(Color("SurfaceElevated"))
                 .zIndex(1)
 
-                // Scroll horizontal sincronizado
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 24) {
                         ForEach(viewModel.hourlyForecast, id: \.date) { hour in
@@ -427,6 +426,11 @@ extension WeatherView {
         return ThermalSensitivity(rawValue: rawValue) ?? .normal
     }
 
+    private var currentClothingPreference: ClothingPreference {
+        guard let rawValue = userProfiles.first?.clothingPreferenceRaw else { return .both }
+        return ClothingPreference(rawValue: rawValue) ?? .both
+    }
+
     private func seedDefaultCatalogIfNeeded() {
         try? DefaultWardrobeCatalogData.seedDatabaseIfNeeded(context: modelContext)
     }
@@ -435,11 +439,7 @@ extension WeatherView {
         guard let request = MKReverseGeocodingRequest(location: location) else { return }
         guard let mapItem = try? await request.mapItems.first else { return }
 
-        let address = mapItem.address
-        let locality = address?.shortAddress ?? ""
-        
-        self.locationPrimary = locality
-        self.locationCountry = mapItem.name ?? ""
+        self.locationPrimary = mapItem.address?.shortAddress ?? mapItem.name ?? ""
     }
 
     private func resolveAndFetchWeather() async {
@@ -458,7 +458,8 @@ extension WeatherView {
                     for: location,
                     sensitivity: currentSensitivity,
                     history: historyRecords,
-                    wardrobe: wardrobeGarments
+                    wardrobe: wardrobeGarments,
+                    preference: currentClothingPreference
                 )
             }
         } else {
@@ -470,7 +471,8 @@ extension WeatherView {
                     for: location,
                     sensitivity: currentSensitivity,
                     history: historyRecords,
-                    wardrobe: wardrobeGarments
+                    wardrobe: wardrobeGarments,
+                    preference: currentClothingPreference
                 )
             } else {
                 let auth = await locationService.requestAuthorization()
@@ -489,7 +491,8 @@ extension WeatherView {
                             for: location,
                             sensitivity: currentSensitivity,
                             history: historyRecords,
-                            wardrobe: wardrobeGarments
+                            wardrobe: wardrobeGarments,
+                            preference: currentClothingPreference
                         )
                     }
                 }

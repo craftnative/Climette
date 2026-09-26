@@ -7,7 +7,8 @@ extension ClothingItemEntity {
             canonicalName: canonicalName,
             bodyZone: BodyZone(rawValue: bodyZoneRaw) ?? .upperTorso,
             supportedLayer: layerRaw != nil ? ClothingLayer(rawValue: layerRaw!) : nil,
-            baseProtection: EnvironmentalProtection(thermal: baseThermal, wind: baseWind, water: baseWater)
+            baseProtection: EnvironmentalProtection(thermal: baseThermal, wind: baseWind, water: baseWater),
+            styleCategory: GarmentStyleCategory(rawValue: styleCategoryRaw) ?? .neutral
         )
         
         return Garment(
@@ -29,6 +30,7 @@ extension ClothingItemEntity {
             canonicalName: domain.archetype.canonicalName,
             bodyZoneRaw: domain.archetype.bodyZone.rawValue,
             layerRaw: domain.archetype.supportedLayer?.rawValue,
+            styleCategoryRaw: domain.archetype.styleCategory.rawValue,
             baseThermal: domain.archetype.baseProtection.thermal,
             baseWind: domain.archetype.baseProtection.wind,
             baseWater: domain.archetype.baseProtection.water,

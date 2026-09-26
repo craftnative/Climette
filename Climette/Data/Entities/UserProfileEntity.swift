@@ -5,6 +5,7 @@ import SwiftData
 public final class UserProfileEntity {
     public var id: UUID = UUID()
     public var sensitivityRaw: String = ""
+    public var clothingPreferenceRaw: String = ClothingPreference.both.rawValue // NEW
     
     public var weekdayMorningHour: Int = 0
     public var weekdayMorningMinute: Int = 0
@@ -18,6 +19,7 @@ public final class UserProfileEntity {
     public init(
         id: UUID = UUID(),
         sensitivityRaw: String,
+        clothingPreferenceRaw: String = ClothingPreference.both.rawValue,
         weekdayMorningHour: Int,
         weekdayMorningMinute: Int,
         nightFeedbackHour: Int,
@@ -28,6 +30,7 @@ public final class UserProfileEntity {
     ) {
         self.id = id
         self.sensitivityRaw = sensitivityRaw
+        self.clothingPreferenceRaw = clothingPreferenceRaw
         self.weekdayMorningHour = weekdayMorningHour
         self.weekdayMorningMinute = weekdayMorningMinute
         self.nightFeedbackHour = nightFeedbackHour

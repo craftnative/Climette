@@ -4,12 +4,6 @@
     "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Did your clothes get it right today? Rate your thermal comfort to calibrate the system."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18,15 +12,15 @@
         }
       }
     },
+    "¿Funcionó la recomendación?" : {
+
+    },
+    "¿Qué tipo de prendas sueles usar?" : {
+
+    },
     "Abrir Ajustes" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Settings"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38,12 +32,6 @@
     "Abrir Ajustes del Sistema" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open System Settings"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -55,12 +43,6 @@
     "Aguanté con lo puesto" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I stuck with what I was wearing"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -72,12 +54,6 @@
     "Ajusta las recomendaciones según el clima de tu zona." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fine-tune recommendations based on your local weather."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86,15 +62,12 @@
         }
       }
     },
+    "Ajusta si prefieres pantalones, faldas/vestidos, o ambos." : {
+
+    },
     "Ajustado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Adjusted"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -106,12 +79,6 @@
     "Ajustes" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -123,12 +90,6 @@
     "Almacenamiento" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Storage"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -137,18 +98,15 @@
         }
       }
     },
+    "Añadir prenda" : {
+
+    },
     "Aplicar" : {
 
     },
     "Armario" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wardrobe"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -160,12 +118,6 @@
     "Aviso: La última vez pasaste calor con este clima. Se reduce la carga térmica." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warning: Last time you felt hot in this weather. Reducing thermal load."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -177,12 +129,6 @@
     "Aviso: La última vez pasaste frío con este clima. Se añade mayor aislamiento." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warning: Last time you felt cold in this weather. Adding more insulation."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -191,15 +137,12 @@
         }
       }
     },
+    "Ayúdanos a filtrar tu armario para sugerirte solo el estilo que prefieras llevar." : {
+
+    },
     "Borrado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Deleted"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -211,12 +154,6 @@
     "Buscar" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -228,12 +165,6 @@
     "Buscar dirección o ciudad" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search address or city"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -243,24 +174,14 @@
       }
     },
     "Buscar dirección o ciudad..." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search for address or city..."
-          }
-        }
-      }
+
+    },
+    "Buscar prenda" : {
+
     },
     "Buscar ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -272,12 +193,6 @@
     "Cabeza / Cuello" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Head / Neck"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -289,12 +204,6 @@
     "Calculando Índice Térmico..." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calculating Thermal Index..."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -306,12 +215,6 @@
     "Calibra cómo percibes las variaciones de temperatura para ajustar tu Índice Térmico Personalizado." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Calibrate how you perceive temperature changes to tune your Personal Thermal Index."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -323,12 +226,6 @@
     "Caluroso" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Warm-natured"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -340,12 +237,6 @@
     "Cambiar" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -360,12 +251,6 @@
     "Capa Base" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Base Layer"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -377,12 +262,6 @@
     "Capa Exterior" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Outer Layer"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -394,12 +273,6 @@
     "Capa Intermedia" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mid Layer"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -411,12 +284,6 @@
     "Cargando clima..." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading weather..."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -428,12 +295,6 @@
     "Cargando perfil..." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading profile..."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -445,12 +306,6 @@
     "Cargando ubicación..." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading location..."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -462,12 +317,6 @@
     "Cerrar" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -479,12 +328,6 @@
     "Clavada / Perfecto" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Spot on / Perfect"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -496,12 +339,6 @@
     "Comenzar" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Started"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -513,12 +350,6 @@
     "Complementos / Accesorios" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Accessories"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -533,12 +364,6 @@
     "Condiciones estables" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stable conditions"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -550,12 +375,6 @@
     "Condiciones idénticas a un día validado previamente. Ropa confirmada." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Identical conditions to a previously validated day. Outfit confirmed."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -567,12 +386,6 @@
     "Condiciones Locales" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Local Conditions"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -581,15 +394,12 @@
         }
       }
     },
+    "Condiciones meteorológicas" : {
+
+    },
     "Conectado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Connected"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -601,12 +411,6 @@
     "Configura las horas de aviso para la recomendación matutina y el registro nocturno." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set notification times for morning recommendations and evening check-ins."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -618,12 +422,6 @@
     "Confirmar Ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Confirm Location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -635,12 +433,6 @@
     "Consulta el atuendo calibrado para el clima de hoy." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Check out the calibrated outfit for today's weather."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -652,12 +444,6 @@
     "Correcto" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Correct"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -669,12 +455,6 @@
     "Cubierto" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Overcast"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -686,12 +466,6 @@
     "Datos de Apple Weather" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Apple Weather Data"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -703,12 +477,6 @@
     "Debes completar la información requerida para continuar." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You must fill in the required information to continue."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -720,12 +488,6 @@
     "Desactivado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disabled"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -737,12 +499,6 @@
     "Desactivar en fin de semana" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mute on weekends"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -754,12 +510,6 @@
     "Desconocido" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -771,15 +521,12 @@
     "Desde" : {
 
     },
+    "Desliza hacia la izquierda sobre una prenda para eliminarla o pulsa Cambiar para sustituirla." : {
+
+    },
     "Despejado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clear"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -788,7 +535,7 @@
         }
       }
     },
-    "Detalles del día" : {
+    "Detalle del registro" : {
 
     },
     "Distorsión por interiores" : {
@@ -803,12 +550,6 @@
     "El acceso a la ubicación no ha sido autorizado." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location access has not been authorized."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -820,12 +561,6 @@
     "El Índice Térmico requiere condiciones locales." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Thermal Index requires local conditions."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -837,12 +572,6 @@
     "El servicio de ubicación dejó de estar disponible durante la operación." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The location service became unavailable during the operation."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -851,15 +580,12 @@
         }
       }
     },
+    "El sistema elegirá libremente entre ambas opciones." : {
+
+    },
     "Equilibrio estándar respecto a las condiciones registradas." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard balance relative to recorded conditions."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -871,12 +597,6 @@
     "Error al resolver la localidad mediante geocodificación inversa." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Error resolving the locality via reverse geocoding."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -888,12 +608,6 @@
     "Error temporal" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temporary error"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -905,12 +619,6 @@
     "Establece la ubicación en el centro actual del mapa" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set the location to the current center of the map"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -922,12 +630,6 @@
     "Establece los momentos del día en que Climette evalúa el clima." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Set the times of day when Climette evaluates the weather."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -936,18 +638,9 @@
         }
       }
     },
-    "Estado" : {
-
-    },
     "Estado de iCloud" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iCloud Status"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -956,18 +649,12 @@
         }
       }
     },
-    "Estado de la recomendación" : {
+    "Estilo" : {
 
     },
     "Estuve perfecto" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Felt comfortable"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -976,15 +663,12 @@
         }
       }
     },
+    "Evaluación de la recomendación" : {
+
+    },
     "Evita recibir notificaciones durante los fines de semana." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avoid receiving notifications over the weekend."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -996,12 +680,6 @@
     "Fallo al buscar ubicación: %@" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to search location: %@"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1013,12 +691,6 @@
     "Fallo al programar la notificación: %@" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to schedule notification: %@"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1030,12 +702,6 @@
     "Fallo en Base de Datos" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Database Failure"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1044,7 +710,7 @@
         }
       }
     },
-    "Fecha" : {
+    "Fecha y hora" : {
 
     },
     "Filtrar historial" : {
@@ -1059,12 +725,6 @@
     "Friolero" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cold-sensitive"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1076,12 +736,6 @@
     "Fuerte amplitud térmica diaria" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "High daily thermal amplitude"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1090,15 +744,12 @@
         }
       }
     },
+    "Funcionó" : {
+
+    },
     "GPS" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "GPS"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1113,12 +764,6 @@
     "Historial" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "History"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1130,12 +775,6 @@
     "history_empty_description" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your past recommendations and feedback will appear here."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1147,12 +786,6 @@
     "history_empty_title" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No History"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1164,12 +797,6 @@
     "Hora" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Time"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1184,12 +811,6 @@
     "Húmedo" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wet"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1201,12 +822,6 @@
     "Ignorado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ignored"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1218,12 +833,6 @@
     "Inicia sesión en Ajustes del sistema para respaldar datos." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sign in to System Settings to back up data."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1235,12 +844,6 @@
     "ITP Activo: %@°" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active PTI: %@°"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1252,12 +855,6 @@
     "Listo" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Done"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1269,12 +866,6 @@
     "Lluvia" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rain"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1289,12 +880,6 @@
     "Los cambios en la sincronización se aplicarán al reiniciar la aplicación." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync changes will be applied upon restarting the app."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1306,12 +891,6 @@
     "Mañana" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tomorrow"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1323,12 +902,6 @@
     "Manos" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hands"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1340,12 +913,6 @@
     "Mantiene calibrada la recomendación climática local sin intervención manual." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Keeps local weather recommendations calibrated without manual adjustments."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1357,12 +924,6 @@
     "Manual" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manual"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1374,12 +935,6 @@
     "Mapa interactivo de ciudad" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Interactive city map"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1391,12 +946,6 @@
     "Me añadí/quité ropa" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "I added or removed layers"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1408,12 +957,6 @@
     "Mediodía - Tarde" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afternoon - Evening"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1422,18 +965,9 @@
         }
       }
     },
-    "Modalidad" : {
-
-    },
     "Necesario para precisión en cambios de localización." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required for localization accuracy."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1445,12 +979,6 @@
     "Necesario para recomendaciones." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required for recommendations."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1462,12 +990,6 @@
     "No disponible" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unavailable"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1476,15 +998,12 @@
         }
       }
     },
+    "No funcionó" : {
+
+    },
     "No hay permiso de localización" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No location permission"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1493,18 +1012,15 @@
         }
       }
     },
+    "No hay prendas registradas para este atuendo." : {
+
+    },
     "No hay registros que coincidan con los filtros seleccionados." : {
 
     },
     "No se encontraron resultados para: %@" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No results found for: %@"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1516,12 +1032,6 @@
     "No se pudieron obtener las condiciones actuales." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not fetch current weather conditions."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1533,12 +1043,6 @@
     "No se pudo obtener la posición geográfica actual." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not get current geographic position."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1550,12 +1054,6 @@
     "Normal" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Normal"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1567,12 +1065,6 @@
     "Notificaciones desactivadas" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications disabled"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1584,12 +1076,6 @@
     "Notificaciones y Rutinas" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notifications & Routines"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1601,12 +1087,6 @@
     "Nubosidad" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cloud Cover"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1618,12 +1098,6 @@
     "Origen de datos" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Data source"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1635,12 +1109,6 @@
     "Pasé calor" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Felt hot"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1652,12 +1120,6 @@
     "Pasé frío" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Felt cold"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1669,12 +1131,6 @@
     "Paso %lld de %lld" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Step %1$lld of %2$lld"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1683,18 +1139,12 @@
         }
       }
     },
-    "Percepción térmica" : {
+    "Periodo evaluado" : {
 
     },
     "Permisos de notificación no otorgados." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Notification permissions not granted."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1706,12 +1156,6 @@
     "Permisos Requeridos" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required Permissions"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1723,12 +1167,6 @@
     "Piernas / Inferior" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Legs / Lower Body"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1740,12 +1178,6 @@
     "Pies" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Feet"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1757,12 +1189,6 @@
     "Por la mañana" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Morning"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1774,12 +1200,6 @@
     "Por la noche" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "At night"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1791,15 +1211,12 @@
     "Precipitación" : {
 
     },
+    "Preferencia de prendas" : {
+
+    },
     "Prefieres prendas más ligeras o toleras menor abrigo." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You prefer lighter clothes or tolerate less warmth."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1811,12 +1228,6 @@
     "Previsión por horas" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hourly forecast"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1825,15 +1236,12 @@
         }
       }
     },
+    "Rango de fechas" : {
+
+    },
     "Recomendación" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Recommendations"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1845,12 +1253,6 @@
     "Recomendación de ropa" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Clothing recommendation"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1862,12 +1264,6 @@
     "Recomendación matutina" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Morning recommendation"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1885,12 +1281,6 @@
     "Restringido" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Restricted"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1899,15 +1289,15 @@
         }
       }
     },
+    "Resultado" : {
+
+    },
+    "Ropa vestida" : {
+
+    },
     "Rutina" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Routine"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1919,12 +1309,6 @@
     "Seco" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dry"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1936,12 +1320,6 @@
     "Seguí destemplado" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Still uncomfortable"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1953,12 +1331,6 @@
     "Selecciona tu perfil de sensibilidad térmica." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select your thermal sensitivity profile."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1967,18 +1339,12 @@
         }
       }
     },
-    "Seleccionar día" : {
+    "Selecciona tu preferencia de prendas para el tren inferior." : {
 
     },
     "Seleccionar ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1987,18 +1353,15 @@
         }
       }
     },
-    "Sensación" : {
+    "Sensación experimentada" : {
+
+    },
+    "Sensibilidad" : {
 
     },
     "Sensibilidad Térmica" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Thermal Sensitivity"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2010,12 +1373,6 @@
     "Siguiente" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Next"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2027,12 +1384,6 @@
     "Sin conexión" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Offline"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2044,12 +1395,6 @@
     "Sin cuenta" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No account"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2064,12 +1409,6 @@
     "Sin ubicación definida" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No location defined"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2081,12 +1420,6 @@
     "Sincroniza historial y armario privadamente." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync history and wardrobe privately."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2098,12 +1431,6 @@
     "Sincronizar con iCloud" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sync with iCloud"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2112,15 +1439,15 @@
         }
       }
     },
+    "Solo se sugerirán faldas o vestidos enteros." : {
+
+    },
+    "Solo se sugerirán pantalones o pantalones cortos." : {
+
+    },
     "Sueles necesitar una capa adicional frente a la media." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You often need an extra layer compared to the average."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2132,12 +1459,6 @@
     "tab_history_accessibility_hint" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to view your recommendation and feedback history."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2149,12 +1470,6 @@
     "tab_recommendation_accessibility_hint" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to open recommendations and personalized suggestions."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2166,12 +1481,6 @@
     "tab_settings_accessibility_hint" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to adjust preferences and app settings."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2183,12 +1492,6 @@
     "tab_wardrobe_accessibility_hint" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to view and manage clothing items."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2200,12 +1503,6 @@
     "Temp" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Temp"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2217,21 +1514,9 @@
     "Temperatura" : {
 
     },
-    "Temperatura registrada" : {
-
-    },
-    "Temporalidad" : {
-
-    },
     "Tiempo" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Weather"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2241,24 +1526,11 @@
       }
     },
     "Toca directamente sobre el mapa o usa el botón Confirmar Ubicación para seleccionar el centro." : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap directly on the map or use the Confirm Location button to select the center."
-          }
-        }
-      }
+
     },
     "Todo el día" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "All day"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2270,12 +1542,6 @@
     "Torso superior" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Upper Torso"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2287,12 +1553,6 @@
     "Ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2304,12 +1564,6 @@
     "Ubicación configurada" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configured location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2321,12 +1575,6 @@
     "Ubicación desactivada" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location disabled"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2338,12 +1586,6 @@
     "Ubicación desconocida" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown location"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2355,12 +1597,6 @@
     "Ubicación y Clima" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Location & Weather"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2372,12 +1608,6 @@
     "Usa el botón de confirmar para seleccionar el centro del mapa." : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Use the confirm button to select the center of the map."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2389,12 +1619,6 @@
     "Valoración del día" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Daily check-in"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2406,12 +1630,6 @@
     "Valoración nocturna" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nightly check-in"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2426,12 +1644,6 @@
     "Viento" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wind"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2443,12 +1655,6 @@
     "wardrobe_empty_description" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your saved clothing items will appear here."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2460,12 +1666,6 @@
     "wardrobe_empty_title" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Empty Wardrobe"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2477,12 +1677,6 @@
     "weather_empty_description" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not fetch current weather conditions."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2494,12 +1688,6 @@
     "weather_empty_title" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Weather Data"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",

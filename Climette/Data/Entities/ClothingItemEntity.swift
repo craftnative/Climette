@@ -8,6 +8,7 @@ public final class ClothingItemEntity {
     public var canonicalName: String = ""
     public var bodyZoneRaw: String = ""
     public var layerRaw: String?
+    public var styleCategoryRaw: String = "" // NEW
     
     public var baseThermal: Int = 1
     public var baseWind: Int = 1
@@ -33,6 +34,7 @@ public final class ClothingItemEntity {
         canonicalName: String,
         bodyZoneRaw: String,
         layerRaw: String? = nil,
+        styleCategoryRaw: String = GarmentStyleCategory.neutral.rawValue,
         baseThermal: Int = 1,
         baseWind: Int = 1,
         baseWater: Int = 1,
@@ -48,6 +50,7 @@ public final class ClothingItemEntity {
         self.canonicalName = canonicalName
         self.bodyZoneRaw = bodyZoneRaw
         self.layerRaw = layerRaw
+        self.styleCategoryRaw = styleCategoryRaw
         self.baseThermal = baseThermal
         self.baseWind = baseWind
         self.baseWater = baseWater

@@ -9,6 +9,7 @@ extension PreviewSampleData {
         
         let userProfile = UserProfileEntity(
             sensitivityRaw: ThermalSensitivity.normal.rawValue,
+            clothingPreferenceRaw: ClothingPreference.both.rawValue, // Mock usa "Ambos"
             weekdayMorningHour: 7,
             weekdayMorningMinute: 45,
             nightFeedbackHour: 20,

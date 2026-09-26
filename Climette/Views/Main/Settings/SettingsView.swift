@@ -84,6 +84,11 @@ struct SettingsView: View {
                     .listRowBackground(Color("SurfaceElevated"))
                 }
             }
+            
+            if let profile = userProfiles.first {
+                ThermalSensitivitySection(userProfile: profile)
+                ClothingPreferenceSection(userProfile: profile)
+            }
 
             if let location = locationStates.first {
                 LocationSettingsSection(locationState: location)

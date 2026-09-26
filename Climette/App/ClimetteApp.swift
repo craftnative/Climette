@@ -27,6 +27,7 @@ struct ClimetteApp: App {
             Task { @MainActor in
                 PreviewSampleData.seedSampleData(into: container.mainContext)
                 // Opcional en desarrollo: omitir onboarding si se desea entrar directo a ver datos
+                UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
                 if UserDefaults.standard.object(forKey: "hasCompletedOnboarding") == nil {
                     UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
                 }

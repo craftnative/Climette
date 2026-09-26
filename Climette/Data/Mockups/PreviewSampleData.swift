@@ -32,16 +32,31 @@ public enum PreviewSampleData {
     }
 
     public static func seedSampleData(into context: ModelContext) {
-        var fetchCheck = FetchDescriptor<UserProfileEntity>()
-        fetchCheck.fetchLimit = 1
-        if let existing = try? context.fetch(fetchCheck), !existing.isEmpty {
-            return
+        // 1. Armario: debe existir y persistirse antes para que el historial pueda vincular prendas
+        var wardrobeCheck = FetchDescriptor<ClothingItemEntity>()
+        wardrobeCheck.fetchLimit = 1
+        let hasWardrobe = (try? context.fetch(wardrobeCheck))?.isEmpty == false
+        if !hasWardrobe {
+            PreviewSampleData.seedWardrobeData(into: context)
+            try? context.save()
         }
 
-        PreviewSampleData.seedUserData(into: context)
-        PreviewSampleData.seedWardrobeData(into: context)
-        PreviewSampleData.seedHistoryData(into: context)
-        
+        // 2. Perfil de usuario y estado de ubicación
+        var userCheck = FetchDescriptor<UserProfileEntity>()
+        userCheck.fetchLimit = 1
+        let hasUser = (try? context.fetch(userCheck))?.isEmpty == false
+        if !hasUser {
+            PreviewSampleData.seedUserData(into: context)
+        }
+
+        // 3. Historial de feedback
+        var historyCheck = FetchDescriptor<FeedbackRecordEntity>()
+        historyCheck.fetchLimit = 1
+        let hasHistory = (try? context.fetch(historyCheck))?.isEmpty == false
+        if !hasHistory {
+            PreviewSampleData.seedHistoryData(into: context)
+        }
+
         try? context.save()
     }
 }

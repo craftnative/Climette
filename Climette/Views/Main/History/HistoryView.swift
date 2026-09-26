@@ -48,11 +48,8 @@ public struct HistoryView: View {
     }
     
     private var filteredAndGroupedSections: [HistoryMonthSection] {
-        let startOfToday = calendar.startOfDay(for: now)
-        
         let validRecords = allRecords.filter { record in
-            // Excluir el día de hoy y fechas futuras
-            guard record.timestamp < startOfToday else { return false }
+            guard record.timestamp <= now else { return false }
             guard isFilterActive else { return true }
             
             let effectiveStart = min(filterCriteria.startDate, filterCriteria.endDate)

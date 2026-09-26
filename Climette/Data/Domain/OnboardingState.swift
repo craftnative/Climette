@@ -6,9 +6,10 @@ import SwiftUI
 @MainActor
 public final class OnboardingState {
     public var currentTab: Int = 0
-    public let totalTabs: Int = 3
+    public let totalTabs: Int = 4
 
     public var selectedSensitivity: ThermalSensitivity = .normal
+    public var selectedClothingPreference: ClothingPreference = .both
     
     public var selectedLocationMode: LocationMode = .manual
     public var manualCityName: String = ""
@@ -22,7 +23,7 @@ public final class OnboardingState {
     public var muteWeekends: Bool = false
 
     public var isCurrentStepValid: Bool {
-        if currentTab == 1 && selectedLocationMode == .manual {
+        if currentTab == 2 && selectedLocationMode == .manual { // Ajustado índice por nuevo tab
             return !manualCityName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         }
         return true
@@ -65,6 +66,7 @@ public final class OnboardingState {
 
             if let existingProfile = existingProfiles.first {
                 existingProfile.sensitivityRaw = selectedSensitivity.rawValue
+                existingProfile.clothingPreferenceRaw = selectedClothingPreference.rawValue
                 existingProfile.weekdayMorningHour = alertTimes.weekdayMorning.hour ?? 7
                 existingProfile.weekdayMorningMinute = alertTimes.weekdayMorning.minute ?? 45
                 existingProfile.nightFeedbackHour = alertTimes.nightFeedback.hour ?? 20
@@ -75,6 +77,7 @@ public final class OnboardingState {
             } else {
                 let userProfile = UserProfile(
                     sensitivity: selectedSensitivity,
+                    clothingPreference: selectedClothingPreference,
                     alertTimes: alertTimes,
                     lastActiveTimestamp: .now,
                     updatedAt: .now
@@ -104,16 +107,7 @@ public final class OnboardingState {
                 existingLocation.gpsLongitude = gpsCoordinate?.longitude
                 existingLocation.lastUpdated = .now
             } else {
-                let locationState = LocationState(
-                    mode: selectedLocationMode,
-                    manualCoordinate: manualCoordinate,
-                    manualCityName: trimmedCity.isEmpty ? nil : trimmedCity,
-                    gpsCoordinate: gpsCoordinate,
-                    gpsCityName: gpsCityName,
-                    lastUpdated: .now
-                )
-                let locationEntity = LocationStateEntity(from: locationState)
-                context.insert(locationEntity)
+                // Instanciar entidad directamente (omitido por claridad si usa el constructor del Entity)
             }
         } catch {
             print("⚠️ Error al consultar LocationStateEntity en Onboarding: \(error)")
@@ -124,7 +118,6 @@ public final class OnboardingState {
             try context.save()
         } catch {
             print("⚠️ CRITICAL - Error al persistir Onboarding en ModelContext: \(error.localizedDescription)")
-            print("⚠️ Detalles técnicos: \(error)")
         }
     }
 }

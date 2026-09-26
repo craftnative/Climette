@@ -22,6 +22,9 @@ struct FeedbackEditSheet: View {
     @State private var failureReason: ThermalPerception = .feltCold
     @State private var isIndoorDistortion: Bool = false
     
+    @State private var feedbackDate: Date = .now
+    @State private var evaluationPeriod: DayEvaluationPeriod = .allDay
+    
     @State private var currentGarments: [ClothingItemEntity] = []
     @State private var isShowingAddSheet: Bool = false
     @State private var garmentToReplaceContext: GarmentReplacementContext?
@@ -80,17 +83,28 @@ struct FeedbackEditSheet: View {
     @ViewBuilder
     private var detailsSection: some View {
         Section {
-            detailRow(
-                icon: "calendar",
-                title: "Fecha",
-                value: recordEntity.timestamp.formatted(.dateTime.day().month(.wide).year())
-            )
-            
-            detailRow(
-                icon: "clock",
-                title: "Hora registrada",
-                value: recordEntity.timestamp.formatted(.dateTime.hour().minute())
-            )
+            if isEditing {
+                DatePicker("Fecha y hora", selection: $feedbackDate, in: ...Date.now)
+                
+                Picker("Periodo evaluado", selection: $evaluationPeriod) {
+                    ForEach(DayEvaluationPeriod.allCases, id: \.self) { period in
+                        Text(period.rawValue).tag(period)
+                    }
+                }
+                .pickerStyle(.menu)
+            } else {
+                detailRow(
+                    icon: "calendar",
+                    title: "Fecha",
+                    value: recordEntity.timestamp.formatted(.dateTime.day().month(.wide).year())
+                )
+                
+                detailRow(
+                    icon: "clock",
+                    title: "Periodo",
+                    value: evaluationPeriod.rawValue
+                )
+            }
             
             if let weather = recordEntity.weatherSnapshot {
                 detailRow(
@@ -367,9 +381,14 @@ struct FeedbackEditSheet: View {
         
         isIndoorDistortion = recordEntity.isIndoorDistortion
         currentGarments = recordEntity.wornGarments ?? []
+        feedbackDate = recordEntity.timestamp
+        evaluationPeriod = DayEvaluationPeriod(rawValue: recordEntity.evaluatedPeriodRaw ?? "") ?? .allDay
     }
     
     private func saveChanges() {
+        recordEntity.timestamp = feedbackDate
+        recordEntity.evaluatedPeriodRaw = evaluationPeriod.rawValue
+        
         if didWork {
             recordEntity.collectionStateRaw = DailyCollectionState.correct.rawValue
             recordEntity.perceptionRaw = ThermalPerception.perfect.rawValue

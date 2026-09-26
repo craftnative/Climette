@@ -16,16 +16,20 @@ struct OnboardingView: View {
             Group {
                 ThermalProfileStepView(selectedSensitivity: $state.selectedSensitivity)
                     .tag(0)
+                
+                // NEW: Clothing Preference Step
+                ClothingPreferenceStepView(selectedPreference: $state.selectedClothingPreference)
+                    .tag(1)
 
                 LocationStepView(state: state)
-                    .tag(1)
+                    .tag(2)
 
                 RoutineStepView(
                     weekdayMorningAlert: $state.weekdayMorningAlert,
                     nightReview: $state.nightReview,
                     muteWeekends: $state.muteWeekends
                 )
-                    .tag(2)
+                    .tag(3)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
