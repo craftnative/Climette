@@ -4,33 +4,28 @@ import SwiftData
 struct OnboardingView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(LocationService.self) private var locationService
+    @Environment(NotificationService.self) private var notificationService
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
-    
-    var notificationService: NotificationServiceProtocol = NotificationService()
-    var locationService: LocationServiceProtocol = LocationService()
     
     @State private var state = OnboardingState()
     @State private var isProcessingCompletion: Bool = false
 
     var body: some View {
         TabView(selection: $state.currentTab) {
-            // El Group fuerza al compilador a usar @ViewBuilder y no @TabContentBuilder
             Group {
                 ThermalProfileStepView(selectedSensitivity: $state.selectedSensitivity)
                     .tag(0)
 
-                LocationStepView(
-                    state: state,
-                    locationService: locationService
-                )
-                .tag(1)
+                LocationStepView(state: state)
+                    .tag(1)
 
                 RoutineStepView(
                     weekdayMorningAlert: $state.weekdayMorningAlert,
                     nightReview: $state.nightReview,
                     muteWeekends: $state.muteWeekends
                 )
-                .tag(2)
+                    .tag(2)
             }
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -62,7 +57,6 @@ struct OnboardingView: View {
                 try await notificationService.scheduleRoutineNotifications(alertTimes: alertTimes)
             }
         } catch {
-            // Continúa la finalización si el permiso es denegado o falla la programación
         }
 
         state.saveAndComplete(context: modelContext)

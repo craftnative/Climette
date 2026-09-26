@@ -4,15 +4,14 @@ import SwiftData
 struct SettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(LocationService.self) private var locationService
+    @Environment(NotificationService.self) private var notificationService
     
     @Query(sort: \UserProfileEntity.updatedAt, order: .reverse)
     private var userProfiles: [UserProfileEntity]
 
     @Query(sort: \LocationStateEntity.lastUpdated, order: .reverse)
     private var locationStates: [LocationStateEntity]
-
-    var locationService: LocationServiceProtocol = LocationService()
-    var notificationService: NotificationServiceProtocol = NotificationService()
 
     @State private var locationStatus: LocationPermissionStatus = .notDetermined
     @State private var notificationStatus: NotificationPermissionStatus = .notDetermined

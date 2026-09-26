@@ -9,12 +9,12 @@ enum MainTab: Hashable {
 
 struct MainTabView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(LocationService.self) private var locationService
+    @Environment(NotificationService.self) private var notificationService
+    
     @State private var selectedTab: MainTab = .recommendation
     @State private var hasMissingPermissions: Bool = false
     
-    var locationService: LocationServiceProtocol = LocationService()
-    var notificationService: NotificationServiceProtocol = NotificationService()
-
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationStack {

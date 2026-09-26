@@ -1,8 +1,10 @@
 import Foundation
 import UserNotifications
+import Observation
 
+@Observable
 public final class NotificationService: NotificationServiceProtocol {
-    private let center: UNUserNotificationCenter
+    @ObservationIgnored private let center: UNUserNotificationCenter
 
     public init(center: UNUserNotificationCenter = .current()) {
         self.center = center
@@ -10,7 +12,6 @@ public final class NotificationService: NotificationServiceProtocol {
     }
 
     private func configureCategories() {
-        // Define una categoría con .customDismissAction para interceptar cuando el usuario descarta manualmente la alerta (estado: ignorado notificacion).
         let feedbackCategory = UNNotificationCategory(
             identifier: "NIGHT_FEEDBACK_CATEGORY",
             actions: [],
@@ -116,7 +117,6 @@ public final class NotificationService: NotificationServiceProtocol {
         content.body = String(localized: "¿Acertó tu ropa hoy? Valora tu confort térmico para calibrar el sistema.")
         content.sound = .default
         
-        // Enlace al categoryIdentifier que expone la acción delegada cuando se ignora
         content.categoryIdentifier = "NIGHT_FEEDBACK_CATEGORY"
 
         var triggerComponents = DateComponents()

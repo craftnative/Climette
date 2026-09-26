@@ -3,6 +3,8 @@ import SwiftData
 
 @main
 struct ClimetteApp: App {
+    @State private var locationService = LocationService()
+    @State private var notificationService = NotificationService()
 
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -14,12 +16,10 @@ struct ClimetteApp: App {
             WeatherEntity.self
         ])
 
-        let syncEnabled = UserDefaults.standard.bool(forKey: "isCloudKitSyncEnabled")
-
         let modelConfiguration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: false,
-            cloudKitDatabase: syncEnabled ? .automatic : .none
+            cloudKitDatabase: .automatic
         )
 
         do {
@@ -34,5 +34,7 @@ struct ClimetteApp: App {
             RootView()
         }
         .modelContainer(sharedModelContainer)
+        .environment(locationService)
+        .environment(notificationService)
     }
 }

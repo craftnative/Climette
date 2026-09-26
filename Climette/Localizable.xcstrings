@@ -1038,6 +1038,40 @@
         }
       }
     },
+    "history_empty_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your past recommendations and feedback will appear here."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tus recomendaciones y valoraciones pasadas aparecerán aquí."
+          }
+        }
+      }
+    },
+    "history_empty_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No History"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin historial"
+          }
+        }
+      }
+    },
     "Hora" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1072,23 +1106,6 @@
         }
       }
     },
-    "ITP Activo: %@°" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Active PTI: %@°"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ITP Activo: %@°"
-          }
-        }
-      }
-    },
     "Ignorado" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1119,6 +1136,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inicia sesión en Ajustes del sistema para respaldar datos."
+          }
+        }
+      }
+    },
+    "ITP Activo: %@°" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Active PTI: %@°"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ITP Activo: %@°"
           }
         }
       }
@@ -1174,6 +1208,40 @@
         }
       }
     },
+    "Mañana" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tomorrow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mañana"
+          }
+        }
+      }
+    },
+    "Manos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hands"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manos"
+          }
+        }
+      }
+    },
     "Mantiene calibrada la recomendación climática local sin intervención manual." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1204,40 +1272,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manual"
-          }
-        }
-      }
-    },
-    "Manos" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hands"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manos"
-          }
-        }
-      }
-    },
-    "Mañana" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tomorrow"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mañana"
           }
         }
       }
@@ -1531,23 +1565,6 @@
         }
       }
     },
-    "Permisos Requeridos" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Required Permissions"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Permisos Requeridos"
-          }
-        }
-      }
-    },
     "Permisos de notificación no otorgados." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1561,6 +1578,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Permisos de notificación no otorgados."
+          }
+        }
+      }
+    },
+    "Permisos Requeridos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required Permissions"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Permisos Requeridos"
           }
         }
       }
@@ -1956,6 +1990,74 @@
         }
       }
     },
+    "tab_history_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to view your recommendation and feedback history."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para revisar el registro de recomendaciones pasadas y valoraciones."
+          }
+        }
+      }
+    },
+    "tab_recommendation_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to open recommendations and personalized suggestions."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para ver las recomendaciones y sugerencias personalizadas."
+          }
+        }
+      }
+    },
+    "tab_settings_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to adjust preferences and app settings."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para configurar tus preferencias y opciones de la app."
+          }
+        }
+      }
+    },
+    "tab_wardrobe_accessibility_hint" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Double-tap to view and manage clothing items."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toca dos veces para consultar y gestionar tus prendas del armario."
+          }
+        }
+      }
+    },
     "Temp" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2058,23 +2160,6 @@
         }
       }
     },
-    "Ubicación desconocida" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Unknown location"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ubicación desconocida"
-          }
-        }
-      }
-    },
     "Ubicación desactivada" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2088,6 +2173,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ubicación desactivada"
+          }
+        }
+      }
+    },
+    "Ubicación desconocida" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación desconocida"
           }
         }
       }
@@ -2160,108 +2262,6 @@
         }
       }
     },
-    "history_empty_description" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your past recommendations and feedback will appear here."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tus recomendaciones y valoraciones pasadas aparecerán aquí."
-          }
-        }
-      }
-    },
-    "history_empty_title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No History"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sin historial"
-          }
-        }
-      }
-    },
-    "tab_history_accessibility_hint" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to view your recommendation and feedback history."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para revisar el registro de recomendaciones pasadas y valoraciones."
-          }
-        }
-      }
-    },
-    "tab_recommendation_accessibility_hint" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to open recommendations and personalized suggestions."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para ver las recomendaciones y sugerencias personalizadas."
-          }
-        }
-      }
-    },
-    "tab_settings_accessibility_hint" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to adjust preferences and app settings."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para configurar tus preferencias y opciones de la app."
-          }
-        }
-      }
-    },
-    "tab_wardrobe_accessibility_hint" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Double-tap to view and manage clothing items."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Toca dos veces para consultar y gestionar tus prendas del armario."
-          }
-        }
-      }
-    },
     "wardrobe_empty_description" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2329,7 +2329,76 @@
           }
         }
       }
-    }
+    },
+    "Confirmar Ubicación": {
+          "extractionState": "manual",
+          "localizations": {
+            "en": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Confirm Location"
+              }
+            },
+            "es": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Confirmar Ubicación"
+              }
+            }
+          }
+        },
+        "Establece la ubicación en el centro actual del mapa": {
+          "extractionState": "manual",
+          "localizations": {
+            "en": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Set the location to the current center of the map"
+              }
+            },
+            "es": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Establece la ubicación en el centro actual del mapa"
+              }
+            }
+          }
+        },
+        "Mapa interactivo de ciudad": {
+          "extractionState": "manual",
+          "localizations": {
+            "en": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Interactive city map"
+              }
+            },
+            "es": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Mapa interactivo de ciudad"
+              }
+            }
+          }
+        },
+        "Usa el botón de confirmar para seleccionar el centro del mapa.": {
+          "extractionState": "manual",
+          "localizations": {
+            "en": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Use the confirm button to select the center of the map."
+              }
+            },
+            "es": {
+              "stringUnit": {
+                "state": "translated",
+                "value": "Usa el botón de confirmar para seleccionar el centro del mapa."
+              }
+            }
+          }
+        }
+      }
   },
   "version" : "1.1"
 }

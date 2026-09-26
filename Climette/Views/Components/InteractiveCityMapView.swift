@@ -5,10 +5,11 @@ import CoreLocation
 struct InteractiveCityMapView: View {
     @Binding var cityName: String
     @Binding var coordinate: GeographicCoordinate?
-    var locationService: LocationServiceProtocol = LocationService()
+    @Environment(LocationService.self) private var locationService
     
     @State private var position: MapCameraPosition = .automatic
     @State private var selectedCoordinate: CLLocationCoordinate2D?
+    @State private var mapCenter: CLLocationCoordinate2D?
     @State private var isGeocoding: Bool = false
     @State private var showSearchSheet: Bool = false
     @State private var mapErrorMessage: String?
@@ -37,7 +38,7 @@ struct InteractiveCityMapView: View {
                     .padding(.horizontal, 4)
             }
             
-            MapReader { proxy in
+            ZStack(alignment: .bottom) {
                 Map(position: $position) {
                     if let selectedCoordinate {
                         Annotation(cityName.isEmpty ? "Ubicación" : cityName, coordinate: selectedCoordinate) {
@@ -53,8 +54,15 @@ struct InteractiveCityMapView: View {
                     MapCompass()
                     MapScaleView()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .onMapCameraChange(frequency: .onEnd) { context in
+                    mapCenter = context.region.center
+                }
+                .overlay(alignment: .center) {
+                    Image(systemName: "plus")
+                        .font(.title)
+                        .foregroundStyle(.blue)
+                        .accessibilityHidden(true)
+                }
                 .overlay(alignment: .topTrailing) {
                     if isGeocoding {
                         ProgressView()
@@ -64,15 +72,31 @@ struct InteractiveCityMapView: View {
                             .padding(8)
                     }
                 }
-                .onTapGesture { screenCoord in
-                    guard let location = proxy.convert(screenCoord, from: .local) else { return }
-                    selectedCoordinate = location
-                    coordinate = GeographicCoordinate(latitude: location.latitude, longitude: location.longitude)
-                    Task {
-                        await resolveCoordinate(location)
+                .accessibilityLabel("Mapa interactivo de ciudad")
+                .accessibilityHint("Usa el botón de confirmar para seleccionar el centro del mapa.")
+                
+                Button {
+                    if let center = mapCenter {
+                        selectedCoordinate = center
+                        coordinate = GeographicCoordinate(latitude: center.latitude, longitude: center.longitude)
+                        Task {
+                            await resolveCoordinate(center)
+                        }
                     }
+                } label: {
+                    Text("Confirmar Ubicación")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color("AccentColor"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                 }
+                .padding()
+                .accessibilityLabel("Confirmar Ubicación")
+                .accessibilityHint("Establece la ubicación en el centro actual del mapa")
             }
+            .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .sheet(isPresented: $showSearchSheet) {
@@ -163,8 +187,6 @@ struct InteractiveCityMapView: View {
         }
     }
 }
-
-// MARK: - Componentes de búsqueda y listado con MKLocalSearchCompleter
 
 @Observable
 final class LocationSearchViewModel: NSObject, MKLocalSearchCompleterDelegate {

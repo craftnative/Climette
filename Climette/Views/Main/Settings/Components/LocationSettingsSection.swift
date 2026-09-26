@@ -52,8 +52,7 @@ struct LocationSettingsSection: View {
                         VStack {
                             InteractiveCityMapView(
                                 cityName: $tempCityName,
-                                coordinate: $tempCoordinate,
-                                locationService: locationService
+                                coordinate: $tempCoordinate
                             )
                         }
                         .padding()

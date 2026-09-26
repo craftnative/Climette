@@ -1,11 +1,13 @@
 import Foundation
 import CoreLocation
 import MapKit
+import Observation
 
+@Observable
 @MainActor
 public final class LocationService: NSObject, LocationServiceProtocol, CLLocationManagerDelegate {
-    private let locationManager: CLLocationManager
-    private var authContinuations: [CheckedContinuation<LocationPermissionStatus, Never>] = []
+    @ObservationIgnored private let locationManager: CLLocationManager
+    @ObservationIgnored private var authContinuations: [CheckedContinuation<LocationPermissionStatus, Never>] = []
 
     public override init() {
         self.locationManager = CLLocationManager()

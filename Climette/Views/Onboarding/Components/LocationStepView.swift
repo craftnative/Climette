@@ -4,9 +4,9 @@ import CoreLocation
 struct LocationStepView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment(\.openURL) private var openURL
+    @Environment(LocationService.self) private var locationService
     
     @Bindable var state: OnboardingState
-    var locationService: LocationServiceProtocol = LocationService()
     
     @FocusState private var isFocused: Bool
     @State private var isLocating: Bool = false
@@ -91,8 +91,7 @@ struct LocationStepView: View {
                 case .manual:
                     InteractiveCityMapView(
                         cityName: $state.manualCityName,
-                        coordinate: $state.manualCoordinate,
-                        locationService: locationService
+                        coordinate: $state.manualCoordinate
                     )
                 }
             }
