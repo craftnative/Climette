@@ -137,6 +137,9 @@
         }
       }
     },
+    "Aplicar" : {
+
+    },
     "Armario" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -351,6 +354,9 @@
         }
       }
     },
+    "Cancelar" : {
+
+    },
     "Capa Base" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -520,6 +526,9 @@
           }
         }
       }
+    },
+    "Condiciones Climáticas" : {
+
     },
     "Condiciones estables" : {
       "extractionState" : "manual",
@@ -759,6 +768,9 @@
         }
       }
     },
+    "Desde" : {
+
+    },
     "Despejado" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -775,6 +787,18 @@
           }
         }
       }
+    },
+    "Detalles del día" : {
+
+    },
+    "Distorsión por interiores" : {
+
+    },
+    "Editar" : {
+
+    },
+    "Editar registro" : {
+
     },
     "El acceso a la ubicación no ha sido autorizado." : {
       "extractionState" : "manual",
@@ -912,6 +936,9 @@
         }
       }
     },
+    "Estado" : {
+
+    },
     "Estado de iCloud" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -928,6 +955,9 @@
           }
         }
       }
+    },
+    "Estado de la recomendación" : {
+
     },
     "Estuve perfecto" : {
       "extractionState" : "manual",
@@ -1014,6 +1044,18 @@
         }
       }
     },
+    "Fecha" : {
+
+    },
+    "Filtrar historial" : {
+
+    },
+    "Filtros aplicados" : {
+
+    },
+    "Filtros avanzados" : {
+
+    },
     "Friolero" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1064,6 +1106,9 @@
           }
         }
       }
+    },
+    "Hasta" : {
+
     },
     "Historial" : {
       "extractionState" : "manual",
@@ -1132,6 +1177,9 @@
           }
         }
       }
+    },
+    "Humedad" : {
+
     },
     "Húmedo" : {
       "extractionState" : "manual",
@@ -1234,6 +1282,9 @@
           }
         }
       }
+    },
+    "Lluvia: %@" : {
+
     },
     "Los cambios en la sincronización se aplicarán al reiniciar la aplicación." : {
       "extractionState" : "manual",
@@ -1371,6 +1422,9 @@
         }
       }
     },
+    "Modalidad" : {
+
+    },
     "Necesario para precisión en cambios de localización." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1438,6 +1492,9 @@
           }
         }
       }
+    },
+    "No hay registros que coincidan con los filtros seleccionados." : {
+
     },
     "No se encontraron resultados para: %@" : {
       "extractionState" : "manual",
@@ -1626,6 +1683,9 @@
         }
       }
     },
+    "Percepción térmica" : {
+
+    },
     "Permisos de notificación no otorgados." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1728,6 +1788,9 @@
         }
       }
     },
+    "Precipitación" : {
+
+    },
     "Prefieres prendas más ligeras o toleras menor abrigo." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1812,6 +1875,12 @@
           }
         }
       }
+    },
+    "Restablecer filtros" : {
+
+    },
+    "Restablecer todos los filtros" : {
+
     },
     "Restringido" : {
       "extractionState" : "manual",
@@ -1898,6 +1967,9 @@
         }
       }
     },
+    "Seleccionar día" : {
+
+    },
     "Seleccionar ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1914,6 +1986,9 @@
           }
         }
       }
+    },
+    "Sensación" : {
+
     },
     "Sensibilidad Térmica" : {
       "extractionState" : "manual",
@@ -1982,6 +2057,9 @@
           }
         }
       }
+    },
+    "Sin resultados" : {
+
     },
     "Sin ubicación definida" : {
       "extractionState" : "manual",
@@ -2135,6 +2213,15 @@
           }
         }
       }
+    },
+    "Temperatura" : {
+
+    },
+    "Temperatura registrada" : {
+
+    },
+    "Temporalidad" : {
+
     },
     "Tiempo" : {
       "extractionState" : "manual",
@@ -2332,6 +2419,9 @@
           }
         }
       }
+    },
+    "Velocidad del viento" : {
+
     },
     "Viento" : {
       "extractionState" : "manual",

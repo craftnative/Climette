@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 enum MainTab: Hashable {
     case recommendation
@@ -81,4 +82,11 @@ struct MainTabView: View {
         
         hasMissingPermissions = isLocationRestricted || isNotificationRestricted
     }
+}
+
+#Preview {
+    MainTabView()
+        .modelContainer(PreviewSampleData.makeContainer())
+        .environment(LocationService())
+        .environment(NotificationService())
 }

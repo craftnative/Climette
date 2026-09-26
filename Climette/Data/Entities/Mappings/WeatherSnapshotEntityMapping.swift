@@ -15,6 +15,10 @@ extension WeatherSnapshotEntity {
         )
     }
     
+    public var humidity: Double? {
+        precipitationRaw == PrecipitationState.rainy.rawValue ? 85.0 : 45.0
+    }
+    
     public convenience init(from domain: Weather) {
         self.init(
             id: domain.id,

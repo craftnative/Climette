@@ -4,21 +4,37 @@ import WeatherKit
 import CoreLocation
 import MapKit
 
+// MARK: - WeatherViewModel
+
 @Observable
 @MainActor
 final class WeatherViewModel {
     var domainWeather: Weather?
+    var currentDemand: ClimateDemand?
+    var resolvedOutfit: Outfit?
+    var recommendationNotice: String?
+
     var hourlyForecast: [HourlyForecastDTO] = []
     var attribution: WeatherAttribution?
     var isLoading: Bool = false
     var errorMessage: String? = nil
 
-    func fetchWeather(for location: CLLocation, sensitivity: ThermalSensitivity) async {
+    private let thermalEngine = ThermalEngine()
+
+    func fetchWeather(
+        for location: CLLocation,
+        sensitivity: ThermalSensitivity,
+        history: [FeedbackRecord],
+        wardrobe: [Garment]
+    ) async {
         isLoading = true
         errorMessage = nil
 
         do {
-            let (current, hourly, daily) = try await WeatherService.shared.weather(for: location, including: .current, .hourly, .daily)
+            let (current, hourly, daily) = try await WeatherService.shared.weather(
+                for: location,
+                including: .current, .hourly, .daily
+            )
             self.attribution = try await WeatherService.shared.attribution
 
             let now = Date.now
@@ -67,7 +83,34 @@ final class WeatherViewModel {
                 dailyForecast: dailyDTO
             )
 
-            self.domainWeather = responseDTO.toDomain(sensitivity: sensitivity)
+            let weather = responseDTO.toDomain(sensitivity: sensitivity)
+            self.domainWeather = weather
+
+            // 1. Normalización calibrada mediante el algoritmo del motor de dominio
+            let demand = thermalEngine.normalizeDemand(from: weather)
+            self.currentDemand = demand
+
+            // 2. Resolución integral del atuendo por ThermalEngine
+            let result = thermalEngine.resolveWithHistory(
+                currentDemand: demand,
+                history: history,
+                wardrobe: wardrobe
+            )
+
+            // 3. Extracción y publicación de resultados hacia la vista
+            switch result {
+            case .validated(let outfit, let message):
+                self.resolvedOutfit = outfit
+                self.recommendationNotice = message
+
+            case .warning(let outfit, let notice):
+                self.resolvedOutfit = outfit
+                self.recommendationNotice = notice
+
+            case .discovery(let outfit):
+                self.resolvedOutfit = outfit
+                self.recommendationNotice = nil
+            }
 
         } catch {
             self.errorMessage = "No se pudieron obtener las condiciones actuales."
@@ -78,11 +121,16 @@ final class WeatherViewModel {
     }
 }
 
+// MARK: - WeatherView
+
 struct WeatherView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
+    
     @Query private var locationStates: [LocationStateEntity]
     @Query private var userProfiles: [UserProfileEntity]
+    @Query(sort: \FeedbackRecordEntity.timestamp, order: .reverse) private var feedbackEntities: [FeedbackRecordEntity]
+    @Query private var clothingEntities: [ClothingItemEntity]
 
     @State private var viewModel = WeatherViewModel()
     @State private var resolvedLocation: CLLocation?
@@ -132,22 +180,25 @@ struct WeatherView: View {
         .navigationTitle(Text("Tiempo"))
         .navigationBarTitleDisplayMode(.inline)
         .task {
+            seedDefaultCatalogIfNeeded()
             await resolveAndFetchWeather()
         }
         .onChange(of: locationStates.first?.lastUpdated) { _, _ in
-            Task {
-                await resolveAndFetchWeather()
-            }
+            Task { await resolveAndFetchWeather() }
         }
         .onChange(of: userProfiles.first?.updatedAt) { _, _ in
-            Task {
-                await resolveAndFetchWeather()
-            }
+            Task { await resolveAndFetchWeather() }
+        }
+        .onChange(of: feedbackEntities.count) { _, _ in
+            Task { await resolveAndFetchWeather() }
+        }
+        .onChange(of: clothingEntities.count) { _, _ in
+            Task { await resolveAndFetchWeather() }
         }
     }
 }
 
-// MARK: - Subviews & Components
+// MARK: - Subviews & Visual Components
 
 extension WeatherView {
 
@@ -201,28 +252,60 @@ extension WeatherView {
                 }
                 Spacer()
             }
-            
-            // Placeholder para inyectar Outfit estructurado si estuviera en viewModel
-            // Ejemplo de renderizado de la recomendación multi-zona iterando BodyZone
-            /*
-            if let recommendation = viewModel.currentRecommendation {
-                Divider().background(Color("SeparatorBase"))
-                ForEach(BodyZone.allCases, id: \.self) { zone in
-                    if let garments = recommendation.outfit.garmentsByZone[zone], !garments.isEmpty {
-                        HStack {
-                            Text(zone.rawValue)
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(Color("TextSecondary"))
-                                .frame(width: 80, alignment: .leading)
-                            
-                            Text(garments.map { $0.resolvedDisplayName }.joined(separator: ", "))
-                                .font(.subheadline)
-                                .foregroundStyle(Color("TextPrimary"))
+
+            // Aviso reactivo emitido por el Closed-loop Feedback
+            if let notice = viewModel.recommendationNotice {
+                HStack(spacing: 8) {
+                    Image(systemName: "info.circle.fill")
+                        .foregroundStyle(Color("AccentColor"))
+                    Text(notice)
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(Color("TextPrimary"))
+                }
+                .padding(10)
+                .background(Color("AccentColor").opacity(0.12))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+
+            // Desglose de atuendo por zonas corporales
+            if let outfit = viewModel.resolvedOutfit, !outfit.garments.isEmpty {
+                Divider()
+                    .background(Color("SeparatorBase"))
+
+                VStack(spacing: 12) {
+                    ForEach(BodyZone.allCases, id: \.self) { zone in
+                        if let garmentsInZone = outfit.garmentsByZone[zone], !garmentsInZone.isEmpty {
+                            HStack(alignment: .top, spacing: 12) {
+                                Text(zone.rawValue)
+                                    .font(.caption.weight(.bold))
+                                    .foregroundStyle(Color("TextSecondary"))
+                                    .frame(width: 90, alignment: .leading)
+                                    .padding(.top, 2)
+
+                                VStack(alignment: .leading, spacing: 6) {
+                                    ForEach(garmentsInZone) { garment in
+                                        HStack(spacing: 6) {
+                                            Text(garment.resolvedDisplayName)
+                                                .font(.subheadline.weight(.medium))
+                                                .foregroundStyle(Color("TextPrimary"))
+
+                                            if let layer = garment.archetype.supportedLayer {
+                                                Text(layer.rawValue)
+                                                    .font(.caption2)
+                                                    .padding(.horizontal, 6)
+                                                    .padding(.vertical, 2)
+                                                    .background(Color.secondary.opacity(0.15))
+                                                    .clipShape(Capsule())
+                                            }
+                                        }
+                                    }
+                                }
+                                Spacer()
+                            }
                         }
                     }
                 }
             }
-            */
         }
         .padding()
         .background(Color("SurfaceElevated"))
@@ -250,7 +333,7 @@ extension WeatherView {
                 .background(Color("SurfaceElevated"))
                 .zIndex(1)
 
-                // Contenido desplazable horizontalmente
+                // Scroll horizontal sincronizado
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 24) {
                         ForEach(viewModel.hourlyForecast, id: \.date) { hour in
@@ -344,6 +427,10 @@ extension WeatherView {
         return ThermalSensitivity(rawValue: rawValue) ?? .normal
     }
 
+    private func seedDefaultCatalogIfNeeded() {
+        try? DefaultWardrobeCatalogData.seedDatabaseIfNeeded(context: modelContext)
+    }
+
     private func updatePlacemarkDetails(for location: CLLocation) async {
         guard let request = MKReverseGeocodingRequest(location: location) else { return }
         guard let mapItem = try? await request.mapItems.first else { return }
@@ -359,19 +446,32 @@ extension WeatherView {
         guard let state = locationStates.first else { return }
         let mode = LocationMode(rawValue: state.modeRaw) ?? .gps
 
+        let historyRecords = feedbackEntities.compactMap { $0.toDomain() }
+        let wardrobeGarments = clothingEntities.map { $0.toDomain() }
+
         if mode == .manual {
             if let lat = state.manualLatitude, let lon = state.manualLongitude {
                 let location = CLLocation(latitude: lat, longitude: lon)
                 self.resolvedLocation = location
                 await updatePlacemarkDetails(for: location)
-                await viewModel.fetchWeather(for: location, sensitivity: currentSensitivity)
+                await viewModel.fetchWeather(
+                    for: location,
+                    sensitivity: currentSensitivity,
+                    history: historyRecords,
+                    wardrobe: wardrobeGarments
+                )
             }
         } else {
             if let lat = state.gpsLatitude, let lon = state.gpsLongitude {
                 let location = CLLocation(latitude: lat, longitude: lon)
                 self.resolvedLocation = location
                 await updatePlacemarkDetails(for: location)
-                await viewModel.fetchWeather(for: location, sensitivity: currentSensitivity)
+                await viewModel.fetchWeather(
+                    for: location,
+                    sensitivity: currentSensitivity,
+                    history: historyRecords,
+                    wardrobe: wardrobeGarments
+                )
             } else {
                 let auth = await locationService.requestAuthorization()
                 if auth == .authorized {
@@ -385,7 +485,12 @@ extension WeatherView {
                         let location = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
                         self.resolvedLocation = location
                         await updatePlacemarkDetails(for: location)
-                        await viewModel.fetchWeather(for: location, sensitivity: currentSensitivity)
+                        await viewModel.fetchWeather(
+                            for: location,
+                            sensitivity: currentSensitivity,
+                            history: historyRecords,
+                            wardrobe: wardrobeGarments
+                        )
                     }
                 }
             }
