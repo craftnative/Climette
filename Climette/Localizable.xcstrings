@@ -154,6 +154,40 @@
         }
       }
     },
+    "Aviso: La última vez pasaste calor con este clima. Se reduce la carga térmica." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: Last time you felt hot in this weather. Reducing thermal load."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviso: La última vez pasaste calor con este clima. Se reduce la carga térmica."
+          }
+        }
+      }
+    },
+    "Aviso: La última vez pasaste frío con este clima. Se añade mayor aislamiento." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: Last time you felt cold in this weather. Adding more insulation."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aviso: La última vez pasaste frío con este clima. Se añade mayor aislamiento."
+          }
+        }
+      }
+    },
     "Borrado" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -443,23 +477,6 @@
         }
       }
     },
-    "CloudKit sincroniza perfiles y armarios privadamente." : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CloudKit syncs profiles and wardrobes privately."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "CloudKit sincroniza perfiles y armarios privadamente."
-          }
-        }
-      }
-    },
     "Comenzar" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -507,6 +524,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Condiciones estables"
+          }
+        }
+      }
+    },
+    "Condiciones idénticas a un día validado previamente. Ropa confirmada." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Identical conditions to a previously validated day. Outfit confirmed."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Condiciones idénticas a un día validado previamente. Ropa confirmada."
           }
         }
       }
