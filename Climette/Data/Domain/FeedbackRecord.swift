@@ -1,16 +1,20 @@
 import Foundation
+import FoundationModels
 
+@Generable
 public enum ThermalPerception: String, Codable, CaseIterable, Sendable {
     case perfect = "Clavada / Perfecto"
     case feltCold = "Pasé frío"
     case feltHot = "Pasé calor"
 }
 
+@Generable
 public enum PhysicalReaction: String, Codable, Sendable {
     case enduredAsIs = "Aguanté con lo puesto"
     case adjustedClothing = "Me añadí/quité ropa"
 }
 
+@Generable
 public enum PostAdjustmentState: String, Codable, Sendable {
     case stabilized = "Estuve perfecto"
     case stillUncomfortable = "Seguí destemplado"
