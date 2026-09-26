@@ -85,8 +85,5 @@ struct MainTabView: View {
 }
 
 #Preview {
-    MainTabView()
-        .modelContainer(PreviewSampleData.makeContainer())
-        .environment(LocationService())
-        .environment(NotificationService())
+    MainTabView().withPreviewEnvironment()
 }
