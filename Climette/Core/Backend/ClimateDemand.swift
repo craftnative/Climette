@@ -243,11 +243,18 @@ public struct ThermalEngine: Sendable {
         }
     }
 
-    public func normalizeDemand(from weather: Weather) -> ClimateDemand {
-        // Demanda instantánea (momento actual/frío)
+    public func normalizeDemand(from weather: Weather, period: DayEvaluationPeriod = .allDay) -> ClimateDemand {
         let peakDemand = getThermalDemand(for: weather.personalThermalIndex)
-        // Demanda base (momento de máxima temperatura si hay gran amplitud)
-        let baseDemand = weather.hasThermalDistortion ? getThermalDemand(for: weather.maxTemperature) : peakDemand
+        let baseDemand: Int
+        
+        switch period {
+        case .morning:
+            baseDemand = peakDemand
+        case .afternoon:
+            baseDemand = getThermalDemand(for: weather.maxTemperature)
+        case .allDay:
+            baseDemand = weather.hasThermalDistortion ? getThermalDemand(for: weather.maxTemperature) : peakDemand
+        }
         
         return ClimateDemand(
             peakThermal: peakDemand,

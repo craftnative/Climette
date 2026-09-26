@@ -18,6 +18,9 @@
     "¿Qué tipo de prendas sueles usar?" : {
 
     },
+    "• %@" : {
+
+    },
     "Abrir Ajustes" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -104,6 +107,9 @@
     "Aplicar" : {
 
     },
+    "Aquí tienes lo que registraste." : {
+
+    },
     "Armario" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -136,6 +142,9 @@
           }
         }
       }
+    },
+    "Ayer" : {
+
     },
     "Ayúdanos a filtrar tu armario para sugerirte solo el estilo que prefieras llevar." : {
 
@@ -441,6 +450,9 @@
         }
       }
     },
+    "Consultar Recomendación" : {
+
+    },
     "Correcto" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -538,6 +550,15 @@
     "Detalle del registro" : {
 
     },
+    "Día" : {
+
+    },
+    "Día Objetivo" : {
+
+    },
+    "Dime cómo te sentiste y qué llevabas puesto." : {
+
+    },
     "Distorsión por interiores" : {
 
     },
@@ -568,6 +589,9 @@
           }
         }
       }
+    },
+    "El procesamiento avanzado requiere un dispositivo compatible con iOS 18 o superior." : {
+
     },
     "El servicio de ubicación dejó de estar disponible durante la operación." : {
       "extractionState" : "manual",
@@ -758,6 +782,9 @@
         }
       }
     },
+    "Guarda cómo te sentiste con la ropa que llevabas hoy." : {
+
+    },
     "Hasta" : {
 
     },
@@ -804,6 +831,9 @@
           }
         }
       }
+    },
+    "Hoy" : {
+
     },
     "Humedad" : {
 
@@ -965,6 +995,12 @@
         }
       }
     },
+    "Momento del día" : {
+
+    },
+    "Momento del Día" : {
+
+    },
     "Necesario para precisión en cambios de localización." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -987,6 +1023,9 @@
         }
       }
     },
+    "No dispongo de datos meteorológicos para %@ en esa franja horaria." : {
+
+    },
     "No disponible" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -997,6 +1036,9 @@
           }
         }
       }
+    },
+    "No encontré un registro guardado para ese día." : {
+
     },
     "No funcionó" : {
 
@@ -1016,6 +1058,9 @@
 
     },
     "No hay registros que coincidan con los filtros seleccionados." : {
+
+    },
+    "No hay una ubicación configurada para evaluar el clima." : {
 
     },
     "No se encontraron resultados para: %@" : {
@@ -1094,6 +1139,9 @@
           }
         }
       }
+    },
+    "Obtiene la recomendación de ropa para una fecha y momento del día." : {
+
     },
     "Origen de datos" : {
       "extractionState" : "manual",
@@ -1261,6 +1309,9 @@
         }
       }
     },
+    "Recomendación de Ropa" : {
+
+    },
     "Recomendación matutina" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1271,6 +1322,15 @@
           }
         }
       }
+    },
+    "Registrar Sensación" : {
+
+    },
+    "Registrar Sensación Térmica" : {
+
+    },
+    "Registro guardado correctamente. Climette ha calibrado tu Índice Térmico." : {
+
     },
     "Restablecer filtros" : {
 
@@ -1354,6 +1414,9 @@
       }
     },
     "Sensación experimentada" : {
+
+    },
+    "Sensación y prendas" : {
 
     },
     "Sensibilidad" : {

@@ -1,5 +1,6 @@
 import Foundation
 import FoundationModels
+import AppIntents
 
 public enum PrecipitationState: String, Codable, Sendable {
     case dry = "Seco"
@@ -12,10 +13,22 @@ public enum SkyCover: String, Codable, Sendable {
 }
 
 @Generable
-public enum DayEvaluationPeriod: String, Codable, CaseIterable, Sendable {
+public enum DayEvaluationPeriod: String, Codable, CaseIterable, Sendable, AppEnum {
     case morning = "Por la mañana"
     case afternoon = "Mediodía - Tarde"
     case allDay = "Todo el día"
+
+    public static var typeDisplayRepresentation: TypeDisplayRepresentation {
+        "Momento del día"
+    }
+
+    public static var caseDisplayRepresentations: [DayEvaluationPeriod: DisplayRepresentation] {
+        [
+            .morning: "Por la mañana",
+            .afternoon: "Mediodía - Tarde",
+            .allDay: "Todo el día"
+        ]
+    }
 }
 
 public struct Weather: Identifiable, Codable, Sendable, Equatable {
