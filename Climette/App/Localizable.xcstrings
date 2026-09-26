@@ -239,6 +239,16 @@
         }
       }
     },
+    "Buscar dirección o ciudad..." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for address or city..."
+          }
+        }
+      }
+    },
     "Buscar ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -596,6 +606,23 @@
         }
       }
     },
+    "Confirmar Ubicación" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm Location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar Ubicación"
+          }
+        }
+      }
+    },
     "Consulta el atuendo calibrado para el clima de hoy." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -847,6 +874,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Error temporal"
+          }
+        }
+      }
+    },
+    "Establece la ubicación en el centro actual del mapa" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set the location to the current center of the map"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Establece la ubicación en el centro actual del mapa"
           }
         }
       }
@@ -1272,6 +1316,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manual"
+          }
+        }
+      }
+    },
+    "Mapa interactivo de ciudad" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interactive city map"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa interactivo de ciudad"
           }
         }
       }
@@ -1820,6 +1881,16 @@
         }
       }
     },
+    "Selecciona ciudad" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select u"
+          }
+        }
+      }
+    },
     "Selecciona tu perfil de sensibilidad térmica." : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1837,19 +1908,19 @@
         }
       }
     },
-    "Seleccionar ciudad" : {
+    "Seleccionar ubicación" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Select city"
+            "value" : "Select location"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seleccionar ciudad"
+            "value" : "Seleccionar ubicación"
           }
         }
       }
@@ -2092,6 +2163,16 @@
         }
       }
     },
+    "Toca directamente sobre el mapa o usa el botón Confirmar Ubicación para seleccionar el centro." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap directly on the map or use the Confirm Location button to select the center."
+          }
+        }
+      }
+    },
     "Todo el día" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2207,6 +2288,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ubicación y Clima"
+          }
+        }
+      }
+    },
+    "Usa el botón de confirmar para seleccionar el centro del mapa." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use the confirm button to select the center of the map."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa el botón de confirmar para seleccionar el centro del mapa."
           }
         }
       }
@@ -2329,76 +2427,7 @@
           }
         }
       }
-    },
-    "Confirmar Ubicación": {
-          "extractionState": "manual",
-          "localizations": {
-            "en": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Confirm Location"
-              }
-            },
-            "es": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Confirmar Ubicación"
-              }
-            }
-          }
-        },
-        "Establece la ubicación en el centro actual del mapa": {
-          "extractionState": "manual",
-          "localizations": {
-            "en": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Set the location to the current center of the map"
-              }
-            },
-            "es": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Establece la ubicación en el centro actual del mapa"
-              }
-            }
-          }
-        },
-        "Mapa interactivo de ciudad": {
-          "extractionState": "manual",
-          "localizations": {
-            "en": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Interactive city map"
-              }
-            },
-            "es": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Mapa interactivo de ciudad"
-              }
-            }
-          }
-        },
-        "Usa el botón de confirmar para seleccionar el centro del mapa.": {
-          "extractionState": "manual",
-          "localizations": {
-            "en": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Use the confirm button to select the center of the map."
-              }
-            },
-            "es": {
-              "stringUnit": {
-                "state": "translated",
-                "value": "Usa el botón de confirmar para seleccionar el centro del mapa."
-              }
-            }
-          }
-        }
-      }
+    }
   },
   "version" : "1.1"
 }
