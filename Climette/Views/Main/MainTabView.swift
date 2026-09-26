@@ -22,9 +22,9 @@ struct MainTabView: View {
                 WeatherView()
             }
             .tabItem {
-                Label("Recomendación", systemImage: "sparkles")
+                Label("Hoy", systemImage: "tshirt.fill")
             }
-            .accessibilityLabel(Text("Recomendación"))
+            .accessibilityLabel(Text("Hoy"))
             .accessibilityHint(Text("tab_recommendation_accessibility_hint"))
             .tag(MainTab.recommendation)
 
@@ -32,7 +32,7 @@ struct MainTabView: View {
                 WardrobeView()
             }
             .tabItem {
-                Label("Armario", systemImage: "tshirt.fill")
+                Label("Armario", systemImage: "cabinet.fill")
             }
             .accessibilityLabel(Text("Armario"))
             .accessibilityHint(Text("tab_wardrobe_accessibility_hint"))
