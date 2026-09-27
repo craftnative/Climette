@@ -81,10 +81,16 @@ public struct ThermalEngine: Sendable {
             }
             
             if let match = bestMatch {
-                return .validated(
-                    outfit: match.record.wornOutfit,
-                    message: "Condiciones idénticas a un día validado previamente. Ropa confirmada."
-                )
+                let allAvailable = match.record.wornOutfit.garments.allSatisfy { historicGarment in
+                    wardrobe.first(where: { $0.id == historicGarment.id })?.isAvailable == true
+                }
+                
+                if allAvailable {
+                    return .validated(
+                        outfit: match.record.wornOutfit,
+                        message: "Condiciones idénticas a un día validado previamente. Ropa confirmada."
+                    )
+                }
             }
             
             if let failure = closestWarning {
@@ -181,16 +187,25 @@ public struct ThermalEngine: Sendable {
                 filteredOuter = outerLayers
             }
 
-            let targetOuter = max(2, demand.peakThermal - demand.baseThermal - 1)
+            let targetOuter: Int
+            if demand.peakThermal >= 7 {
+                targetOuter = demand.peakThermal
+            } else {
+                targetOuter = max(2, demand.peakThermal - demand.baseThermal)
+            }
+            
             if let outer = selectClosestGarment(from: filteredOuter, targetThermal: targetOuter) {
                 selectedGarments.append(outer)
             }
         }
 
-        // 5. Tren Inferior (Solo se pone pantalón o falda si no lleva vestido)
-        if !hasFullBodyDress {
+        // 5. Tren Inferior (Permite medias/mallas térmicas si lleva vestido en clima frío)
+        let isCold = demand.peakThermal >= 5
+        if !hasFullBodyDress || isCold {
             let lowerGarments = filteredByPreference.filter { $0.archetype.bodyZone == .lowerBody }
-            if let lower = selectClosestGarment(from: lowerGarments, targetThermal: demand.peakThermal) {
+            let validLower = hasFullBodyDress ? lowerGarments.filter { $0.archetype.id == "arch_bot_thermal_tights" } : lowerGarments
+            
+            if let lower = selectClosestGarment(from: validLower, targetThermal: demand.peakThermal) {
                 selectedGarments.append(lower)
             }
         }
