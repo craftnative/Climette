@@ -10,6 +10,12 @@ public enum RecommendationPriority: Int, Codable, Comparable, Sendable {
     }
 }
 
+enum HistoryMatchStatus: Equatable {
+    case none
+    case exact
+    case adjusted(feedbackId: UUID)
+}
+
 public struct ZoneDiagnostic: Codable, Sendable, Equatable {
     public let isWindThresholdMet: Bool
     public let isWaterThresholdMet: Bool

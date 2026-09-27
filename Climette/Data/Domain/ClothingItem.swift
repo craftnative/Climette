@@ -46,6 +46,9 @@ public struct GarmentArchetype: Identifiable, Codable, Sendable, Equatable {
     public let supportedLayer: ClothingLayer?
     public let baseProtection: EnvironmentalProtection
     public let styleCategory: GarmentStyleCategory
+
+    public var isHeadwear: Bool { id.hasPrefix("arch_head_") }
+    public var isNeckwear: Bool { id.hasPrefix("arch_neck_") }
     
     public init(id: String, canonicalName: String, bodyZone: BodyZone, supportedLayer: ClothingLayer? = nil, baseProtection: EnvironmentalProtection, styleCategory: GarmentStyleCategory = .neutral) {
         self.id = id

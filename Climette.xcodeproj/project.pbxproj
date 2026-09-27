@@ -96,7 +96,6 @@
 			developmentRegion = es;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				es,
 			);
 			mainGroup = 3C33CFF4305C37AE0071425B;
@@ -144,6 +143,9 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Climette analiza tus horarios de sueño para sincronizar automáticamente la entrega matutina y nocturna de recomendaciones.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Climette requiere acceso al entorno de salud para gestionar la sincronización de horarios de descanso.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Climette utiliza tu ubicación actual para consultar las condiciones climáticas hiperlocales y calcular tu Índice Térmico Personalizado.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Climette necesita acceso al micrófono para que puedas registrar tus sensaciones térmicas mediante voz.";
+				INFOPLIST_KEY_NSSiriUsageDescription = "Climette utiliza Siri para procesar tus registros de ropa de forma natural.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Climette analiza tus grabaciones de voz para autocompletar las prendas y sensaciones registradas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
@@ -186,6 +188,9 @@
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "Climette analiza tus horarios de sueño para sincronizar automáticamente la entrega matutina y nocturna de recomendaciones.";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Climette requiere acceso al entorno de salud para gestionar la sincronización de horarios de descanso.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Climette utiliza tu ubicación actual para consultar las condiciones climáticas hiperlocales y calcular tu Índice Térmico Personalizado.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Climette necesita acceso al micrófono para que puedas registrar tus sensaciones térmicas mediante voz.";
+				INFOPLIST_KEY_NSSiriUsageDescription = "Climette utiliza Siri para procesar tus registros de ropa de forma natural.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Climette analiza tus grabaciones de voz para autocompletar las prendas y sensaciones registradas.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;

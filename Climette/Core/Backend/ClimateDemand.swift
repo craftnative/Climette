@@ -1,8 +1,8 @@
 import Foundation
 
 public struct ClimateDemand: Sendable, Equatable {
-    public let peakThermal: Int // Demanda térmica máxima (Momento más frío)
-    public let baseThermal: Int // Demanda térmica mínima (Momento más cálido)
+    public let peakThermal: Int
+    public let baseThermal: Int
     public let wind: Int
     public let humidity: Int
     public let requiresRainProtection: Bool
@@ -219,9 +219,18 @@ public struct ThermalEngine: Sendable {
         }
 
         if demand.peakThermal >= 7 || (demand.requiresRainProtection && demand.peakThermal >= 5) {
-            let headGarments = filteredByPreference.filter { $0.archetype.bodyZone == .headNeck }
+            let headNeckGarments = filteredByPreference.filter { $0.archetype.bodyZone == .headNeck }
+            
+            // Selección de Gorro/Pasamontañas
+            let headGarments = headNeckGarments.filter { $0.archetype.isHeadwear }
             if let head = selectClosestGarment(from: headGarments, targetThermal: demand.peakThermal) {
                 selectedGarments.append(head)
+            }
+            
+            // Selección de Bufanda/Braga térmica
+            let neckGarments = headNeckGarments.filter { $0.archetype.isNeckwear }
+            if let neck = selectClosestGarment(from: neckGarments, targetThermal: demand.peakThermal) {
+                selectedGarments.append(neck)
             }
         }
 

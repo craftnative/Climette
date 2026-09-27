@@ -16,7 +16,7 @@ struct WardrobeEmptyStateView: View {
                 .foregroundStyle(Color("TextPrimary"))
 
             if isSearch {
-                Text("No se encontraron resultados para: \(searchText)")
+                Text("No se encontraron prendas que coincidan con: \(searchText)")
                     .font(.body)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(Color("TextSecondary"))
@@ -29,7 +29,7 @@ struct WardrobeEmptyStateView: View {
                     .padding(.horizontal, 32)
             }
         }
-        .padding(.top, 48)
+        .padding(.top, 64)
         .accessibilityElement(children: .combine)
     }
 }

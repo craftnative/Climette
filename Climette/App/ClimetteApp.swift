@@ -27,7 +27,7 @@ struct ClimetteApp: App {
             let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
             Task { @MainActor in
                 PreviewSampleData.seedSampleData(into: container.mainContext)
-                UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
+                //UserDefaults.standard.set(false, forKey: "hasCompletedOnboarding")
                 if UserDefaults.standard.object(forKey: "hasCompletedOnboarding") == nil {
                     UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
                 }

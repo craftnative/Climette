@@ -5,11 +5,9 @@ import SwiftData
 @MainActor
 extension PreviewSampleData {
     public static func seedWardrobeData(into context: ModelContext) {
-        var garmentDescriptor = FetchDescriptor<ClothingItemEntity>()
-        garmentDescriptor.fetchLimit = 1
-        if let existing = try? context.fetch(garmentDescriptor), !existing.isEmpty {
-            return
-        }
+        let existingDescriptor = FetchDescriptor<ClothingItemEntity>()
+        let existingItems = (try? context.fetch(existingDescriptor)) ?? []
+        let existingArchetypeIds = Set(existingItems.map { $0.archetypeId })
 
         let mockGarments: [ClothingItemEntity] = [
             // Torso Superior - Capa Base
@@ -224,8 +222,12 @@ extension PreviewSampleData {
         ]
 
         for garment in mockGarments {
-            context.insert(garment)
+            if !existingArchetypeIds.contains(garment.archetypeId) {
+                context.insert(garment)
+            }
         }
+
+        try? context.save()
     }
 }
 #endif

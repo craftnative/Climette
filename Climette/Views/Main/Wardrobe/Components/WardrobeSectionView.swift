@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftData
 
 struct WardrobeSectionView: View {
     let zone: BodyZone
-    let garments: [Garment]
+    let entities: [ClothingItemEntity]
+    let onEdit: (ClothingItemEntity) -> Void
     
     @State private var isExpanded: Bool = true
     
@@ -20,6 +22,14 @@ struct WardrobeSectionView: View {
                     
                     Spacer()
                     
+                    Text("\(entities.count)")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(Color("TextSecondary"))
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 2)
+                        .background(Color("SeparatorBase").opacity(0.3))
+                        .clipShape(Capsule())
+                    
                     Image(systemName: "chevron.down")
                         .foregroundStyle(Color("TextSecondary"))
                         .rotationEffect(.degrees(isExpanded ? 180 : 0))
@@ -32,8 +42,13 @@ struct WardrobeSectionView: View {
             
             if isExpanded {
                 VStack(spacing: 12) {
-                    ForEach(garments) { garment in
-                        WardrobeItemRowView(garment: garment)
+                    ForEach(entities) { entity in
+                        Button {
+                            onEdit(entity)
+                        } label: {
+                            WardrobeItemRowView(garment: entity.toDomain())
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }

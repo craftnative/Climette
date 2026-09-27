@@ -5,25 +5,40 @@ struct WardrobeItemRowView: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(garment.resolvedDisplayName)
-                    .font(.body.weight(.medium))
-                    .foregroundStyle(Color("TextPrimary"))
-                
-                HStack(spacing: 8) {
-                    metricBadge(icon: "thermometer", value: garment.effectiveProtection.thermal, isOverride: garment.overrideThermal != nil)
-                    metricBadge(icon: "wind", value: garment.effectiveProtection.wind, isOverride: garment.overrideWind != nil)
-                    metricBadge(icon: "drop.fill", value: garment.effectiveProtection.water, isOverride: garment.overrideWater != nil)
+            VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(garment.resolvedDisplayName)
+                        .font(.body.weight(.semibold))
+                        .foregroundStyle(Color("TextPrimary"))
+                        .lineLimit(1)
+
+                    if let nickname = garment.userNickname, !nickname.isEmpty {
+                        Text(garment.archetype.canonicalName)
+                            .font(.caption2)
+                            .foregroundStyle(Color("TextSecondary"))
+                            .lineLimit(1)
+                    }
+                    
+                    HStack(spacing: 8) {
+                        metricBadge(icon: "thermometer", value: garment.effectiveProtection.thermal, isOverride: garment.overrideThermal != nil)
+                        metricBadge(icon: "wind", value: garment.effectiveProtection.wind, isOverride: garment.overrideWind != nil)
+                        metricBadge(icon: "drop.fill", value: garment.effectiveProtection.water, isOverride: garment.overrideWater != nil)
+                    }
+                    .padding(.top, 2)
                 }
             }
             
             Spacer()
             
             if !garment.isAvailable {
-                Text("No disponible")
+                Image(systemName: "archivebox.fill")
                     .font(.caption)
-                    .foregroundStyle(.red)
+                    .foregroundStyle(.orange)
             }
+            
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color("SeparatorBase"))
         }
         .padding()
         .background(Color("SurfaceElevated"))
@@ -39,7 +54,7 @@ struct WardrobeItemRowView: View {
         .font(.caption2.weight(.semibold))
         .padding(.horizontal, 6)
         .padding(.vertical, 4)
-        .background(isOverride ? Color("AccentColor").opacity(0.2) : Color.secondary.opacity(0.1))
+        .background(isOverride ? Color("AccentColor").opacity(0.15) : Color.secondary.opacity(0.1))
         .foregroundStyle(isOverride ? Color("AccentColor") : Color("TextSecondary"))
         .clipShape(Capsule())
     }

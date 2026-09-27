@@ -8,43 +8,50 @@ extension PreviewSampleData {
         let calendar = Calendar.current
         let now = Date.now
 
+        // Recuperar registros históricos existentes indexados por el inicio del día
+        let feedbackDescriptor = FetchDescriptor<FeedbackRecordEntity>()
+        let existingFeedbacks = (try? context.fetch(feedbackDescriptor)) ?? []
+        let existingDays = Set(existingFeedbacks.map { calendar.startOfDay(for: $0.timestamp) })
+
         let garmentDescriptor = FetchDescriptor<ClothingItemEntity>()
         let catalog = (try? context.fetch(garmentDescriptor)) ?? []
         
         let tShirt = catalog.first(where: { $0.archetypeId == "arch_top_base_cotton_tee" })
         let tankTop = catalog.first(where: { $0.archetypeId == "arch_top_base_tank" }) ?? tShirt
         let jeans = catalog.first(where: { $0.archetypeId == "arch_bot_jeans_standard" })
-        let shorts = catalog.first(where: { $0.archetypeId == "arch_bot_chino_shorts" }) ?? jeans
+        let shorts = catalog.first(where: { $0.archetypeId == "arch_bot_running_shorts" }) ?? jeans
         let jacket = catalog.first(where: { $0.archetypeId == "arch_top_outer_rain_jacket" })
         let sweater = catalog.first(where: { $0.archetypeId == "arch_top_mid_fine_knit" })
         
+        var insertedCount = 0
+
         for daysAgo in 0..<90 {
             guard let targetDate = calendar.date(byAdding: .day, value: -daysAgo, to: now) else { continue }
+            let dayStart = calendar.startOfDay(for: targetDate)
+            
+            // Omitir días que ya tengan histórico registrado
+            if existingDays.contains(dayStart) {
+                continue
+            }
             
             // Perfil climático para Madrid (Julio - Septiembre)
-            // daysAgo 0 = Finales de Septiembre (media ~20-22ºC)
-            // daysAgo 90 = Finales de Junio / Julio (media ~28-32ºC)
             let baseTemp = 20.0 + (Double(min(daysAgo, 75)) * 0.16)
             let tempVariance = Double((daysAgo * 11) % 7) - 3.0
             let temperature = (baseTemp + tempVariance).rounded()
             
-            // Fuerte amplitud térmica diaria característica del clima continental
             let minTemp = temperature - 7.0
             let maxTemp = temperature + 8.0
-            
             let windSpeed = Double(5 + ((daysAgo * 17) % 15))
             
-            // Precipitaciones muy escasas en pleno verano, ligeramente más frecuentes en septiembre
             let isRain = daysAgo < 30 ? (daysAgo % 9 == 0) : (daysAgo % 40 == 0)
-            _ = false
             let isOvercast = isRain || (daysAgo % 12 == 0)
             
             let collectionState: DailyCollectionState = {
                 if daysAgo == 1 { return .adjusted }
                 switch daysAgo % 7 {
                 case 0, 1, 2, 3, 4: return .correct
-                case 5:          return .adjusted
-                default:         return .ignored
+                case 5:             return .adjusted
+                default:            return .ignored
                 }
             }()
             
@@ -93,6 +100,11 @@ extension PreviewSampleData {
                 collectionStateRaw: collectionState.rawValue
             )
             context.insert(feedback)
+            insertedCount += 1
+        }
+
+        if insertedCount > 0 {
+            try? context.save()
         }
     }
 }
