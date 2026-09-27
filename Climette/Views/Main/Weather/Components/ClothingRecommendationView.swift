@@ -2,10 +2,18 @@ import SwiftUI
 import WeatherKit
 
 struct ClothingRecommendationView: View {
+    // Datos de hoy
     let domainWeather: Weather?
     let resolvedOutfit: Outfit?
     let recommendationNotice: String?
-    let matchStatus: HistoryMatchStatus // Estado del historial
+    let matchStatus: HistoryMatchStatus
+
+    // Datos de mañana que faltan:
+    let tomorrowWeather: Weather?
+    let tomorrowOutfit: Outfit?
+    let tomorrowNotice: String?
+    let tomorrowMatchStatus: HistoryMatchStatus
+
     let hourlyForecast: [HourlyForecastDTO]
     var onSelectFeedback: ((UUID) -> Void)? = nil
 
@@ -115,24 +123,18 @@ struct ClothingRecommendationView: View {
                 Spacer(minLength: 0)
             }
 
-            // Barra de estado de histórico fija (mantiene el alto en Hoy y Mañana)
             if isToday {
-                historyStatusBadge
+                historyStatusBadge(status: matchStatus, notice: recommendationNotice)
             } else {
-                Text("Previsión sujeta a cambios hasta las 00:00")
-                    .font(.caption.weight(.medium))
-                    .foregroundStyle(Color("TextSecondary"))
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .frame(height: 48)
-                    .background(Color.secondary.opacity(0.08))
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                historyStatusBadge(status: tomorrowMatchStatus, notice: tomorrowNotice)
             }
 
             Divider()
                 .background(Color("SeparatorBase"))
 
-            // Lista de prendas centrada
-            if let outfit = resolvedOutfit, !outfit.garments.isEmpty {
+            // Lista de prendas según el día activo
+            let targetOutfit = isToday ? resolvedOutfit : tomorrowOutfit
+            if let outfit = targetOutfit, !outfit.garments.isEmpty {
                 garmentList(outfit: outfit)
             } else {
                 Text(isToday ? "Calculando prendas..." : "Revisión de prendas para mañana disponible al actualizar.")
@@ -146,14 +148,14 @@ struct ClothingRecommendationView: View {
     }
 
     @ViewBuilder
-    private var historyStatusBadge: some View {
-        switch matchStatus {
+    private func historyStatusBadge(status: HistoryMatchStatus, notice: String?) -> some View {
+        switch status {
         case .none:
             HStack(spacing: 8) {
                 Image(systemName: "clock.arrow.circlepath")
                     .font(.caption)
                     .foregroundStyle(Color("TextSecondary"))
-                Text(recommendationNotice ?? "Sin datos previos similares. Recomendación base.")
+                Text(notice ?? "Sin datos previos similares. Recomendación base.")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(Color("TextSecondary"))
             }
@@ -167,7 +169,7 @@ struct ClothingRecommendationView: View {
                 Image(systemName: "checkmark.seal.fill")
                     .font(.caption)
                     .foregroundStyle(.green)
-                Text(recommendationNotice ?? "Condiciones idénticas a un día validado previamente. Ropa confirmada.")
+                Text(notice ?? "Condiciones idénticas a un día validado previamente. Ropa confirmada.")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(Color("TextPrimary"))
                     .lineLimit(2)
@@ -185,7 +187,7 @@ struct ClothingRecommendationView: View {
                     Image(systemName: "slider.horizontal.3")
                         .font(.caption)
                         .foregroundStyle(.orange)
-                    Text(recommendationNotice ?? "Ajustado por experiencia previa fallida.")
+                    Text(notice ?? "Ajustado por experiencia previa fallida.")
                         .font(.caption.weight(.medium))
                         .foregroundStyle(Color("TextPrimary"))
                         .lineLimit(2)

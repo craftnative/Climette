@@ -5,10 +5,16 @@ import WeatherKit
 @Observable
 @MainActor
 final class WeatherMainViewModel {
-    var domainWeather: Weather?
+    
     var currentDemand: ClimateDemand?
+    
+    var domainWeather: Weather?
     var resolvedOutfit: Outfit?
     var recommendationNotice: String?
+    
+    var tomorrowDomainWeather: Weather?
+    var tomorrowOutfit: Outfit?
+    var tomorrowNotice: String?
 
     var hourlyForecast: [HourlyForecastDTO] = []
     var attribution: WeatherAttribution?
@@ -105,6 +111,44 @@ final class WeatherMainViewModel {
             case .discovery(let outfit):
                 self.resolvedOutfit = outfit
                 self.recommendationNotice = nil
+            }
+            
+            if let tomorrowDaily = daily.first(where: { calendar.isDateInTomorrow($0.date) }) {
+                let tomorrowDTO = WeatherResponseDTO(
+                    latitude: location.coordinate.latitude,
+                    longitude: location.coordinate.longitude,
+                    fetchedAt: now,
+                    currentTemperature: tomorrowDaily.highTemperature.value,
+                    currentApparentTemperature: tomorrowDaily.highTemperature.value,
+                    currentWindSpeedKmh: self.hourlyForecast.filter { calendar.isDateInTomorrow($0.date) }.map(\.windSpeedKmh).max() ?? 10.0,
+                    hourlyForecast: self.hourlyForecast.filter { calendar.isDateInTomorrow($0.date) },
+                    dailyForecast: DailyForecastDTO(
+                        date: tomorrowDaily.date,
+                        minTemperature: tomorrowDaily.lowTemperature.value,
+                        maxTemperature: tomorrowDaily.highTemperature.value
+                    )
+                )
+                let tWeather = tomorrowDTO.toDomain(sensitivity: sensitivity)
+                self.tomorrowDomainWeather = tWeather
+                
+                let tDemand = thermalEngine.normalizeDemand(from: tWeather)
+                let tResult = thermalEngine.resolveWithHistory(
+                    currentDemand: tDemand,
+                    history: history,
+                    wardrobe: wardrobe,
+                    preference: preference
+                )
+                switch tResult {
+                case .validated(let outfit, let message):
+                    self.tomorrowOutfit = outfit
+                    self.tomorrowNotice = message
+                case .warning(let outfit, let notice):
+                    self.tomorrowOutfit = outfit
+                    self.tomorrowNotice = notice
+                case .discovery(let outfit):
+                    self.tomorrowOutfit = outfit
+                    self.tomorrowNotice = nil
+                }
             }
 
         } catch {

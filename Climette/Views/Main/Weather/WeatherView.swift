@@ -31,7 +31,11 @@ struct WeatherView: View {
                         domainWeather: viewModel.domainWeather,
                         resolvedOutfit: viewModel.resolvedOutfit,
                         recommendationNotice: viewModel.recommendationNotice,
-                        matchStatus: resolvedMatchStatus,
+                        matchStatus: todayMatchStatus,
+                        tomorrowWeather: viewModel.tomorrowDomainWeather,
+                        tomorrowOutfit: viewModel.tomorrowOutfit,
+                        tomorrowNotice: viewModel.tomorrowNotice,
+                        tomorrowMatchStatus: tomorrowMatchStatus,
                         hourlyForecast: viewModel.hourlyForecast,
                         onSelectFeedback: { feedbackId in
                             selectedFeedbackRecord = feedbackEntities.first(where: { $0.id == feedbackId })
@@ -95,33 +99,32 @@ struct WeatherView: View {
         }
     }
 
-    private var resolvedMatchStatus: HistoryMatchStatus {
-        guard let weather = viewModel.domainWeather, !feedbackEntities.isEmpty else {
-            return .none
-        }
+    private var todayMatchStatus: HistoryMatchStatus {
+        matchStatus(for: viewModel.domainWeather)
+    }
 
-        let currentWeatherTemp = weather.personalThermalIndex
+    private var tomorrowMatchStatus: HistoryMatchStatus {
+        matchStatus(for: viewModel.tomorrowDomainWeather)
+    }
 
-        // Coincidencia exacta (mismo rango térmico +-1°C con percepción perfecta)
-        let exactMatch = feedbackEntities.first { record in
+    private func matchStatus(for weather: Weather?) -> HistoryMatchStatus {
+        guard let weather, !feedbackEntities.isEmpty else { return .none }
+        let temp = weather.personalThermalIndex
+        
+        if feedbackEntities.contains(where: { record in
             guard let snapshot = record.weatherSnapshot else { return false }
-            let isTempClose = abs(snapshot.personalThermalIndex - currentWeatherTemp) <= 1.0
-            return isTempClose && record.perceptionRaw == ThermalPerception.perfect.rawValue
-        }
-        if exactMatch != nil {
+            return abs(snapshot.personalThermalIndex - temp) <= 1.0 && record.perceptionRaw == ThermalPerception.perfect.rawValue
+        }) {
             return .exact
         }
-
-        // Coincidencia ajustada (experiencia previa en rango similar donde se pasó frío o calor)
-        let adjustedMatch = feedbackEntities.first { record in
+        
+        if let adjusted = feedbackEntities.first(where: { record in
             guard let snapshot = record.weatherSnapshot else { return false }
-            let isTempNear = abs(snapshot.personalThermalIndex - currentWeatherTemp) <= 2.5
-            return isTempNear && record.perceptionRaw != ThermalPerception.perfect.rawValue
-        }
-        if let adjusted = adjustedMatch {
+            return abs(snapshot.personalThermalIndex - temp) <= 2.5 && record.perceptionRaw != ThermalPerception.perfect.rawValue
+        }) {
             return .adjusted(feedbackId: adjusted.id)
         }
-
+        
         return .none
     }
 

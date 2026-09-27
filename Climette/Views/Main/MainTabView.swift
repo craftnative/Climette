@@ -83,7 +83,3 @@ struct MainTabView: View {
         hasMissingPermissions = isLocationRestricted || isNotificationRestricted
     }
 }
-
-#Preview {
-    MainTabView().withPreviewEnvironment()
-}
