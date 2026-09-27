@@ -57,9 +57,15 @@ struct LocationSettingsSection: View {
                         }
                         .padding()
                         .background(Color("BackgroundBase"))
-                        .navigationTitle("Seleccionar ubicación")
+                        .navigationTitle("Ubicación")
                         .navigationBarTitleDisplayMode(.inline)
                         .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancelar") {
+                                    showMapSheet = false
+                                }
+                            }
+                            
                             ToolbarItem(placement: .confirmationAction) {
                                 Button("Listo") {
                                     locationState.manualCityName = tempCityName

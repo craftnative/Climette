@@ -11,7 +11,6 @@ struct InteractiveCityMapView: View {
     
     @State private var position: MapCameraPosition = .automatic
     @State private var selectedCoordinate: CLLocationCoordinate2D?
-    @State private var mapCenter: CLLocationCoordinate2D?
     @State private var isGeocoding: Bool = false
     @State private var mapErrorMessage: String?
     
@@ -20,27 +19,6 @@ struct InteractiveCityMapView: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            Button {
-                if let center = mapCenter {
-                    selectedCoordinate = center
-                    coordinate = GeographicCoordinate(latitude: center.latitude, longitude: center.longitude)
-                    Task {
-                        await resolveCoordinate(center)
-                    }
-                }
-            } label: {
-                Text("Confirmar Ubicación")
-                    .font(.headline)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 14)
-                    .background(Color("AccentColor"))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
-            }
-            .padding(.horizontal)
-            .accessibilityLabel("Confirmar Ubicación")
-            .accessibilityHint("Establece la ubicación en el centro actual del mapa")
-            
             // Solo muestra errores críticos reales, suprimiendo fallos transitorios de búsqueda
             if let mapErrorMessage {
                 Text(mapErrorMessage)
@@ -68,9 +46,6 @@ struct InteractiveCityMapView: View {
                         MapCompass()
                         MapScaleView()
                     }
-                    .onMapCameraChange(frequency: .onEnd) { context in
-                        mapCenter = context.region.center
-                    }
                     .onTapGesture { screenPosition in
                         isSearchFocused = false
                         if let tappedCoord = proxy.convert(screenPosition, from: .local) {
@@ -81,14 +56,8 @@ struct InteractiveCityMapView: View {
                             }
                         }
                     }
-                    .overlay(alignment: .center) {
-                        Image(systemName: "plus")
-                            .font(.title)
-                            .foregroundStyle(.blue)
-                            .accessibilityHidden(true)
-                    }
                     .accessibilityLabel("Mapa interactivo de ciudad")
-                    .accessibilityHint("Toca directamente sobre el mapa o usa el botón Confirmar Ubicación para seleccionar el centro.")
+                    .accessibilityHint("Toca directamente sobre el mapa para seleccionar la ubicación.")
                     
                     if isGeocoding {
                         ProgressView()
