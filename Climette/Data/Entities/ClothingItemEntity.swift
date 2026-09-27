@@ -8,7 +8,7 @@ public final class ClothingItemEntity {
     public var canonicalName: String = ""
     public var bodyZoneRaw: String = ""
     public var layerRaw: String?
-    public var styleCategoryRaw: String = "" // NEW
+    public var styleCategoryRaw: String = ""
     
     public var baseThermal: Int = 1
     public var baseWind: Int = 1
@@ -21,6 +21,9 @@ public final class ClothingItemEntity {
     public var overrideThermal: Int?
     public var overrideWind: Int?
     public var overrideWater: Int?
+    
+    @Relationship(inverse: \FeedbackRecordEntity.recommendedGarments)
+    public var recommendedFeedbacks: [FeedbackRecordEntity]?
     
     @Relationship(inverse: \FeedbackRecordEntity.wornGarments)
     public var outfitFeedbacks: [FeedbackRecordEntity]?

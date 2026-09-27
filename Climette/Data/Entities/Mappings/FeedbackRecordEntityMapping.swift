@@ -7,6 +7,9 @@ extension FeedbackRecordEntity {
         let garments = (wornGarments ?? []).map { $0.toDomain() }
         let outfit = Outfit(id: UUID(), garments: garments)
         
+        let recGarments = (recommendedGarments ?? []).map { $0.toDomain() }
+        let recommendedOutfit = recommendedGarments != nil ? Outfit(id: UUID(), garments: recGarments) : nil
+        
         var evaluatedPeriod: DayEvaluationPeriod? = nil
         if let ep = evaluatedPeriodRaw {
             evaluatedPeriod = DayEvaluationPeriod(rawValue: ep)
@@ -26,6 +29,21 @@ extension FeedbackRecordEntity {
         if let pas = postAdjustmentStateRaw {
             postAdjState = PostAdjustmentState(rawValue: pas)
         }
+
+        let parsedPerception = ThermalPerception(rawValue: perceptionRaw) ?? .perfect
+
+        let resolvedCollectionState: DailyCollectionState = {
+            if let explicitState = DailyCollectionState(rawValue: collectionStateRaw) {
+                return explicitState
+            }
+            if parsedPerception == .perfect {
+                return .correct
+            } else if adjustedGarment != nil || physicalReaction == .adjustedClothing {
+                return .adjusted
+            } else {
+                return .incorrect
+            }
+        }()
         
         return FeedbackRecord(
             id: id,
@@ -33,20 +51,22 @@ extension FeedbackRecordEntity {
             weatherSnapshot: weatherSnapshot,
             originPriority: RecommendationPriority(rawValue: originPriorityRaw) ?? .priority3ColdStart,
             evaluatedPeriod: evaluatedPeriod,
+            recommendedOutfit: recommendedOutfit,
             wornOutfit: outfit,
-            perception: ThermalPerception(rawValue: perceptionRaw) ?? .perfect,
+            perception: parsedPerception,
             isIndoorDistortion: isIndoorDistortion,
             affectedZone: affectedZone,
             physicalReaction: physicalReaction,
             adjustedGarment: adjustedGarment?.toDomain(),
             postAdjustmentState: postAdjState,
-            collectionState: DailyCollectionState(rawValue: collectionStateRaw) ?? .correct
+            collectionState: resolvedCollectionState
         )
     }
     
     public convenience init(
         from domain: FeedbackRecord,
         weatherEntity: WeatherSnapshotEntity,
+        recommendedGarmentEntities: [ClothingItemEntity]?,
         wornGarmentEntities: [ClothingItemEntity]?,
         adjustedEntity: ClothingItemEntity?
     ) {
@@ -56,6 +76,7 @@ extension FeedbackRecordEntity {
             weatherSnapshot: weatherEntity,
             originPriorityRaw: domain.originPriority.rawValue,
             evaluatedPeriodRaw: domain.evaluatedPeriod?.rawValue,
+            recommendedGarments: recommendedGarmentEntities,
             wornGarments: wornGarmentEntities,
             perceptionRaw: domain.perception.rawValue,
             isIndoorDistortion: domain.isIndoorDistortion,

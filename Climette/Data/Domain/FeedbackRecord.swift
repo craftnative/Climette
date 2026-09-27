@@ -22,9 +22,27 @@ public enum PostAdjustmentState: String, Codable, Sendable {
 
 public enum DailyCollectionState: String, Codable, CaseIterable, Sendable {
     case correct = "Correcto"
+    case incorrect = "Incorrecto"
     case adjusted = "Ajustado"
     case ignored = "Ignorado"
     case deleted = "Borrado"
+}
+
+public enum HistoryGarmentModification: String, Codable, Sendable {
+    case kept = "Mantenida"
+    case added = "Añadida"
+    case removed = "Eliminada"
+}
+
+public struct HistoryGarmentItem: Identifiable, Sendable, Equatable {
+    public var id: UUID { garment.id }
+    public let garment: Garment
+    public let modification: HistoryGarmentModification
+    
+    public init(garment: Garment, modification: HistoryGarmentModification) {
+        self.garment = garment
+        self.modification = modification
+    }
 }
 
 public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
@@ -33,6 +51,7 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
     public let weatherSnapshot: Weather
     public let originPriority: RecommendationPriority
     public let evaluatedPeriod: DayEvaluationPeriod?
+    public let recommendedOutfit: Outfit?
     public let wornOutfit: Outfit
     public let perception: ThermalPerception
     public let isIndoorDistortion: Bool
@@ -44,13 +63,38 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
     public var collectionState: DailyCollectionState
 
     public var resolvesAsSuccess: Bool {
-        if collectionState == .deleted || collectionState == .ignored { return false }
+        if collectionState == .deleted || collectionState == .ignored || collectionState == .incorrect { return false }
         if isIndoorDistortion { return false }
-        if perception == .perfect { return true }
-        if physicalReaction == .adjustedClothing && postAdjustmentState == .stabilized {
+        if perception == .perfect && collectionState == .correct { return true }
+        if (collectionState == .adjusted || physicalReaction == .adjustedClothing) && postAdjustmentState == .stabilized {
             return true
         }
         return false
+    }
+
+    public var itemModifications: [HistoryGarmentItem] {
+        guard let recommended = recommendedOutfit else {
+            return wornOutfit.garments.map { HistoryGarmentItem(garment: $0, modification: .kept) }
+        }
+
+        let wornIDs = Set(wornOutfit.garments.map(\.id))
+        let recommendedIDs = Set(recommended.garments.map(\.id))
+
+        var items: [HistoryGarmentItem] = []
+
+        for garment in wornOutfit.garments {
+            if recommendedIDs.contains(garment.id) {
+                items.append(HistoryGarmentItem(garment: garment, modification: .kept))
+            } else {
+                items.append(HistoryGarmentItem(garment: garment, modification: .added))
+            }
+        }
+
+        for garment in recommended.garments where !wornIDs.contains(garment.id) {
+            items.append(HistoryGarmentItem(garment: garment, modification: .removed))
+        }
+
+        return items
     }
 
     public init(
@@ -59,6 +103,7 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         weatherSnapshot: Weather,
         originPriority: RecommendationPriority,
         evaluatedPeriod: DayEvaluationPeriod? = nil,
+        recommendedOutfit: Outfit? = nil,
         wornOutfit: Outfit,
         perception: ThermalPerception,
         isIndoorDistortion: Bool = false,
@@ -73,6 +118,7 @@ public struct FeedbackRecord: Identifiable, Codable, Sendable, Equatable {
         self.weatherSnapshot = weatherSnapshot
         self.originPriority = originPriority
         self.evaluatedPeriod = evaluatedPeriod
+        self.recommendedOutfit = recommendedOutfit
         self.wornOutfit = wornOutfit
         self.perception = perception
         self.isIndoorDistortion = isIndoorDistortion

@@ -27,106 +27,122 @@ public struct ThermalEngine: Sendable {
     public init() {}
     
     public func resolveWithHistory(
-            currentDemand: ClimateDemand,
-            history: [FeedbackRecord],
-            wardrobe: [Garment],
-            preference: ClothingPreference
-        ) -> HierarchyResult {
-            let validHistory = history.filter { record in
-                if record.isIndoorDistortion || record.collectionState == .deleted || record.collectionState == .ignored {
-                    return false
-                }
-                
-                // Aseguramos que el atuendo histórico cumple estrictamente con la preferencia actual
-                return record.wornOutfit.garments.allSatisfy { garment in
-                    switch preference {
-                    case .pantsOnly:
-                        return garment.archetype.styleCategory != .dress && garment.archetype.styleCategory != .skirt
-                    case .skirtsAndDressesOnly:
-                        return garment.archetype.styleCategory != .pants
-                    case .both:
-                        return true
+                currentDemand: ClimateDemand,
+                history: [FeedbackRecord],
+                wardrobe: [Garment],
+                preference: ClothingPreference
+            ) -> HierarchyResult {
+                let validHistory = history.filter { record in
+                    if record.isIndoorDistortion || record.collectionState == .deleted || record.collectionState == .ignored {
+                        return false
                     }
-                }
-            }
-            
-            var bestMatch: (record: FeedbackRecord, distance: Int)?
-            var closestWarning: (record: FeedbackRecord, distance: Int)?
-            
-            for record in validHistory {
-                let historicalDemand = normalizeDemand(from: record.weatherSnapshot)
-                
-                // Comparamos priorizando el momento de mayor rigor térmico (peakThermal)
-                let diffT = abs(currentDemand.peakThermal - historicalDemand.peakThermal)
-                let diffV = abs(currentDemand.wind - historicalDemand.wind)
-                let diffH = abs(currentDemand.humidity - historicalDemand.humidity)
-                
-                let totalDistance = (diffT * 2) + diffV + diffH
-                
-                if totalDistance <= 1 && record.perception == .perfect {
-                    if let current = bestMatch {
-                        if totalDistance < current.distance { bestMatch = (record, totalDistance) }
-                    } else {
-                        bestMatch = (record, totalDistance)
-                    }
-                }
-                
-                if diffT <= 1 && (record.perception == .feltCold || record.perception == .feltHot) {
-                    if let current = closestWarning {
-                        if totalDistance < current.distance { closestWarning = (record, totalDistance) }
-                    } else {
-                        closestWarning = (record, totalDistance)
-                    }
-                }
-            }
-            
-            if let match = bestMatch {
-                let allAvailable = match.record.wornOutfit.garments.allSatisfy { historicGarment in
-                    wardrobe.first(where: { $0.id == historicGarment.id })?.isAvailable == true
-                }
-                
-                if allAvailable {
-                    return .validated(
-                        outfit: match.record.wornOutfit,
-                        message: "Condiciones idénticas a un día validado previamente. Ropa confirmada."
-                    )
-                }
-            }
-            
-            if let failure = closestWarning {
-                switch failure.record.perception {
-                case .feltCold:
-                    let adjustedDemand = ClimateDemand(
-                        peakThermal: min(currentDemand.peakThermal + 1, 10),
-                        baseThermal: currentDemand.baseThermal,
-                        wind: currentDemand.wind,
-                        humidity: currentDemand.humidity,
-                        requiresRainProtection: currentDemand.requiresRainProtection
-                    )
-                    return .warning(
-                        outfit: generateRecommendedOutfit(demand: adjustedDemand, wardrobe: wardrobe, preference: preference),
-                        notice: "Aviso: La última vez pasaste frío con este clima. Se añade mayor aislamiento."
-                    )
                     
-                case .feltHot:
-                    let adjustedDemand = ClimateDemand(
-                        peakThermal: max(currentDemand.peakThermal - 1, 1),
-                        baseThermal: max(currentDemand.baseThermal - 1, 1),
-                        wind: currentDemand.wind,
-                        humidity: currentDemand.humidity,
-                        requiresRainProtection: currentDemand.requiresRainProtection
-                    )
-                    return .warning(
-                        outfit: generateRecommendedOutfit(demand: adjustedDemand, wardrobe: wardrobe, preference: preference),
-                        notice: "Aviso: La última vez pasaste calor con este clima. Se reduce la carga térmica."
-                    )
-                    
-                default: break
+                    // Aseguramos que el atuendo histórico cumple estrictamente con la preferencia actual
+                    return record.wornOutfit.garments.allSatisfy { garment in
+                        switch preference {
+                        case .pantsOnly:
+                            return garment.archetype.styleCategory != .dress && garment.archetype.styleCategory != .skirt
+                        case .skirtsAndDressesOnly:
+                            return garment.archetype.styleCategory != .pants
+                        case .both:
+                            return true
+                        }
+                    }
                 }
+                
+                var bestMatch: (record: FeedbackRecord, distance: Int)?
+                var closestWarning: (record: FeedbackRecord, distance: Int)?
+                
+                for record in validHistory {
+                    let historicalDemand = normalizeDemand(from: record.weatherSnapshot)
+                    
+                    // Comparamos priorizando el momento de mayor rigor térmico (peakThermal)
+                    let diffT = abs(currentDemand.peakThermal - historicalDemand.peakThermal)
+                    let diffV = abs(currentDemand.wind - historicalDemand.wind)
+                    let diffH = abs(currentDemand.humidity - historicalDemand.humidity)
+                    
+                    let totalDistance = (diffT * 2) + diffV + diffH
+                    
+                    // Estado: Correcto (resultado plenamente satisfactorio)
+                    let isCorrect = record.collectionState == .correct && record.perception == .perfect
+                    if totalDistance <= 1 && isCorrect {
+                        if let current = bestMatch {
+                            if totalDistance < current.distance { bestMatch = (record, totalDistance) }
+                        } else {
+                            bestMatch = (record, totalDistance)
+                        }
+                    }
+                    
+                    // Estados: Incorrecto o Incorrecto pero ajustado (disconfort térmico que requiere advertencia)
+                    let hasThermalDiscomfort = record.perception == .feltCold || record.perception == .feltHot
+                    let isIncorrectOrAdjusted = record.collectionState == .incorrect || record.collectionState == .adjusted || hasThermalDiscomfort
+                    
+                    if diffT <= 1 && isIncorrectOrAdjusted && !isCorrect {
+                        if let current = closestWarning {
+                            if totalDistance < current.distance { closestWarning = (record, totalDistance) }
+                        } else {
+                            closestWarning = (record, totalDistance)
+                        }
+                    }
+                }
+                
+                if let match = bestMatch {
+                    let allAvailable = match.record.wornOutfit.garments.allSatisfy { historicGarment in
+                        wardrobe.first(where: { $0.id == historicGarment.id })?.isAvailable == true
+                    }
+                    
+                    if allAvailable {
+                        return .validated(
+                            outfit: match.record.wornOutfit,
+                            message: "Condiciones idénticas a un día validado previamente. Ropa confirmada."
+                        )
+                    }
+                }
+                
+                if let failure = closestWarning {
+                    let wasAdjusted = failure.record.collectionState == .adjusted || failure.record.adjustedGarment != nil
+                    
+                    switch failure.record.perception {
+                    case .feltCold:
+                        let adjustedDemand = ClimateDemand(
+                            peakThermal: min(currentDemand.peakThermal + 1, 10),
+                            baseThermal: currentDemand.baseThermal,
+                            wind: currentDemand.wind,
+                            humidity: currentDemand.humidity,
+                            requiresRainProtection: currentDemand.requiresRainProtection
+                        )
+                        let noticeMessage = wasAdjusted
+                            ? "Aviso: En un día similar pasaste frío y ajustaste prendas. Se añade mayor aislamiento."
+                            : "Aviso: La última vez pasaste frío con este clima. Se añade mayor aislamiento."
+                        
+                        return .warning(
+                            outfit: generateRecommendedOutfit(demand: adjustedDemand, wardrobe: wardrobe, preference: preference),
+                            notice: noticeMessage
+                        )
+                        
+                    case .feltHot:
+                        let adjustedDemand = ClimateDemand(
+                            peakThermal: max(currentDemand.peakThermal - 1, 1),
+                            baseThermal: max(currentDemand.baseThermal - 1, 1),
+                            wind: currentDemand.wind,
+                            humidity: currentDemand.humidity,
+                            requiresRainProtection: currentDemand.requiresRainProtection
+                        )
+                        let noticeMessage = wasAdjusted
+                            ? "Aviso: En un día similar pasaste calor y ajustaste prendas. Se reduce la carga térmica."
+                            : "Aviso: La última vez pasaste calor con este clima. Se reduce la carga térmica."
+                        
+                        return .warning(
+                            outfit: generateRecommendedOutfit(demand: adjustedDemand, wardrobe: wardrobe, preference: preference),
+                            notice: noticeMessage
+                        )
+                        
+                    default: break
+                    }
+                }
+                
+                return .discovery(outfit: generateRecommendedOutfit(demand: currentDemand, wardrobe: wardrobe, preference: preference))
             }
-            
-            return .discovery(outfit: generateRecommendedOutfit(demand: currentDemand, wardrobe: wardrobe, preference: preference))
-        }
     
     public func generateRecommendedOutfit(demand: ClimateDemand, wardrobe: [Garment], preference: ClothingPreference) -> Outfit {
         let availableGarments = wardrobe.filter { $0.isAvailable }

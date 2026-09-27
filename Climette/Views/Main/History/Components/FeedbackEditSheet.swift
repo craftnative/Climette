@@ -7,16 +7,47 @@ private struct GarmentReplacementContext: Identifiable {
     var id: UUID { garment.id }
     let garment: ClothingItemEntity
 }
+
 private var isAppleIntelligenceReady: Bool {
     switch SystemLanguageModel.default.availability {
     case .available:
-        return true // Hardware compatible y AI activada
+        return true
     case .unavailable(.appleIntelligenceNotEnabled), .unavailable(.modelNotReady):
-        return false // Hardware compatible (chip A17+), pero apagada en Ajustes o descargando modelos
+        return false
     case .unavailable(.deviceNotEligible):
-        return false // El chip del dispositivo no soporta Apple Intelligence
+        return false
     @unknown default:
         return false
+    }
+}
+
+private enum GarmentVisualStatus {
+    case kept
+    case added
+    case removed
+
+    var badgeTitle: String? {
+        switch self {
+        case .kept: return nil
+        case .added: return "Añadida"
+        case .removed: return "Retirada"
+        }
+    }
+
+    var badgeIcon: String? {
+        switch self {
+        case .kept: return nil
+        case .added: return "plus"
+        case .removed: return "minus"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .kept: return Color("AccentColor")
+        case .added: return .green
+        case .removed: return .red
+        }
     }
 }
 
@@ -40,30 +71,33 @@ struct FeedbackEditSheet: View {
     @State private var evaluationPeriod: DayEvaluationPeriod = .allDay
     
     @State private var currentGarments: [ClothingItemEntity] = []
+    @State private var originalRecommendedGarments: [ClothingItemEntity] = []
+    @State private var removedGarments: [ClothingItemEntity] = []
+    
     @State private var isShowingAddSheet: Bool = false
     @State private var garmentToReplaceContext: GarmentReplacementContext?
     @State private var isProcessingAI: Bool = false
-
+    
     init(recordEntity: FeedbackRecordEntity, isEligibleForEdit: Bool, initialEditMode: Bool = false) {
         self.recordEntity = recordEntity
         self.isEligibleForEdit = isEligibleForEdit
         self.initialEditMode = isEligibleForEdit && initialEditMode
         self._isEditing = State(initialValue: isEligibleForEdit && initialEditMode)
     }
-
+    
     var body: some View {
-            NavigationStack {
-                Form {
-                    if isEditing {
-                        if isAppleIntelligenceReady {
-                            appleIntelligenceSection
-                        }
+        NavigationStack {
+            Form {
+                if isEditing {
+                    if isAppleIntelligenceReady {
+                        appleIntelligenceSection
                     }
-                    
-                    detailsSection
-                    evaluationSection
-                    garmentsSection
                 }
+                
+                detailsSection
+                evaluationSection
+                garmentsSection
+            }
             .scrollContentBackground(.hidden)
             .background(Color("BackgroundBase").ignoresSafeArea())
             .navigationTitle(isEditing ? Text("Editar registro") : Text("Detalle del registro"))
@@ -82,6 +116,7 @@ struct FeedbackEditSheet: View {
                     availableGarments: availableGarmentsToAdd
                 ) { selected in
                     currentGarments.append(selected)
+                    removedGarments.removeAll(where: { $0.id == selected.id })
                 }
             }
             .sheet(item: $garmentToReplaceContext) { context in
@@ -92,6 +127,9 @@ struct FeedbackEditSheet: View {
                 ) { selected in
                     if let index = currentGarments.firstIndex(where: { $0.id == target.id }) {
                         currentGarments[index] = selected
+                        if !removedGarments.contains(where: { $0.id == target.id }) {
+                            removedGarments.append(target)
+                        }
                     }
                 }
             }
@@ -235,6 +273,16 @@ struct FeedbackEditSheet: View {
         .listRowBackground(Color("SurfaceElevated"))
     }
     
+    private var evaluationResultDetails: (title: String, icon: String, color: Color) {
+        if didWork {
+            return ("Correcto", "checkmark.circle.fill", .green)
+        } else if recordEntity.recommendationState == .adjusted {
+            return ("Incorrecto pero ajustado", "slider.horizontal.3", .orange)
+        } else {
+            return ("Incorrecto", "xmark.circle.fill", .red)
+        }
+    }
+    
     @ViewBuilder
     private var evaluationSection: some View {
         Section {
@@ -255,14 +303,15 @@ struct FeedbackEditSheet: View {
                     Toggle("Distorsión por interiores", isOn: $isIndoorDistortion)
                 }
             } else {
+                let result = evaluationResultDetails
                 HStack(spacing: 12) {
                     ZStack {
                         Circle()
-                            .fill(Color("AccentColor").opacity(0.12))
+                            .fill(result.color.opacity(0.12))
                             .frame(width: 32, height: 32)
-                        Image(systemName: didWork ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                        Image(systemName: result.icon)
                             .font(.system(size: 16, weight: .semibold))
-                            .foregroundStyle(Color("AccentColor"))
+                            .foregroundStyle(result.color)
                     }
                     
                     Text("Resultado")
@@ -270,8 +319,8 @@ struct FeedbackEditSheet: View {
                     
                     Spacer()
                     
-                    Text(didWork ? "Funcionó" : "No funcionó")
-                        .foregroundStyle(Color("TextPrimary"))
+                    Text(result.title)
+                        .foregroundStyle(result.color)
                         .fontWeight(.semibold)
                 }
                 
@@ -298,73 +347,191 @@ struct FeedbackEditSheet: View {
     @ViewBuilder
     private var garmentsSection: some View {
         Section {
-            if currentGarments.isEmpty {
-                Text("No hay prendas registradas para este atuendo.")
-                    .font(.caption)
-                    .foregroundStyle(Color("TextSecondary"))
-            } else {
-                ForEach(currentGarments, id: \.id) { garment in
-                    HStack(spacing: 12) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(Color("AccentColor").opacity(0.12))
-                                .frame(width: 36, height: 36)
-                            
-                            Image(systemName: iconForGarmentZone(garment.bodyZoneRaw))
-                                .font(.system(size: 15, weight: .medium))
-                                .foregroundStyle(Color("AccentColor"))
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(garment.canonicalName)
-                                .font(.body.weight(.medium))
-                                .foregroundStyle(Color("TextPrimary"))
-                            
-                            Text(garment.bodyZoneRaw.capitalized)
-                                .font(.caption2)
-                                .foregroundStyle(Color("TextSecondary"))
-                        }
-                        
-                        Spacer()
-                        
-                        if isEditing {
-                            Button {
-                                garmentToReplaceContext = GarmentReplacementContext(garment: garment)
-                            } label: {
-                                Text("Cambiar")
-                                    .font(.caption.weight(.semibold))
-                                    .foregroundStyle(Color("AccentColor"))
-                            }
-                            .buttonStyle(.borderless)
-                        }
-                    }
-                    .padding(.vertical, 2)
-                }
-                .onDelete(perform: isEditing ? { offsets in removeGarments(at: offsets) } : nil)
-            }
-            
             if isEditing {
-                Button {
-                    isShowingAddSheet = true
-                } label: {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Añadir prenda")
-                    }
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color("AccentColor"))
-                }
+                editingGarmentsContent
+            } else {
+                detailedGarmentsContent
             }
         } header: {
             Text("Ropa vestida")
         } footer: {
             if isEditing {
-                Text("Desliza hacia la izquierda sobre una prenda para eliminarla o pulsa Cambiar para sustituirla.")
+                Text("Desliza hacia la izquierda sobre una prenda para retirarla o pulsa Cambiar para sustituirla.")
+                    .font(.caption)
+                    .foregroundStyle(Color("TextSecondary"))
+            } else if recordEntity.recommendationState == .adjusted {
+                Text("Verde: prendas añadidas durante el día. Rojo: prendas recomendadas que se retiraron.")
                     .font(.caption)
                     .foregroundStyle(Color("TextSecondary"))
             }
         }
         .listRowBackground(Color("SurfaceElevated"))
+    }
+    
+    @ViewBuilder
+    private var editingGarmentsContent: some View {
+        if currentGarments.isEmpty {
+            Text("No hay prendas registradas para este atuendo.")
+                .font(.caption)
+                .foregroundStyle(Color("TextSecondary"))
+        } else {
+            ForEach(currentGarments, id: \.id) { garment in
+                let isAdded = !originalRecommendedGarments.contains(where: { $0.id == garment.id })
+                HStack(spacing: 12) {
+                    garmentIconView(zone: garment.bodyZoneRaw, status: isAdded ? .added : .kept)
+                    
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(garment.canonicalName)
+                            .font(.body.weight(.medium))
+                            .foregroundStyle(Color("TextPrimary"))
+                        
+                        Text(garment.bodyZoneRaw.capitalized)
+                            .font(.caption2)
+                            .foregroundStyle(Color("TextSecondary"))
+                    }
+                    
+                    Spacer()
+                    
+                    if isAdded {
+                        // Botón para quitar el añadido manual directamente
+                        Button {
+                            withAnimation {
+                                currentGarments.removeAll(where: { $0.id == garment.id })
+                                removedGarments.removeAll(where: { $0.id == garment.id })
+                            }
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "xmark.circle.fill")
+                                Text("Quitar")
+                            }
+                            .font(.caption2.weight(.semibold))
+                            .foregroundStyle(.red)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
+                            .background(Color.red.opacity(0.12))
+                            .clipShape(Capsule())
+                        }
+                        .buttonStyle(.borderless)
+                    }
+                    
+                    Button {
+                        garmentToReplaceContext = GarmentReplacementContext(garment: garment)
+                    } label: {
+                        Text("Cambiar")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(Color("AccentColor"))
+                    }
+                    .buttonStyle(.borderless)
+                }
+                .padding(.vertical, 2)
+            }
+            .onDelete(perform: removeGarments)
+        }
+        
+        HStack {
+            Button {
+                isShowingAddSheet = true
+            } label: {
+                HStack {
+                    Image(systemName: "plus.circle.fill")
+                    Text("Añadir prenda")
+                }
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color("AccentColor"))
+            }
+            
+            Spacer()
+            
+            // Retomar estado original descartando modificaciones manuales
+            if currentGarments.map(\.id) != originalRecommendedGarments.map(\.id) {
+                Button("Restablecer original") {
+                    withAnimation {
+                        currentGarments = originalRecommendedGarments
+                        removedGarments.removeAll()
+                    }
+                }
+                .font(.caption.weight(.medium))
+                .foregroundStyle(.secondary)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var detailedGarmentsContent: some View {
+        let isAdjusted = recordEntity.recommendationState == .adjusted
+        let kept = recordEntity.keptGarments
+        let added = recordEntity.addedGarments
+        let removed = recordEntity.removedGarments
+        
+        if kept.isEmpty && added.isEmpty && removed.isEmpty {
+            Text("No hay prendas registradas para este atuendo.")
+                .font(.caption)
+                .foregroundStyle(Color("TextSecondary"))
+        } else if !isAdjusted {
+            ForEach(currentGarments, id: \.id) { garment in
+                garmentRowView(garment: garment, status: .kept)
+            }
+        } else {
+            ForEach(kept, id: \.id) { garment in
+                garmentRowView(garment: garment, status: .kept)
+            }
+            ForEach(added, id: \.id) { garment in
+                garmentRowView(garment: garment, status: .added)
+            }
+            ForEach(removed, id: \.id) { garment in
+                garmentRowView(garment: garment, status: .removed)
+            }
+        }
+    }
+    
+    private func garmentRowView(garment: ClothingItemEntity, status: GarmentVisualStatus) -> some View {
+        HStack(spacing: 12) {
+            garmentIconView(zone: garment.bodyZoneRaw, status: status)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Text(garment.canonicalName)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(status == .removed ? Color("TextSecondary") : Color("TextPrimary"))
+                    .strikethrough(status == .removed, color: .red)
+                
+                Text(garment.bodyZoneRaw.capitalized)
+                    .font(.caption2)
+                    .foregroundStyle(Color("TextSecondary"))
+            }
+            
+            Spacer()
+            
+            if let title = status.badgeTitle, let icon = status.badgeIcon {
+                statusBadge(title: title, icon: icon, color: status.color)
+            }
+        }
+        .padding(.vertical, 2)
+    }
+    
+    private func garmentIconView(zone: String, status: GarmentVisualStatus) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(status.color.opacity(0.12))
+                .frame(width: 36, height: 36)
+            
+            Image(systemName: iconForGarmentZone(zone))
+                .font(.system(size: 15, weight: .medium))
+                .foregroundStyle(status.color)
+        }
+    }
+    
+    private func statusBadge(title: String, icon: String, color: Color) -> some View {
+        HStack(spacing: 4) {
+            Image(systemName: icon)
+                .font(.system(size: 9, weight: .bold))
+            Text(title)
+                .font(.caption2.weight(.semibold))
+        }
+        .foregroundStyle(color)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 3)
+        .background(color.opacity(0.12))
+        .clipShape(Capsule())
     }
     
     private func detailRow(icon: String, title: String, value: String) -> some View {
@@ -459,6 +626,14 @@ struct FeedbackEditSheet: View {
     }
     
     private func removeGarments(at offsets: IndexSet) {
+        for index in offsets {
+            let removedItem = currentGarments[index]
+            let wasOriginallyRecommended = originalRecommendedGarments.contains(where: { $0.id == removedItem.id })
+            
+            if wasOriginallyRecommended && !removedGarments.contains(where: { $0.id == removedItem.id }) {
+                removedGarments.append(removedItem)
+            }
+        }
         currentGarments.remove(atOffsets: offsets)
     }
     
@@ -476,6 +651,11 @@ struct FeedbackEditSheet: View {
         
         isIndoorDistortion = recordEntity.isIndoorDistortion
         currentGarments = recordEntity.wornGarments ?? []
+        
+        // Si no existía recomendación guardada, la base de partida inicial es lo que vestía
+        let base = recordEntity.recommendedGarments ?? []
+        originalRecommendedGarments = base.isEmpty ? (recordEntity.wornGarments ?? []) : base
+        removedGarments = recordEntity.removedGarments
         feedbackDate = recordEntity.timestamp
         evaluationPeriod = DayEvaluationPeriod(rawValue: recordEntity.evaluatedPeriodRaw ?? "") ?? .allDay
     }
@@ -484,27 +664,44 @@ struct FeedbackEditSheet: View {
         recordEntity.timestamp = feedbackDate
         recordEntity.evaluatedPeriodRaw = evaluationPeriod.rawValue
         
+        // Conservar la recomendación base original
+        if recordEntity.recommendedGarments == nil || recordEntity.recommendedGarments?.isEmpty == true {
+            recordEntity.recommendedGarments = originalRecommendedGarments
+        }
+        
+        let baseRecommended = recordEntity.recommendedGarments ?? []
+        let baseIDs = Set(baseRecommended.map(\.id))
+        let currentIDs = Set(currentGarments.map(\.id))
+        let hasOutfitChanged = baseIDs != currentIDs
+        
+        recordEntity.wornGarments = currentGarments
+        
         if didWork {
             recordEntity.collectionStateRaw = DailyCollectionState.correct.rawValue
             recordEntity.perceptionRaw = ThermalPerception.perfect.rawValue
             recordEntity.isIndoorDistortion = false
+            recordEntity.physicalReactionRaw = nil
+            recordEntity.adjustedGarment = nil
+            recordEntity.postAdjustmentStateRaw = nil
         } else {
-            recordEntity.collectionStateRaw = DailyCollectionState.adjusted.rawValue
             recordEntity.perceptionRaw = failureReason.rawValue
             recordEntity.isIndoorDistortion = isIndoorDistortion
-        }
-        
-        let initialGarments = recordEntity.wornGarments ?? []
-        let hasOutfitChanged = Set(initialGarments.map(\.id)) != Set(currentGarments.map(\.id))
-        
-        recordEntity.wornGarments = currentGarments
-        
-        if hasOutfitChanged {
-            recordEntity.physicalReactionRaw = PhysicalReaction.adjustedClothing.rawValue
-            if let firstAdded = currentGarments.first(where: { garment in
-                !initialGarments.contains(where: { $0.id == garment.id })
-            }) {
-                recordEntity.adjustedGarment = firstAdded
+            
+            if hasOutfitChanged {
+                recordEntity.collectionStateRaw = DailyCollectionState.adjusted.rawValue
+                recordEntity.physicalReactionRaw = PhysicalReaction.adjustedClothing.rawValue
+                
+                // Identificar qué prenda se añadió o quitó respecto a la base
+                let newlyAdded = currentGarments.filter { !baseIDs.contains($0.id) }
+                let newlyRemoved = baseRecommended.filter { !currentIDs.contains($0.id) }
+                
+                recordEntity.adjustedGarment = newlyAdded.first ?? newlyRemoved.first
+                recordEntity.postAdjustmentStateRaw = PostAdjustmentState.stabilized.rawValue
+            } else {
+                recordEntity.collectionStateRaw = DailyCollectionState.incorrect.rawValue
+                recordEntity.physicalReactionRaw = PhysicalReaction.enduredAsIs.rawValue
+                recordEntity.adjustedGarment = nil
+                recordEntity.postAdjustmentStateRaw = nil
             }
         }
         

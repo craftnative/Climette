@@ -48,6 +48,16 @@ public struct SaveDailyFeedbackIntent: AppIntent {
             recordedAt: .now
         )
         
+        let collectionState: DailyCollectionState = {
+            if extractedDTO.perception == .perfect {
+                return .correct
+            } else if adjustedGarment != nil || extractedDTO.physicalReaction == .adjustedClothing {
+                return .adjusted
+            } else {
+                return .incorrect
+            }
+        }()
+
         let newRecord = FeedbackRecordEntity(
             timestamp: .now,
             weatherSnapshot: weatherEntity,
@@ -59,7 +69,7 @@ public struct SaveDailyFeedbackIntent: AppIntent {
             physicalReactionRaw: extractedDTO.physicalReaction?.rawValue,
             adjustedGarment: adjustedGarment,
             postAdjustmentStateRaw: extractedDTO.postAdjustmentState?.rawValue,
-            collectionStateRaw: DailyCollectionState.correct.rawValue
+            collectionStateRaw: collectionState.rawValue
         )
         
         context.insert(weatherEntity)

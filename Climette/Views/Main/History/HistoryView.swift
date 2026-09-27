@@ -50,6 +50,7 @@ public struct HistoryView: View {
     private var filteredAndGroupedSections: [HistoryMonthSection] {
         let validRecords = allRecords.filter { record in
             guard record.timestamp <= now else { return false }
+            guard record.collectionStateRaw != DailyCollectionState.deleted.rawValue else { return false }
             guard isFilterActive else { return true }
             
             let effectiveStart = min(filterCriteria.startDate, filterCriteria.endDate)

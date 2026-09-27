@@ -1,6 +1,12 @@
 import Foundation
 import SwiftData
 
+public enum RecommendationState: String, Sendable {
+    case correct = "Correcto"
+    case incorrect = "Incorrecto"
+    case adjusted = "Incorrecto pero ajustado"
+}
+
 @Model
 public final class FeedbackRecordEntity {
     public var id: UUID = UUID()
@@ -11,6 +17,9 @@ public final class FeedbackRecordEntity {
     
     public var originPriorityRaw: Int = 0
     public var evaluatedPeriodRaw: String?
+    
+    @Relationship
+    public var recommendedGarments: [ClothingItemEntity]?
     
     @Relationship
     public var wornGarments: [ClothingItemEntity]?
@@ -26,12 +35,41 @@ public final class FeedbackRecordEntity {
     public var postAdjustmentStateRaw: String?
     public var collectionStateRaw: String = ""
 
+    public var recommendationState: RecommendationState {
+        if collectionStateRaw == "Ajustado" || adjustedGarment != nil || physicalReactionRaw == PhysicalReaction.adjustedClothing.rawValue {
+            return .adjusted
+        }
+        if collectionStateRaw == "Incorrecto" || perceptionRaw == ThermalPerception.feltCold.rawValue || perceptionRaw == ThermalPerception.feltHot.rawValue {
+            return .incorrect
+        }
+        return .correct
+    }
+
+    public var addedGarments: [ClothingItemEntity] {
+        guard let recommended = recommendedGarments, !recommended.isEmpty else { return [] }
+        let recommendedIDs = Set(recommended.map(\.id))
+        return (wornGarments ?? []).filter { !recommendedIDs.contains($0.id) }
+    }
+
+    public var removedGarments: [ClothingItemEntity] {
+        guard let recommended = recommendedGarments, !recommended.isEmpty else { return [] }
+        let wornIDs = Set((wornGarments ?? []).map(\.id))
+        return recommended.filter { !wornIDs.contains($0.id) }
+    }
+
+    public var keptGarments: [ClothingItemEntity] {
+        guard let recommended = recommendedGarments, !recommended.isEmpty else { return wornGarments ?? [] }
+        let recommendedIDs = Set(recommended.map(\.id))
+        return (wornGarments ?? []).filter { recommendedIDs.contains($0.id) }
+    }
+
     public init(
         id: UUID = UUID(),
         timestamp: Date,
         weatherSnapshot: WeatherSnapshotEntity? = nil,
         originPriorityRaw: Int,
         evaluatedPeriodRaw: String? = nil,
+        recommendedGarments: [ClothingItemEntity]? = nil,
         wornGarments: [ClothingItemEntity]? = nil,
         perceptionRaw: String,
         isIndoorDistortion: Bool,
@@ -46,6 +84,7 @@ public final class FeedbackRecordEntity {
         self.weatherSnapshot = weatherSnapshot
         self.originPriorityRaw = originPriorityRaw
         self.evaluatedPeriodRaw = evaluatedPeriodRaw
+        self.recommendedGarments = recommendedGarments
         self.wornGarments = wornGarments
         self.perceptionRaw = perceptionRaw
         self.isIndoorDistortion = isIndoorDistortion
