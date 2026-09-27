@@ -19,8 +19,7 @@ public struct GetClothingRecommendationIntent: AppIntent {
 
     @MainActor
     public func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-        let container = try ModelContainer(for: Schema([UserProfileEntity.self, LocationStateEntity.self, FeedbackRecordEntity.self, ClothingItemEntity.self, WeatherSnapshotEntity.self, WeatherEntity.self]))
-        let context = container.mainContext
+        let context = SharedModelContainer.shared.mainContext
         
         let targetDate = targetDay.targetDate()
         let calendar = Calendar.current

@@ -1,29 +1,9 @@
 import SwiftUI
 import SwiftData
-import AppIntents
-import FoundationModels
-@preconcurrency import Speech
-import AVFoundation
-import os
-
-private let logger = Logger(subsystem: "craftnative.studio.Climette", category: "FeedbackEditSheet")
 
 private struct GarmentReplacementContext: Identifiable {
-    var id: UUID { garment.id }
+    var id: PersistentIdentifier { garment.persistentModelID }
     let garment: ClothingItemEntity
-}
-
-private var isAppleIntelligenceReady: Bool {
-    switch SystemLanguageModel.default.availability {
-    case .available:
-        return true
-    case .unavailable(.appleIntelligenceNotEnabled), .unavailable(.modelNotReady):
-        return false
-    case .unavailable(.deviceNotEligible):
-        return false
-    @unknown default:
-        return false
-    }
 }
 
 private enum GarmentVisualStatus {
@@ -82,16 +62,6 @@ struct FeedbackEditSheet: View {
     @State private var isShowingAddSheet: Bool = false
     @State private var garmentToReplaceContext: GarmentReplacementContext?
     
-    // Estados de voz y Apple Intelligence
-    @State private var isRecording: Bool = false
-    @State private var isProcessingAI: Bool = false
-    @State private var transcribedText: String = ""
-    @State private var voiceErrorMessage: String?
-    
-    @State private var audioEngine: AVAudioEngine?
-    @State private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    @State private var recognitionTask: SFSpeechRecognitionTask?
-    
     init(recordEntity: FeedbackRecordEntity, isEligibleForEdit: Bool, initialEditMode: Bool = false) {
         self.recordEntity = recordEntity
         self.isEligibleForEdit = isEligibleForEdit
@@ -102,12 +72,6 @@ struct FeedbackEditSheet: View {
     var body: some View {
         NavigationStack {
             Form {
-                if isEditing {
-                    if isAppleIntelligenceReady {
-                        appleIntelligenceSection
-                    }
-                }
-                
                 detailsSection
                 evaluationSection
                 garmentsSection
@@ -129,8 +93,9 @@ struct FeedbackEditSheet: View {
                     title: "Añadir prenda",
                     availableGarments: availableGarmentsToAdd
                 ) { selected in
+                    guard !currentGarments.contains(where: { $0.persistentModelID == selected.persistentModelID }) else { return }
                     currentGarments.append(selected)
-                    removedGarments.removeAll(where: { $0.id == selected.id })
+                    removedGarments.removeAll(where: { $0.persistentModelID == selected.persistentModelID })
                 }
             }
             .sheet(item: $garmentToReplaceContext) { context in
@@ -150,257 +115,6 @@ struct FeedbackEditSheet: View {
             .onAppear {
                 loadRecordData()
             }
-            .onDisappear {
-                stopAudioCapture()
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var appleIntelligenceSection: some View {
-        Section {
-            Button {
-                Task {
-                    if isRecording {
-                        logger.debug("Botón presionado: Detener grabación")
-                        await stopRecordingAndProcess()
-                    } else {
-                        logger.debug("Botón presionado: Iniciar grabación")
-                        await startRecording()
-                    }
-                }
-            } label: {
-                HStack(spacing: 8) {
-                    if isProcessingAI {
-                        ProgressView().tint(.white)
-                        Text("Analizando...")
-                    } else if isRecording {
-                        Image(systemName: "stop.circle.fill")
-                        Text("Detener y procesar")
-                    } else {
-                        Image(systemName: "apple.intelligence")
-                        Text("Describir con voz")
-                    }
-                }
-                .font(.headline)
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(isRecording ? .red : Color.purple)
-            .disabled(isProcessingAI)
-            
-            if !transcribedText.isEmpty {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Transcripción:")
-                        .font(.caption2.weight(.bold))
-                        .foregroundStyle(Color("TextSecondary"))
-                    Text(transcribedText)
-                        .font(.caption)
-                        .foregroundStyle(Color("TextPrimary"))
-                }
-                .padding(.vertical, 2)
-            }
-            
-            if let voiceErrorMessage {
-                Text(voiceErrorMessage)
-                    .font(.caption)
-                    .foregroundStyle(.red)
-            }
-        } header: {
-            Text("Apple Intelligence")
-        } footer: {
-            Text("Describe verbalmente tu atuendo y sensación térmica para calibrar automáticamente las opciones.")
-                .font(.caption)
-                .foregroundStyle(Color("TextSecondary"))
-        }
-        .listRowBackground(Color("SurfaceElevated"))
-    }
-    
-    @MainActor
-    private func requestPermissions() async -> Bool {
-        logger.debug("Iniciando solicitud de permisos de micrófono/voz en Vista...")
-        let micAllowed = await AVAudioApplication.requestRecordPermission()
-        logger.debug("Resultado permiso micrófono: \(micAllowed)")
-        guard micAllowed else {
-            voiceErrorMessage = "Acceso al micrófono denegado. Permítelo en los Ajustes del sistema."
-            return false
-        }
-        
-        let speechStatus = await Self.requestSpeechRecognizerAuthorization()
-        logger.debug("Resultado permiso SFSpeechRecognizer: \(String(describing: speechStatus.rawValue))")
-        guard speechStatus == .authorized else {
-            voiceErrorMessage = "Acceso al reconocimiento de voz denegado. Permítelo en Ajustes."
-            return false
-        }
-        
-        voiceErrorMessage = nil
-        return true
-    }
-    
-    nonisolated private static func requestSpeechRecognizerAuthorization() async -> SFSpeechRecognizerAuthorizationStatus {
-        await withCheckedContinuation { continuation in
-            SFSpeechRecognizer.requestAuthorization { status in
-                continuation.resume(returning: status)
-            }
-        }
-    }
-    
-    nonisolated private static func configureAndActivateAudioSession() throws {
-        let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.record, mode: .measurement, options: .duckOthers)
-        try session.setActive(true, options: .notifyOthersOnDeactivation)
-    }
-    
-    nonisolated private static func deactivateAudioSession() {
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-    }
-    
-    @MainActor
-    private func startRecording() async {
-        logger.debug("startRecording() invocado en FeedbackEditSheet")
-        guard await requestPermissions() else { return }
-        
-        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: "es-ES")) ?? SFSpeechRecognizer()
-        guard let recognizer, recognizer.isAvailable else {
-            logger.error("SFSpeechRecognizer no disponible para es-ES")
-            voiceErrorMessage = "El reconocedor de voz no está disponible en este momento."
-            return
-        }
-        
-        stopAudioCapture()
-        
-        do {
-            logger.debug("Configurando AVAudioSession en hilo secundario...")
-            try await Task.detached(priority: .userInitiated) {
-                try Self.configureAndActivateAudioSession()
-            }.value
-            
-            let engine = AVAudioEngine()
-            let request = SFSpeechAudioBufferRecognitionRequest()
-            request.shouldReportPartialResults = true
-            
-            self.audioEngine = engine
-            self.recognitionRequest = request
-            self.transcribedText = ""
-            
-            let inputNode = engine.inputNode
-            let format = inputNode.outputFormat(forBus: 0)
-            
-            logger.debug("Instalando tap en AVAudioEngine (Vista)...")
-            
-            // CORRECCIÓN VITAL PARA SWIFT 6: El bloque del tap se ejecuta en el hilo secundario
-            // de audio en tiempo real de AVAudioEngine. Marcarlo como @Sendable evita que herede
-            // el aislamiento de @MainActor y colapse (_dispatch_assert_queue_fail).
-            inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { @Sendable [weak request] buffer, _ in
-                request?.append(buffer)
-            }
-            
-            engine.prepare()
-            try engine.start()
-            logger.debug("AVAudioEngine iniciado correctamente (Vista).")
-            
-            self.isRecording = true
-            
-            self.recognitionTask = recognizer.recognitionTask(with: request) { @Sendable result, error in
-                let partialTranscript = result?.bestTranscription.formattedString
-                let localizedError = error?.localizedDescription
-                
-                Task { @MainActor in
-                    if let partialTranscript {
-                        self.transcribedText = partialTranscript
-                    }
-                    if let localizedError {
-                        logger.error("Error asíncrono en recognitionTask: \(localizedError)")
-                        self.stopAudioCapture()
-                        self.isRecording = false
-                    }
-                }
-            }
-        } catch {
-            logger.error("Fallo al iniciar captura de audio: \(error.localizedDescription)")
-            voiceErrorMessage = "Error al iniciar captura de audio: \(error.localizedDescription)"
-            stopAudioCapture()
-            isRecording = false
-        }
-    }
-    
-    @MainActor
-    private func stopRecordingAndProcess() async {
-        logger.debug("Deteniendo grabación e iniciando procesamiento AI...")
-        stopAudioCapture()
-        isRecording = false
-        
-        let cleanedText = transcribedText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !cleanedText.isEmpty else {
-            logger.warning("El texto transcrito está vacío, abortando extracción.")
-            voiceErrorMessage = "No se detectó ninguna instrucción hablada."
-            return
-        }
-        
-        await extractFeedbackFromAI(cleanedText)
-    }
-    
-    @MainActor
-    private func stopAudioCapture() {
-        logger.debug("stopAudioCapture() invocado")
-        if let engine = audioEngine, engine.isRunning {
-            engine.stop()
-            engine.inputNode.removeTap(onBus: 0)
-            logger.debug("AVAudioEngine detenido y tap removido")
-        }
-        recognitionRequest?.endAudio()
-        recognitionTask?.cancel()
-        
-        audioEngine = nil
-        recognitionRequest = nil
-        recognitionTask = nil
-        
-        Task.detached(priority: .utility) {
-            Self.deactivateAudioSession()
-        }
-    }
-    
-    @MainActor
-    private func extractFeedbackFromAI(_ promptText: String) async {
-        logger.debug("Iniciando LanguageModelSession con texto: \(promptText)")
-        isProcessingAI = true
-        voiceErrorMessage = nil
-        defer { isProcessingAI = false }
-        
-        do {
-            let session = LanguageModelSession(
-                instructions: "Eres un asistente de moda y clima. Extrae los detalles del atuendo descrito y la sensación térmica del usuario según el esquema proporcionado."
-            )
-            
-            let response = try await session.respond(
-                to: promptText,
-                generating: VoiceFeedbackExtractionDTO.self
-            )
-            
-            logger.debug("Respuesta AI recibida exitosamente.")
-            let extractedDTO = response.content
-            
-            let editState = extractedDTO.mapToEditState(
-                catalog: allCatalogGarments,
-                currentWornGarments: currentGarments
-            )
-            
-            withAnimation {
-                self.evaluationPeriod = editState.evaluationPeriod
-                self.isIndoorDistortion = editState.isIndoorDistortion
-                self.currentGarments = editState.wornGarments
-                
-                if editState.perception == .perfect && editState.physicalReaction != .adjustedClothing {
-                    self.didWork = true
-                } else {
-                    self.didWork = false
-                    self.failureReason = editState.perception == .perfect ? .feltCold : editState.perception
-                }
-            }
-        } catch {
-            logger.error("Error en extractFeedbackFromAI: \(error.localizedDescription)")
-            voiceErrorMessage = "Error al analizar texto con Apple Intelligence: \(error.localizedDescription)"
         }
     }
     
@@ -566,7 +280,7 @@ struct FeedbackEditSheet: View {
                 .font(.caption)
                 .foregroundStyle(Color("TextSecondary"))
         } else {
-            ForEach(currentGarments, id: \.id) { garment in
+            ForEach(currentGarments, id: \.persistentModelID) { garment in
                 let isAdded = !originalRecommendedGarments.contains(where: { $0.id == garment.id })
                 HStack(spacing: 12) {
                     garmentIconView(zone: garment.bodyZoneRaw, status: isAdded ? .added : .kept)
@@ -657,7 +371,7 @@ struct FeedbackEditSheet: View {
                 .font(.caption)
                 .foregroundStyle(Color("TextSecondary"))
         } else if !isAdjusted {
-            ForEach(currentGarments, id: \.id) { garment in
+            ForEach(currentGarments, id: \.persistentModelID) { garment in
                 garmentRowView(garment: garment, status: .kept)
             }
         } else {
@@ -803,23 +517,23 @@ struct FeedbackEditSheet: View {
     }
     
     private var availableGarmentsToAdd: [ClothingItemEntity] {
-        let currentIds = Set(currentGarments.map(\.id))
-        return allCatalogGarments.filter { !currentIds.contains($0.id) }
+        let currentIds = Set(currentGarments.map(\.persistentModelID))
+        return allCatalogGarments.filter { !currentIds.contains($0.persistentModelID) }
     }
     
     private func availableGarmentsToReplace(_ target: ClothingItemEntity) -> [ClothingItemEntity] {
-        let currentIds = Set(currentGarments.map(\.id))
+        let currentIds = Set(currentGarments.map(\.persistentModelID))
         return allCatalogGarments.filter { garment in
-            garment.bodyZoneRaw == target.bodyZoneRaw && !currentIds.contains(garment.id)
+            garment.bodyZoneRaw == target.bodyZoneRaw && !currentIds.contains(garment.persistentModelID)
         }
     }
     
     private func removeGarments(at offsets: IndexSet) {
         for index in offsets {
             let removedItem = currentGarments[index]
-            let wasOriginallyRecommended = originalRecommendedGarments.contains(where: { $0.id == removedItem.id })
+            let wasOriginallyRecommended = originalRecommendedGarments.contains(where: { $0.persistentModelID == removedItem.persistentModelID })
             
-            if wasOriginallyRecommended && !removedGarments.contains(where: { $0.id == removedItem.id }) {
+            if wasOriginallyRecommended && !removedGarments.contains(where: { $0.persistentModelID == removedItem.persistentModelID }) {
                 removedGarments.append(removedItem)
             }
         }

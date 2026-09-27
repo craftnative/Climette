@@ -6,6 +6,7 @@ import MapKit
 struct WeatherView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(LocationService.self) private var locationService
 
     @Query private var locationStates: [LocationStateEntity]
     @Query private var userProfiles: [UserProfileEntity]
@@ -16,8 +17,7 @@ struct WeatherView: View {
     @State private var resolvedLocation: CLLocation?
     @State private var locationPrimary: String = ""
     @State private var selectedFeedbackRecord: FeedbackRecordEntity?
-    
-    private var locationService: LocationServiceProtocol = LocationService()
+
 
     var body: some View {
         ScrollView {

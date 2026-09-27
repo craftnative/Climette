@@ -1,20 +1,29 @@
 import Foundation
-import FoundationModels
+import AppIntents
 
-@Generable
-public enum ThermalPerception: String, Codable, CaseIterable, Sendable {
+public enum ThermalPerception: String, Codable, CaseIterable, Sendable, AppEnum {
     case perfect = "Clavada / Perfecto"
     case feltCold = "Pasé frío"
     case feltHot = "Pasé calor"
+
+    public static var typeDisplayRepresentation: TypeDisplayRepresentation {
+        "Sensación Térmica"
+    }
+
+    public static var caseDisplayRepresentations: [ThermalPerception: DisplayRepresentation] {
+        [
+            .perfect: "Clavada / Perfecto",
+            .feltCold: "Pasé frío",
+            .feltHot: "Pasé calor"
+        ]
+    }
 }
 
-@Generable
 public enum PhysicalReaction: String, Codable, Sendable {
     case enduredAsIs = "Aguanté con lo puesto"
     case adjustedClothing = "Me añadí/quité ropa"
 }
 
-@Generable
 public enum PostAdjustmentState: String, Codable, Sendable {
     case stabilized = "Estuve perfecto"
     case stillUncomfortable = "Seguí destemplado"

@@ -1,7 +1,5 @@
 import Foundation
-import FoundationModels
 
-@Generable
 public enum BodyZone: String, Codable, CaseIterable, Sendable {
     case headNeck = "Cabeza / Cuello"
     case upperTorso = "Torso superior"
@@ -12,14 +10,12 @@ public enum BodyZone: String, Codable, CaseIterable, Sendable {
     case accessories = "Complementos / Accesorios"
 }
 
-@Generable
 public enum ClothingLayer: String, Codable, CaseIterable, Sendable {
     case base = "Capa Base"
     case mid = "Capa Intermedia"
     case outer = "Capa Exterior"
 }
 
-@Generable
 public enum GarmentStyleCategory: String, Codable, Sendable {
     case pants = "pants"
     case skirt = "skirt"

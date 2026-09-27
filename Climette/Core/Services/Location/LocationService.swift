@@ -30,23 +30,45 @@ public final class LocationService: NSObject, LocationServiceProtocol, CLLocatio
             locationManager.requestWhenInUseAuthorization()
         }
     }
-
+    
     public func getCurrentLocation() async throws -> GeographicCoordinate {
+        try await getCurrentLocation(timeout: .seconds(15))
+    }
+
+    public func getCurrentLocation(timeout: Duration) async throws -> GeographicCoordinate {
         guard authorizationStatus == .authorized else {
             throw LocationServiceError.unauthorized
         }
 
-        for try await update in CLLocationUpdate.liveUpdates() {
-            guard !Task.isCancelled else { break }
-            if let location = update.location {
-                return GeographicCoordinate(
-                    latitude: location.coordinate.latitude,
-                    longitude: location.coordinate.longitude
-                )
+        return try await withThrowingTaskGroup(of: GeographicCoordinate.self) { group in
+            group.addTask {
+                for try await update in CLLocationUpdate.liveUpdates() {
+                    try Task.checkCancellation()
+                    if let location = update.location {
+                        return await GeographicCoordinate(
+                            latitude: location.coordinate.latitude,
+                            longitude: location.coordinate.longitude
+                        )
+                    }
+                }
+                throw LocationServiceError.locationUnavailable
+            }
+            group.addTask {
+                try await Task.sleep(for: timeout)
+                throw LocationServiceError.locationUnavailable
+            }
+
+            do {
+                guard let result = try await group.next() else {
+                    throw LocationServiceError.locationUnavailable
+                }
+                group.cancelAll()
+                return result
+            } catch {
+                group.cancelAll()
+                throw error
             }
         }
-        
-        throw LocationServiceError.locationUnavailable
     }
 
     public func reverseGeocode(coordinate: GeographicCoordinate) async throws -> String? {

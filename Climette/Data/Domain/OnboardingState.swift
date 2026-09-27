@@ -57,8 +57,7 @@ public final class OnboardingState {
 
     public func saveAndComplete(context: ModelContext) {
         let alertTimes = createNotificationAlertTimes()
-
-        // 1. Upsert UserProfileEntity
+        
         do {
             var profileDescriptor = FetchDescriptor<UserProfileEntity>()
             profileDescriptor.fetchLimit = 1

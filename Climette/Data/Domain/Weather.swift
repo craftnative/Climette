@@ -1,5 +1,4 @@
 import Foundation
-import FoundationModels
 import AppIntents
 
 public enum PrecipitationState: String, Codable, Sendable {
@@ -12,7 +11,6 @@ public enum SkyCover: String, Codable, Sendable {
     case overcast = "Cubierto"
 }
 
-@Generable
 public enum DayEvaluationPeriod: String, Codable, CaseIterable, Sendable, AppEnum {
     case morning = "Por la mañana"
     case afternoon = "Mediodía - Tarde"
